@@ -457,34 +457,31 @@
     }
 
     .followup-container {
-      margin-top: 10px;
-      display: flex;
-      flex-wrap: wrap;
-      gap: 8px;
-    }
+  margin-top: 10px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  align-items: flex-start;
+}
 
-    .followup-label {
-      font-size: 11px;
-      color: var(--text-muted);
-      margin-right: 2px;
-    }
-
-   .followup-btn {
+.followup-btn {
   font-size: 11px;
-  padding: 4px 10px;
+  padding: 6px 12px;
   border-radius: 999px;
   border: 1px solid #d2d2e2;
-  background: #f7f7fb;
+  background: #ffffff;
   cursor: pointer;
-  max-width: 260px;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  transition: background 0.15s ease, border-color 0.15s ease, transform 0.08s ease;
+  max-width: 100%;          /* le bouton ne dépasse pas de la colonne */
+  white-space: normal;      /* autorise les retours à la ligne */
+  line-height: 1.4;         /* un peu d’air entre les lignes */
+  text-align: left;         /* plus lisible pour deux lignes */
+  transition: background 0.15s ease,
+              border-color 0.15s ease,
+              transform 0.08s ease;
 }
 
 .followup-btn:hover {
-  background: #eef0ff;
+  background: #f3f3fb;
   border-color: var(--accent);
   transform: translateY(-0.5px);
 }
