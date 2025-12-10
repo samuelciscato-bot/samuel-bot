@@ -79,15 +79,35 @@ exports.handler = async (event) => {
 
     const data = await res.json();
 
-    const answer =
-      (data.output_text && data.output_text.trim()) ||
-      "Désolé, je n'ai pas pu générer de réponse.";
+    // Extraction robuste du texte de réponse
+    let answer = "Désolé, je n'ai pas pu générer de réponse.";
+
+    if (data.output && Array.isArray(data.output) && data.output.length > 0) {
+      const message = data.output.find((o) => o.type === "message") || data.output[0];
+
+      if (message && Array.isArray(message.content)) {
+        const textPart =
+          message.content.find((c) => c.type === "output_text") ||
+          message.content.find((c) => c.type === "text") ||
+          message.content[0];
+
+        if (textPart) {
+          // Plusieurs structures possibles: text.value, text, ou direct value
+          if (textPart.text && typeof textPart.text.value === "string") {
+            answer = textPart.text.value.trim();
+          } else if (typeof textPart.text === "string") {
+            answer = textPart.text.trim();
+          } else if (typeof textPart.value === "string") {
+            answer = textPart.value.trim();
+          }
+        }
+      }
+    }
 
     const unknown = answer.startsWith(
       "Je ne sais pas, cette information ne figure pas dans le dossier."
     );
 
-    // Log vers Make
     try {
       await fetch(
         "https://hook.eu2.make.com/quvd1xm7kdw1fs9l4ba4j52qhjqabps9",
