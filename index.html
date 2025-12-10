@@ -1,20 +1,35 @@
-exports.handler = async (event) => {
-  if (event.httpMethod !== "POST") {
-    return {
-      statusCode: 405,
-      body: JSON.stringify({ error: "Méthode non autorisée" })
-    };
-  }
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <title>Samuel Ciscato – Dossier interactif</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+<body>
+  <h1>Samuel Ciscato</h1>
+  <p>Posez vos questions à mon dossier professionnel.</p>
 
-  const { question } = JSON.parse(event.body || "{}");
+  <textarea id="question" rows="4" cols="60" placeholder="Saisissez votre question ici..."></textarea>
+  <br>
+  <button id="askBtn">Poser la question</button>
 
-  // V1: réponse de test, sans IA
-  const fakeAnswer = `Tu as posé la question: "${question}". 
-Pour l'instant, je suis une réponse de test sans IA.`;
+  <h2>Réponse</h2>
+  <div id="answer"></div>
 
-  return {
-    statusCode: 200,
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ answer: fakeAnswer })
-  };
-};
+  <script>
+    document.getElementById("askBtn").addEventListener("click", async () => {
+      const question = document.getElementById("question").value.trim();
+      if (!question) return;
+
+      const res = await fetch("/.netlify/functions/chat", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ question })
+      });
+
+      const data = await res.json();
+      document.getElementById("answer").textContent = data.answer || "(Pas de réponse)";
+    });
+  </script>
+</body>
+</html>
