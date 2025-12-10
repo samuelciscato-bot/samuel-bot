@@ -918,69 +918,86 @@
     }
 
     function clearFollowups() {
-      followupContainer.style.display = "none";
-      followupContainer.querySelectorAll(".followup-btn").forEach(btn => btn.remove());
-    }
+  // Cache le bloc et supprime seulement les anciens boutons
+  followupContainer.style.display = "none";
+  followupContainer.querySelectorAll(".followup-btn").forEach((btn) => btn.remove());
+}
 
-    function extractFollowup(text) {
-      const frRegex = /Le recruteur pourrait, par exemple, lui demander\s*:\s*«?\s*(.+?)\s*»?\s*\?/i;
-      const enRegex = /The recruiter could, for example, ask him\s*:\s*\"?\s*(.+?)\s*\"?\s*\?/i;
-      const match = text.match(frRegex) || text.match(enRegex);
-      if (!match) return null;
-      return match[1].trim();
-    }
+// Parse la ligne QUESTIONS_SUIVANTES: ["...", "...", "..."]
+function parseSuggestions(rawText) {
+  const match = rawText.match(/QUESTIONS_SUIVANTES:\s*(\[.*\])\s*$/m);
+  if (!match) return { mainAnswer: rawText.trim(), suggestions: [] };
 
-    function showFollowup(questionText) {
-      if (!questionText) return;
-      followupContainer.style.display = "flex";
-      const btn = document.createElement("button");
-      btn.type = "button";
-      btn.className = "followup-btn";
-      btn.textContent = questionText + " ?";
-      btn.addEventListener("click", () => {
-        elements.questionInput.value = questionText + " ?";
-        elements.questionInput.focus();
-      });
-      followupContainer.appendChild(btn);
-    }
+  let suggestions = [];
+  try {
+    suggestions = JSON.parse(match[1]);
+  } catch (e) {
+    console.error("Impossible de parser QUESTIONS_SUIVANTES", e);
+  }
+
+  const mainAnswer = rawText.replace(match[0], "").trim();
+  return { mainAnswer, suggestions };
+}
+
+function renderFollowups(suggestions, originalQuestion) {
+  clearFollowups();
+  if (!Array.isArray(suggestions) || suggestions.length === 0) return;
+
+  followupContainer.style.display = "flex";
+
+  suggestions.slice(0, 3).forEach((q) => {
+    if (!q || typeof q !== "string") return;
+    const btn = document.createElement("button");
+    btn.type = "button";
+    btn.className = "followup-btn";
+    btn.textContent = q;
+
+    btn.addEventListener("click", () => {
+      elements.questionInput.value = q;
+      // On envoie directement la question au bot
+      form.dispatchEvent(new Event("submit", { cancelable: true }));
+    });
+
+    followupContainer.appendChild(btn);
+  });
+}
 
     form.addEventListener("submit", async (event) => {
-      event.preventDefault();
-      const t = translations[currentLang];
-      const question = elements.questionInput.value.trim();
-      if (!question) {
-        statusText.textContent = t.emptyQuestion;
-        return;
-      }
+  event.preventDefault();
+  const t = translations[currentLang];
+  const question = elements.questionInput.value.trim();
+  if (!question) {
+    statusText.textContent = t.emptyQuestion;
+    return;
+  }
 
-      setLoading(true);
-      clearFollowups();
+  setLoading(true);
+  clearFollowups();
 
-      try {
-        const response = await fetch("/.netlify/functions/chat", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json"
-          },
-          body: JSON.stringify({ question })
-        });
-
-        const data = await response.json();
-        if (data && data.answer) {
-          renderAnswer(data.answer);
-          const followup = extractFollowup(data.answer);
-          if (followup) {
-            showFollowup(followup);
-          }
-        } else {
-          renderAnswer(t.genericError);
-        }
-      } catch (error) {
-        renderAnswer(translations[currentLang].genericError);
-      } finally {
-        setLoading(false);
-      }
+  try {
+    const response = await fetch("/.netlify/functions/chat", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({ question })
     });
+
+    const data = await response.json();
+    if (data && typeof data.answer === "string") {
+      const { mainAnswer, suggestions } = parseSuggestions(data.answer);
+      renderAnswer(mainAnswer);
+      renderFollowups(suggestions, question);
+    } else {
+      renderAnswer(t.genericError);
+    }
+  } catch (error) {
+    console.error(error);
+    renderAnswer(translations[currentLang].genericError);
+  } finally {
+    setLoading(false);
+  }
+});
 
     // Init
     initLang();
