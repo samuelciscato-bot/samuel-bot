@@ -469,21 +469,25 @@
       margin-right: 2px;
     }
 
-    .followup-btn {
-      font-size: 11px;
-      padding: 5px 10px;
-      border-radius: 999px;
-      border: 1px solid #d2d2e2;
-      background: #ffffff;
-      cursor: pointer;
-      transition: background 0.15s ease, border-color 0.15s ease, transform 0.08s ease;
-    }
+   .followup-btn {
+  font-size: 11px;
+  padding: 4px 10px;
+  border-radius: 999px;
+  border: 1px solid #d2d2e2;
+  background: #f7f7fb;
+  cursor: pointer;
+  max-width: 260px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  transition: background 0.15s ease, border-color 0.15s ease, transform 0.08s ease;
+}
 
-    .followup-btn:hover {
-      background: #f3f3fb;
-      border-color: var(--accent);
-      transform: translateY(-0.5px);
-    }
+.followup-btn:hover {
+  background: #eef0ff;
+  border-color: var(--accent);
+  transform: translateY(-0.5px);
+}
 
     .footer-note {
       font-size: 11px;
@@ -946,20 +950,27 @@ function renderFollowups(suggestions, originalQuestion) {
   followupContainer.style.display = "flex";
 
   suggestions.slice(0, 3).forEach((q) => {
-    if (!q || typeof q !== "string") return;
-    const btn = document.createElement("button");
-    btn.type = "button";
-    btn.className = "followup-btn";
-    btn.textContent = q;
+  if (!q || typeof q !== "string") return;
 
-    btn.addEventListener("click", () => {
-      elements.questionInput.value = q;
-      // On envoie directement la question au bot
-      form.dispatchEvent(new Event("submit", { cancelable: true }));
-    });
+  const btn = document.createElement("button");
+  btn.type = "button";
+  btn.className = "followup-btn";
 
-    followupContainer.appendChild(btn);
+  const label =
+    q.length > 80
+      ? q.slice(0, 77).trimEnd() + "..."
+      : q;
+
+  btn.textContent = label;
+  btn.title = q; // la question complète au survol
+
+  btn.addEventListener("click", () => {
+    elements.questionInput.value = q;
+    form.dispatchEvent(new Event("submit", { cancelable: true }));
   });
+
+  followupContainer.appendChild(btn);
+});
 }
 
     form.addEventListener("submit", async (event) => {
