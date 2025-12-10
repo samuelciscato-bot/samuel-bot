@@ -8,7 +8,7 @@
   <!-- Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Sora:wght@500;600;700&display=swap" rel="stylesheet">
 
   <style>
     :root {
@@ -36,12 +36,19 @@
       color: var(--text-main);
     }
 
+    h1, h2, h3,
+    .hero-title,
+    .sidebar-section-title {
+      font-family: "Sora", "Inter", system-ui, sans-serif;
+    }
+
     .page {
       max-width: 1120px;
       margin: 32px auto 40px;
       padding: 0 20px;
       display: grid;
       grid-template-columns: 280px minmax(0, 1fr);
+      grid-auto-rows: auto;
       gap: 24px;
     }
 
@@ -51,39 +58,67 @@
       }
     }
 
-    /* Sidebar */
+    /* Hero wide */
 
-    .sidebar {
+    .hero-card {
       background: var(--bg-card);
       border-radius: var(--radius-lg);
-      padding: 24px 22px;
       border: 1px solid var(--border-subtle);
-      display: flex;
-      flex-direction: column;
-      gap: 20px;
       box-shadow: var(--shadow-soft);
+      padding: 18px 22px 18px;
+      position: relative;
+      overflow: hidden;
+      grid-column: 1 / -1;
     }
 
-    .name-block {
-      border-bottom: 1px solid var(--border-subtle);
-      padding-bottom: 18px;
+    .hero-layout {
+      display: grid;
+      grid-template-columns: auto minmax(0, 1fr);
+      gap: 20px;
+      align-items: flex-start;
+    }
+
+    @media (max-width: 720px) {
+      .hero-layout {
+        grid-template-columns: minmax(0, 1fr);
+      }
+    }
+
+    .hero-identity {
       display: flex;
+      align-items: center;
       gap: 12px;
     }
 
-    .name-texts {
-      flex: 1;
+    .avatar {
+      width: 64px;
+      height: 64px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #d6defa, #f2f3ff);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 26px;
+      font-weight: 600;
+      color: #1c2a5a;
+      flex-shrink: 0;
     }
 
-    .name-block h1 {
-      margin: 0 0 4px;
+    .name-texts {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .hero-name {
+      margin: 0;
       font-size: 22px;
       letter-spacing: 0.06em;
       text-transform: uppercase;
       font-weight: 600;
     }
 
-    .name-block .role {
+    .role {
       font-size: 11px;
       letter-spacing: 0.16em;
       text-transform: uppercase;
@@ -100,7 +135,8 @@
       color: #1c2a5a;
       font-size: 11px;
       font-weight: 500;
-      margin-top: 10px;
+      margin-top: 6px;
+      align-self: flex-start;
     }
 
     .badge-dot {
@@ -110,17 +146,73 @@
       background: var(--accent);
     }
 
-    .avatar {
-      width: 56px;
-      height: 56px;
-      border-radius: 50%;
-      background: linear-gradient(135deg, #d6defa, #f2f3ff);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 22px;
+    .hero-eyebrow {
+      font-size: 11px;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      margin-bottom: 6px;
+    }
+
+    .hero-title {
+      margin: 0 0 6px;
+      font-size: 19px;
       font-weight: 600;
-      color: #1c2a5a;
+    }
+
+    .hero-sub {
+      margin: 0;
+      font-size: 13px;
+      color: var(--text-muted);
+      line-height: 1.6;
+      max-width: 640px;
+    }
+
+    .hero-quick-questions {
+      margin-top: 12px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .hero-quick-btn {
+      border-radius: 999px;
+      border: 1px solid #ddddea;
+      background: #f7f7fb;
+      font-size: 11px;
+      padding: 5px 10px;
+      cursor: pointer;
+      transition: background 0.15s ease, border-color 0.15s ease, transform 0.08s ease;
+      white-space: nowrap;
+    }
+
+    .hero-quick-btn:hover {
+      background: #e8ebff;
+      border-color: var(--accent);
+      transform: translateY(-0.5px);
+    }
+
+    .hero-diagram {
+      position: absolute;
+      right: -30px;
+      top: -10px;
+      width: 180px;
+      height: 120px;
+      pointer-events: none;
+      opacity: 0.5;
+    }
+
+    /* Sidebar */
+
+    .sidebar {
+      background: var(--bg-card);
+      border-radius: var(--radius-lg);
+      padding: 22px 22px;
+      border: 1px solid var(--border-subtle);
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+      box-shadow: var(--shadow-soft);
     }
 
     .sidebar-section-title {
@@ -195,22 +287,6 @@
 
     .btn-ghost:hover {
       background: #f3f3f8;
-    }
-
-    .sidebar-chips {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 6px;
-    }
-
-    .chip {
-      font-size: 11px;
-      padding: 4px 8px;
-      border-radius: 999px;
-      border: 1px solid #dedee6;
-      background: #fafafb;
-      color: #33333b;
-      white-space: nowrap;
     }
 
     .sidebar-contact {
@@ -302,63 +378,6 @@
       background: #e5e7ff;
       color: #111111;
       font-weight: 500;
-    }
-
-    .hero-card {
-      background: var(--bg-card);
-      border-radius: var(--radius-lg);
-      border: 1px solid var(--border-subtle);
-      box-shadow: var(--shadow-soft);
-      padding: 20px 22px 18px;
-      position: relative;
-      overflow: hidden;
-    }
-
-    .hero-eyebrow {
-      font-size: 11px;
-      letter-spacing: 0.22em;
-      text-transform: uppercase;
-      color: var(--text-muted);
-      margin-bottom: 8px;
-    }
-
-    .hero-title {
-      margin: 0 0 8px;
-      font-size: 19px;
-      font-weight: 600;
-    }
-
-    .hero-sub {
-      margin: 0;
-      font-size: 13px;
-      color: var(--text-muted);
-      line-height: 1.6;
-      max-width: 620px;
-    }
-
-    .hero-tags {
-      margin-top: 12px;
-      display: flex;
-      flex-wrap: wrap;
-      gap: 8px;
-    }
-
-    .hero-tag {
-      font-size: 11px;
-      padding: 4px 9px;
-      border-radius: 999px;
-      border: 1px solid #ddddea;
-      background: #f7f7fb;
-    }
-
-    .hero-diagram {
-      position: absolute;
-      right: -30px;
-      top: -10px;
-      width: 180px;
-      height: 120px;
-      pointer-events: none;
-      opacity: 0.5;
     }
 
     .qa-card {
@@ -457,39 +476,63 @@
     }
 
     .followup-container {
-  margin-top: 10px;
-  display: flex;
-  flex-wrap: wrap;
-  gap: 8px;
-  align-items: flex-start;
-}
+      margin-top: 10px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      align-items: flex-start;
+    }
 
-.followup-btn {
-  font-size: 11px;
-  padding: 6px 12px;
-  border-radius: 999px;
-  border: 1px solid #d2d2e2;
-  background: #ffffff;
-  cursor: pointer;
-  max-width: 100%;          /* le bouton ne dépasse pas de la colonne */
-  white-space: normal;      /* autorise les retours à la ligne */
-  line-height: 1.4;         /* un peu d’air entre les lignes */
-  text-align: left;         /* plus lisible pour deux lignes */
-  transition: background 0.15s ease,
-              border-color 0.15s ease,
-              transform 0.08s ease;
-}
-
-.followup-btn:hover {
-  background: #f3f3fb;
-  border-color: var(--accent);
-  transform: translateY(-0.5px);
-}
-
-    .footer-note {
+    .followup-label {
       font-size: 11px;
       color: var(--text-muted);
-      line-height: 1.5;
+    }
+
+    .followup-btn {
+      font-size: 11px;
+      padding: 6px 12px;
+      border-radius: 999px;
+      border: 1px solid #d2d2e2;
+      background: #ffffff;
+      cursor: pointer;
+      max-width: 100%;
+      white-space: normal;
+      line-height: 1.4;
+      text-align: left;
+      transition: background 0.15s ease,
+                  border-color 0.15s ease,
+                  transform 0.08s ease;
+    }
+
+    .followup-btn:hover {
+      background: #f3f3fb;
+      border-color: var(--accent);
+      transform: translateY(-0.5px);
+    }
+
+    /* Info card */
+
+    .info-card {
+      background: var(--bg-card);
+      border-radius: var(--radius-lg);
+      border: 1px solid var(--border-subtle);
+      box-shadow: var(--shadow-soft);
+      padding: 18px 22px 18px;
+      grid-column: 1 / -1;
+      font-size: 12px;
+      line-height: 1.6;
+    }
+
+    .info-title {
+      margin: 0 0 8px;
+      font-size: 14px;
+      font-weight: 600;
+    }
+
+    .footer-note {
+      font-size: 12px;
+      color: var(--text-muted);
+      line-height: 1.6;
     }
 
     .footer-note strong {
@@ -499,27 +542,65 @@
 </head>
 <body>
   <main class="page">
-    <!-- Sidebar -->
-    <aside class="sidebar">
-      <div class="name-block">
-        <div class="avatar">S</div>
-        <div class="name-texts">
-          <h1>SAMUEL CISCATO</h1>
-          <div class="role" id="role-line">
-            DIRECTION MARKETING ET E COMMERCE · TRANSFORMATION DIGITALE
+
+    <!-- Hero wide -->
+    <section class="hero-card">
+      <div class="hero-layout">
+        <div class="hero-identity">
+          <div class="avatar">S</div>
+          <div class="name-texts">
+            <h1 class="hero-name">SAMUEL CISCATO</h1>
+            <div class="role" id="role-line">
+              DIRECTION MARKETING ET E COMMERCE · TRANSFORMATION DIGITALE
+            </div>
+            <div class="badge-twin">
+              <span class="badge-dot"></span>
+              <span id="badge-text">Samuel CV Twin</span>
+            </div>
           </div>
-          <div class="badge-twin">
-            <span class="badge-dot"></span>
-            <span id="badge-text">Samuel CV Twin</span>
-          </div>
+        </div>
+
+        <div>
+          <div class="hero-eyebrow" id="hero-eyebrow">DOSSIER INTERACTIF</div>
+          <h2 class="hero-title" id="hero-title">
+            Explorer mon parcours avant d echanger en direct
+          </h2>
+          <p class="hero-sub" id="hero-sub">
+            Cet outil vous permet de poser des questions a un agent IA entraine sur mon dossier
+            (CV, lettres, profil AssessFirst, questions reponses). Il ne parle pas en mon nom:
+            il lit, recoupe et synthetise les informations disponibles, puis vous propose des pistes pour creuser.
+          </p>
+
+          <div class="hero-quick-questions" id="hero-quick-questions"></div>
         </div>
       </div>
 
+      <!-- petit diagramme tech discret -->
+      <svg class="hero-diagram" viewBox="0 0 200 120" aria-hidden="true">
+        <defs>
+          <linearGradient id="grad" x1="0" y1="0" x2="1" y2="1">
+            <stop offset="0" stop-color="#d7ddff" />
+            <stop offset="1" stop-color="#b3c3ff" />
+          </linearGradient>
+        </defs>
+        <circle cx="40" cy="60" r="10" fill="url(#grad)" />
+        <circle cx="110" cy="30" r="8" fill="url(#grad)" />
+        <circle cx="150" cy="80" r="9" fill="url(#grad)" />
+        <circle cx="85" cy="95" r="6" fill="#ffffff" stroke="#c4cdf7" stroke-width="1" />
+        <line x1="40" y1="60" x2="110" y2="30" stroke="#c4cdf7" stroke-width="1" />
+        <line x1="40" y1="60" x2="150" y2="80" stroke="#c4cdf7" stroke-width="1" />
+        <line x1="110" y1="30" x2="150" y2="80" stroke="#c4cdf7" stroke-width="1" />
+        <line x1="40" y1="60" x2="85" y2="95" stroke="#c4cdf7" stroke-width="1" />
+      </svg>
+    </section>
+
+    <!-- Sidebar -->
+    <aside class="sidebar">
       <section>
         <h2 class="sidebar-section-title" id="profil-title">PROFIL</h2>
         <p class="sidebar-text" id="profil-text">
-          Samuel conçoit des systèmes de croissance lisibles, utiles et soutenables pour les équipes.
-          Il croise marketing, data et psychologie cognitive pour mettre de l ordre dans la complexité, pas pour la masquer.
+          Samuel clarifie des situations complexes pour les traduire en plans de croissance lisibles et utiles pour les equipes.
+          Il croise marketing, digital et psychologie cognitive pour aligner clients, operations et direction sur les memes priorites.
         </p>
       </section>
 
@@ -527,24 +608,12 @@
         <h2 class="sidebar-section-title" id="cv-title">CV ET DOSSIER</h2>
         <div class="sidebar-card">
           <div class="cv-preview-box" id="cv-preview">
-            Aperçu CV<br />
+            Apercu CV<br />
             <span style="font-size: 11px;">(remplacez cette zone par une miniature de CV plus tard)</span>
           </div>
           <div class="sidebar-buttons">
-            <a href="#" class="btn btn-primary" id="btn-download-cv">Télécharger le CV</a>
+            <a href="#" class="btn btn-primary" id="btn-download-cv">Telecharger le CV</a>
             <a href="#" class="btn btn-ghost" id="btn-open-cv">Ouvrir en grand format</a>
-          </div>
-        </div>
-      </section>
-
-      <section>
-        <h2 class="sidebar-section-title" id="axes-title">AXES CLES</h2>
-        <div class="sidebar-card">
-          <div class="sidebar-chips">
-            <span class="chip" id="chip-1">Strategie et execution omnicanale</span>
-            <span class="chip" id="chip-2">Pilotage e commerce et marketplaces</span>
-            <span class="chip" id="chip-3">Transformation digitale et change</span>
-            <span class="chip" id="chip-4">Culture data et IA appliquee</span>
           </div>
         </div>
       </section>
@@ -585,41 +654,6 @@
         </div>
       </div>
 
-      <section class="hero-card">
-        <div class="hero-eyebrow" id="hero-eyebrow">DOSSIER INTERACTIF</div>
-        <h2 class="hero-title" id="hero-title">
-          Explorer mon parcours avant d echanger en direct
-        </h2>
-        <p class="hero-sub" id="hero-sub">
-          Cet outil vous permet de poser des questions a un agent IA entraine sur mon dossier
-          (CV, lettres, profil AssessFirst, questions reponses). Il ne parle pas en mon nom:
-          il lit, recoupe et synthétise les informations disponibles, puis vous propose des pistes pour creuser.
-        </p>
-        <div class="hero-tags">
-          <span class="hero-tag" id="tag-1">Marketing et e commerce</span>
-          <span class="hero-tag" id="tag-2">Environnements complexes</span>
-          <span class="hero-tag" id="tag-3">IA et automatisation</span>
-        </div>
-
-        <!-- petit diagramme tech discret -->
-        <svg class="hero-diagram" viewBox="0 0 200 120" aria-hidden="true">
-          <defs>
-            <linearGradient id="grad" x1="0" y1="0" x2="1" y2="1">
-              <stop offset="0" stop-color="#d7ddff" />
-              <stop offset="1" stop-color="#b3c3ff" />
-            </linearGradient>
-          </defs>
-          <circle cx="40" cy="60" r="10" fill="url(#grad)" />
-          <circle cx="110" cy="30" r="8" fill="url(#grad)" />
-          <circle cx="150" cy="80" r="9" fill="url(#grad)" />
-          <circle cx="85" cy="95" r="6" fill="#ffffff" stroke="#c4cdf7" stroke-width="1" />
-          <line x1="40" y1="60" x2="110" y2="30" stroke="#c4cdf7" stroke-width="1" />
-          <line x1="40" y1="60" x2="150" y2="80" stroke="#c4cdf7" stroke-width="1" />
-          <line x1="110" y1="30" x2="150" y2="80" stroke="#c4cdf7" stroke-width="1" />
-          <line x1="40" y1="60" x2="85" y2="95" stroke="#c4cdf7" stroke-width="1" />
-        </svg>
-      </section>
-
       <section class="qa-card">
         <div class="qa-header-row">
           <h3 class="qa-title" id="qa-title">Poser une question a mon dossier</h3>
@@ -649,20 +683,16 @@
 
         <div id="followup-container" class="followup-container" style="display:none;">
           <span class="followup-label" id="followup-label">Questions possibles pour creuser :</span>
-          <!-- boutons dynamiques ici -->
         </div>
       </section>
+    </section>
 
-      <section>
-        <p class="footer-note" id="footer-note">
-          <strong>Donnees et confidentialite.</strong> Les questions posees peuvent etre enregistreés
-          afin d ameliorer la qualite des reponses du jumeau IA. Elles ne sont ni revendues,
-          ni utilisees pour de la publicite ciblee.<br />
-          <strong>Ce que l outil ne fait pas.</strong> Il ne cree pas d informations nouvelles
-          sur la vie privee de Samuel et ne porte pas de jugement sur le fit culturel.
-          Pour cela, un echange direct reste indispensable.
-        </p>
-      </section>
+    <!-- Info card -->
+    <section class="info-card">
+      <h3 class="info-title" id="info-title">Comment fonctionne ce jumeau IA</h3>
+      <p class="footer-note" id="footer-note">
+        <!-- Rempli par le script selon la langue -->
+      </p>
     </section>
   </main>
 
@@ -674,17 +704,12 @@
         badgeText: "Samuel CV Twin",
         profilTitle: "PROFIL",
         profilText:
-          "Samuel conçoit des systemes de croissance lisibles, utiles et soutenables pour les equipes. " +
-          "Il croise marketing, data et psychologie cognitive pour mettre de l ordre dans la complexite, pas pour la masquer.",
+          "Samuel clarifie des situations complexes pour les traduire en plans de croissance lisibles et utiles pour les equipes. " +
+          "Il croise marketing, digital et psychologie cognitive pour aligner clients, operations et direction sur les memes priorites.",
         cvTitle: "CV ET DOSSIER",
         cvPreview: "Apercu CV<br /><span style=\"font-size: 11px;\">(remplacez cette zone par une miniature de CV plus tard)</span>",
         btnDownload: "Telecharger le CV",
         btnOpen: "Ouvrir en grand format",
-        axesTitle: "AXES CLES",
-        chip1: "Strategie et execution omnicanale",
-        chip2: "Pilotage e commerce et marketplaces",
-        chip3: "Transformation digitale et change",
-        chip4: "Culture data et IA appliquee",
         contactTitle: "CONTACT",
         linkedinMain: "Voir le profil LinkedIn",
         linkedinSub: "Recommandations et detail des experiences sur LinkedIn.",
@@ -695,9 +720,6 @@
           "Cet outil vous permet de poser des questions a un agent IA entraine sur mon dossier " +
           "(CV, lettres, profil AssessFirst, questions reponses). Il ne parle pas en mon nom: " +
           "il lit, recoupe et synthetise les informations disponibles, puis vous propose des pistes pour creuser.",
-        tag1: "Marketing et e commerce",
-        tag2: "Environnements complexes",
-        tag3: "IA et automatisation",
         qaTitle: "Poser une question a mon dossier",
         qaCaption:
           "L agent s appuie uniquement sur les informations presentes dans le dossier. " +
@@ -708,34 +730,47 @@
         btnAsk: "Poser la question",
         answerEmpty: "Aucune question posee pour le moment. La premiere reponse apparaitra ici.",
         followupLabel: "Questions possibles pour creuser :",
+        infoTitle: "Comment fonctionne ce jumeau IA",
         footer:
-          "<strong>Donnees et confidentialite.</strong> Les questions posees peuvent etre enregistreés " +
-          "afin d ameliorer la qualite des reponses du jumeau IA. Elles ne sont ni revendues, " +
-          "ni utilisees pour de la publicite ciblee.<br />" +
-          "<strong>Ce que l outil ne fait pas.</strong> Il ne cree pas d informations nouvelles " +
-          "sur la vie privee de Samuel et ne porte pas de jugement sur le fit culturel. " +
+          "<strong>Base de travail.</strong> Le jumeau IA s appuie sur un pack de donnees fixe: plusieurs versions de mon CV, " +
+          "des lettres de motivation, des reponses RH structurees et des elements de profil de personnalite. " +
+          "Le modele lit ces documents, recoupe les informations et produit une synthese adaptee a la question posee.<br /><br />" +
+          "<strong>Technologie.</strong> L agent tourne sur le modele GPT 5.1 d OpenAI, deploye via Netlify et pilote par des scenarios Make. " +
+          "Il ne invente pas de dates ni de chiffres en dehors de ce qui figure dans le dossier et indique explicitement quand une information manque.<br /><br />" +
+          "<strong>Donnees et confidentialite.</strong> Les questions que vous posez peuvent etre enregistreés pour analyser les themes les plus fréquents " +
+          "et ameliorer le dispositif. Elles ne sont ni revendues, ni utilisees pour de la publicite ciblee. " +
+          "Le jumeau IA ne cree pas d informations nouvelles sur ma vie privee et ne porte pas de jugement sur le fit culturel. " +
           "Pour cela, un echange direct reste indispensable.",
         loading: "En reflexion...",
         emptyQuestion: "Merci de saisir une question avant d envoyer.",
-        genericError: "Une erreur est survenue. Vous pouvez reessayer dans un instant."
+        genericError: "Une erreur est survenue. Vous pouvez reessayer dans un instant.",
+        quickExamples: [
+          {
+            label: "Son experience marketing",
+            question: "Pouvez vous resumer son experience en marketing et e commerce ?"
+          },
+          {
+            label: "Management d equipe",
+            question: "Comment dirige t il une equipe marketing et digitale dans un contexte de pression ?"
+          },
+          {
+            label: "IA et automatisation",
+            question: "Comment utilise t il concretement l IA et l automatisation dans ses missions ?"
+          }
+        ]
       },
       en: {
         roleLine: "MARKETING AND E COMMERCE LEADERSHIP · DIGITAL TRANSFORMATION",
         badgeText: "Samuel CV Twin",
         profilTitle: "PROFILE",
         profilText:
-          "Samuel designs growth systems that are readable, useful and sustainable for teams. " +
-          "He combines marketing, data and cognitive psychology to bring order to complexity, not to hide it.",
+          "Samuel turns complex situations into clear growth plans that are useful and sustainable for teams. " +
+          "He combines marketing, digital and cognitive psychology to align customers, operations and leadership on the same priorities.",
         cvTitle: "CV AND DOSSIER",
         cvPreview:
           "CV preview<br /><span style=\"font-size: 11px;\">(replace this area with a real CV thumbnail later)</span>",
         btnDownload: "Download CV",
         btnOpen: "Open full version",
-        axesTitle: "KEY FOCUS AREAS",
-        chip1: "Omnichannel strategy and execution",
-        chip2: "E commerce and marketplaces leadership",
-        chip3: "Digital transformation and change",
-        chip4: "Data and applied AI culture",
         contactTitle: "CONTACT",
         linkedinMain: "View LinkedIn profile",
         linkedinSub: "Recommendations and full experience details on LinkedIn.",
@@ -744,11 +779,8 @@
         heroTitle: "Explore my track record before a live conversation",
         heroSub:
           "This tool lets you ask questions to an AI agent trained on my dossier " +
-          "(CV, letters, AssessFirst profile, Q&A blocks). It does not speak in my name: " +
-          "it reads, cross checks and synthesises the information, then suggests angles to dig deeper.",
-        tag1: "Marketing and e commerce",
-        tag2: "Complex environments",
-        tag3: "AI and automation",
+          "(CV, letters, AssessFirst profile, Q and A blocks). It does not speak in my name: " +
+          "it reads, cross checks and synthesises the available information, then suggests angles you can dig into.",
         qaTitle: "Ask a question to my dossier",
         qaCaption:
           "The agent only relies on what is present in the dossier. " +
@@ -759,14 +791,33 @@
         btnAsk: "Ask the question",
         answerEmpty: "No question asked yet. The first answer will appear here.",
         followupLabel: "Follow up questions you could ask:",
+        infoTitle: "How this AI twin works",
         footer:
-          "<strong>Data and privacy.</strong> Questions may be logged in order to improve the quality " +
-          "of the AI twin answers. They are not sold or used for targeted advertising.<br />" +
-          "<strong>What this tool does not do.</strong> It does not create new information about Samuel s private life " +
-          "and it does not judge cultural fit. A direct conversation is still required for that.",
+          "<strong>Data set.</strong> The AI twin is based on a fixed pack of documents: several versions of my CV, " +
+          "cover letters, structured HR Q and A and personality insights. The model reads these documents, " +
+          "cross checks the information and produces a synthesis tailored to the question.<br /><br />" +
+          "<strong>Technology.</strong> The agent runs on OpenAI s GPT 5.1 model, deployed on Netlify and orchestrated with Make scenarios. " +
+          "It does not invent dates or figures beyond what is present in the dossier and clearly says when a piece of information is missing.<br /><br />" +
+          "<strong>Data and privacy.</strong> Questions may be logged to analyse recurring themes and improve the system. " +
+          "They are not sold or used for targeted advertising. The AI twin does not create new information about my private life " +
+          "and does not judge cultural fit. For that, a direct conversation is still required.",
         loading: "Thinking...",
         emptyQuestion: "Please type a question before sending.",
-        genericError: "Something went wrong. You can try again in a moment."
+        genericError: "Something went wrong. You can try again in a moment.",
+        quickExamples: [
+          {
+            label: "Marketing track record",
+            question: "Could you summarise his experience in marketing and e commerce?"
+          },
+          {
+            label: "Team leadership",
+            question: "How does he lead a marketing and digital team in a high pressure context?"
+          },
+          {
+            label: "AI and automation",
+            question: "How does he use AI and automation in his recent projects?"
+          }
+        ]
       }
     };
 
@@ -779,11 +830,6 @@
       cvPreview: document.getElementById("cv-preview"),
       btnDownload: document.getElementById("btn-download-cv"),
       btnOpen: document.getElementById("btn-open-cv"),
-      axesTitle: document.getElementById("axes-title"),
-      chip1: document.getElementById("chip-1"),
-      chip2: document.getElementById("chip-2"),
-      chip3: document.getElementById("chip-3"),
-      chip4: document.getElementById("chip-4"),
       contactTitle: document.getElementById("contact-title"),
       linkedinMain: document.getElementById("linkedin-main-text"),
       linkedinSub: document.getElementById("linkedin-sub-text"),
@@ -791,20 +837,19 @@
       heroEyebrow: document.getElementById("hero-eyebrow"),
       heroTitle: document.getElementById("hero-title"),
       heroSub: document.getElementById("hero-sub"),
-      tag1: document.getElementById("tag-1"),
-      tag2: document.getElementById("tag-2"),
-      tag3: document.getElementById("tag-3"),
       qaTitle: document.getElementById("qa-title"),
       qaCaption: document.getElementById("qa-caption"),
       questionInput: document.getElementById("question-input"),
       submitBtn: document.getElementById("submit-btn"),
       answerBox: document.getElementById("answer-box"),
       followupLabel: document.getElementById("followup-label"),
+      infoTitle: document.getElementById("info-title"),
       footerNote: document.getElementById("footer-note")
     };
 
     const statusText = document.getElementById("status-text");
     const followupContainer = document.getElementById("followup-container");
+    const quickContainer = document.getElementById("hero-quick-questions");
 
     const langButtons = {
       fr: document.getElementById("btn-lang-fr"),
@@ -812,6 +857,25 @@
     };
 
     let currentLang = "fr";
+
+    function renderQuickExamples(lang) {
+      const t = translations[lang];
+      if (!t || !Array.isArray(t.quickExamples)) return;
+
+      quickContainer.innerHTML = "";
+      t.quickExamples.forEach((item) => {
+        if (!item || typeof item.label !== "string" || typeof item.question !== "string") return;
+        const btn = document.createElement("button");
+        btn.type = "button";
+        btn.className = "hero-quick-btn";
+        btn.textContent = item.label;
+        btn.addEventListener("click", () => {
+          elements.questionInput.value = item.question;
+          document.getElementById("qa-form").dispatchEvent(new Event("submit", { cancelable: true }));
+        });
+        quickContainer.appendChild(btn);
+      });
+    }
 
     function applyLang(lang) {
       const t = translations[lang];
@@ -828,11 +892,6 @@
       elements.cvPreview.innerHTML = t.cvPreview;
       elements.btnDownload.textContent = t.btnDownload;
       elements.btnOpen.textContent = t.btnOpen;
-      elements.axesTitle.textContent = t.axesTitle;
-      elements.chip1.textContent = t.chip1;
-      elements.chip2.textContent = t.chip2;
-      elements.chip3.textContent = t.chip3;
-      elements.chip4.textContent = t.chip4;
       elements.contactTitle.textContent = t.contactTitle;
       elements.linkedinMain.textContent = t.linkedinMain;
       elements.linkedinSub.textContent = t.linkedinSub;
@@ -840,9 +899,6 @@
       elements.heroEyebrow.textContent = t.heroEyebrow;
       elements.heroTitle.textContent = t.heroTitle;
       elements.heroSub.textContent = t.heroSub;
-      elements.tag1.textContent = t.tag1;
-      elements.tag2.textContent = t.tag2;
-      elements.tag3.textContent = t.tag3;
       elements.qaTitle.textContent = t.qaTitle;
       elements.qaCaption.textContent = t.qaCaption;
       elements.questionInput.placeholder = t.placeholder;
@@ -850,6 +906,7 @@
       elements.answerBox.textContent = t.answerEmpty;
       elements.answerBox.classList.add("answer-empty");
       elements.followupLabel.textContent = t.followupLabel;
+      elements.infoTitle.textContent = t.infoTitle;
       elements.footerNote.innerHTML = t.footer;
 
       // switch UI
@@ -857,9 +914,10 @@
         langButtons[code].classList.toggle("active", code === lang);
       });
 
-      // reset status text
+      // reset status text et followups
       statusText.textContent = "";
       clearFollowups();
+      renderQuickExamples(lang);
     }
 
     function initLang() {
@@ -919,93 +977,92 @@
     }
 
     function clearFollowups() {
-  // Cache le bloc et supprime seulement les anciens boutons
-  followupContainer.style.display = "none";
-  followupContainer.querySelectorAll(".followup-btn").forEach((btn) => btn.remove());
-}
+      followupContainer.style.display = "none";
+      followupContainer.querySelectorAll(".followup-btn").forEach((btn) => btn.remove());
+    }
 
-// Parse la ligne QUESTIONS_SUIVANTES: ["...", "...", "..."]
-function parseSuggestions(rawText) {
-  const match = rawText.match(/QUESTIONS_SUIVANTES:\s*(\[.*\])\s*$/m);
-  if (!match) return { mainAnswer: rawText.trim(), suggestions: [] };
+    // Parse la ligne QUESTIONS_SUIVANTES: ["...", "...", "..."]
+    function parseSuggestions(rawText) {
+      const match = rawText.match(/QUESTIONS_SUIVANTES:\s*(\[.*\])\s*$/m);
+      if (!match) return { mainAnswer: rawText.trim(), suggestions: [] };
 
-  let suggestions = [];
-  try {
-    suggestions = JSON.parse(match[1]);
-  } catch (e) {
-    console.error("Impossible de parser QUESTIONS_SUIVANTES", e);
-  }
+      let suggestions = [];
+      try {
+        suggestions = JSON.parse(match[1]);
+      } catch (e) {
+        console.error("Impossible de parser QUESTIONS_SUIVANTES", e);
+      }
 
-  const mainAnswer = rawText.replace(match[0], "").trim();
-  return { mainAnswer, suggestions };
-}
+      const mainAnswer = rawText.replace(match[0], "").trim();
+      return { mainAnswer, suggestions };
+    }
 
-function renderFollowups(suggestions, originalQuestion) {
-  clearFollowups();
-  if (!Array.isArray(suggestions) || suggestions.length === 0) return;
+    function renderFollowups(suggestions) {
+      clearFollowups();
+      if (!Array.isArray(suggestions) || suggestions.length === 0) return;
 
-  followupContainer.style.display = "flex";
+      followupContainer.style.display = "flex";
 
-  suggestions.slice(0, 3).forEach((q) => {
-  if (!q || typeof q !== "string") return;
+      suggestions.slice(0, 3).forEach((q) => {
+        if (!q || typeof q !== "string") return;
 
-  const btn = document.createElement("button");
-  btn.type = "button";
-  btn.className = "followup-btn";
+        const btn = document.createElement("button");
+        btn.type = "button";
+        btn.className = "followup-btn";
 
-  const label =
-    q.length > 80
-      ? q.slice(0, 77).trimEnd() + "..."
-      : q;
+        const label =
+          q.length > 80
+            ? q.slice(0, 77).trimEnd() + "..."
+            : q;
 
-  btn.textContent = label;
-  btn.title = q; // la question complète au survol
+        btn.textContent = label;
+        btn.title = q;
 
-  btn.addEventListener("click", () => {
-    elements.questionInput.value = q;
-    form.dispatchEvent(new Event("submit", { cancelable: true }));
-  });
+        btn.addEventListener("click", () => {
+          elements.questionInput.value = q;
+          form.dispatchEvent(new Event("submit", { cancelable: true }));
+        });
 
-  followupContainer.appendChild(btn);
-});
-}
+        followupContainer.appendChild(btn);
+      });
+    }
 
     form.addEventListener("submit", async (event) => {
-  event.preventDefault();
-  const t = translations[currentLang];
-  const question = elements.questionInput.value.trim();
-  if (!question) {
-    statusText.textContent = t.emptyQuestion;
-    return;
-  }
+      event.preventDefault();
+      const t = translations[currentLang];
+      const question = elements.questionInput.value.trim();
+      if (!question) {
+        statusText.textContent = t.emptyQuestion;
+        return;
+      }
 
-  setLoading(true);
-  clearFollowups();
+      setLoading(true);
+      clearFollowups();
 
-  try {
-    const response = await fetch("/.netlify/functions/chat", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify({ question })
+      try {
+        const response = await fetch("/.netlify/functions/chat", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json"
+          },
+          body: JSON.stringify({ question })
+        });
+
+        const data = await response.json();
+        if (data && typeof data.answer === "string") {
+          const { mainAnswer, suggestions } = parseSuggestions(data.answer);
+          renderAnswer(mainAnswer);
+          renderFollowups(suggestions);
+        } else {
+          renderAnswer(t.genericError);
+        }
+      } catch (error) {
+        console.error(error);
+        renderAnswer(translations[currentLang].genericError);
+      } finally {
+        setLoading(false);
+      }
     });
-
-    const data = await response.json();
-    if (data && typeof data.answer === "string") {
-      const { mainAnswer, suggestions } = parseSuggestions(data.answer);
-      renderAnswer(mainAnswer);
-      renderFollowups(suggestions, question);
-    } else {
-      renderAnswer(t.genericError);
-    }
-  } catch (error) {
-    console.error(error);
-    renderAnswer(translations[currentLang].genericError);
-  } finally {
-    setLoading(false);
-  }
-});
 
     // Init
     initLang();
