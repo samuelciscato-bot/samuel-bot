@@ -117,7 +117,7 @@ exports.handler = async (event) => {
               },
               {
                 type: "input_file",
-                file_id: "file-4QzrXVLeRsinkr1cPh8UuN"
+                file_id: "file-NPjuebfkHrndzW6gg7raoP"
               }
             ]
           }
