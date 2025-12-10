@@ -4,31 +4,575 @@
   <meta charset="utf-8">
   <title>Samuel Ciscato – Dossier interactif</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+        Roboto, sans-serif;
+      background: #e5e7eb;
+      color: #111827;
+    }
+
+    a {
+      color: #2563eb;
+      text-decoration: none;
+    }
+
+    a:hover {
+      text-decoration: underline;
+    }
+
+    /* Wrapper global */
+
+    .page {
+      min-height: 100vh;
+      padding: 32px 16px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .sheet {
+      max-width: 1080px;
+      width: 100%;
+      background: #ffffff;
+      box-shadow:
+        0 18px 40px rgba(15, 23, 42, 0.15),
+        0 0 1px rgba(15, 23, 42, 0.2);
+      display: flex;
+      flex-direction: column;
+      border-radius: 4px;
+      overflow: hidden;
+    }
+
+    /* En-tête type CV */
+
+    .sheet-header {
+      padding: 18px 32px;
+      border-bottom: 2px solid #111827;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+    }
+
+    .header-main {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .header-name {
+      font-size: 1.9rem;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+    }
+
+    .header-title {
+      font-size: 0.98rem;
+      letter-spacing: 0.09em;
+      text-transform: uppercase;
+      color: #4b5563;
+    }
+
+    .header-contact {
+      font-size: 0.85rem;
+      text-align: right;
+      color: #4b5563;
+      line-height: 1.5;
+    }
+
+    .header-contact p {
+      margin: 0;
+    }
+
+    /* Corps cv */
+
+    .sheet-body {
+      display: grid;
+      grid-template-columns: 280px 1fr;
+      border-top: 1px solid #d1d5db;
+    }
+
+    /* Colonne gauche */
+
+    .col-left {
+      border-right: 1px solid #d1d5db;
+      background: #f9fafb;
+      padding: 20px 22px;
+      display: flex;
+      flex-direction: column;
+      gap: 18px;
+    }
+
+    .portrait-block {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      align-items: flex-start;
+    }
+
+    .portrait-photo {
+      width: 90px;
+      height: 90px;
+      border-radius: 999px;
+      border: 1px solid #9ca3af;
+      overflow: hidden;
+      background: #e5e7eb;
+    }
+
+    .portrait-photo img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .portrait-tagline {
+      font-size: 0.86rem;
+      line-height: 1.5;
+      color: #4b5563;
+    }
+
+    .left-section {
+      padding-top: 6px;
+      border-top: 1px solid #d1d5db;
+    }
+
+    .left-section:first-of-type {
+      border-top: none;
+      padding-top: 0;
+    }
+
+    .left-title {
+      font-size: 0.78rem;
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+      color: #6b7280;
+      margin-bottom: 6px;
+    }
+
+    .left-list,
+    .left-text {
+      font-size: 0.86rem;
+      line-height: 1.6;
+      color: #374151;
+    }
+
+    .left-list p {
+      margin: 0;
+    }
+
+    .cv-preview {
+      margin-top: 6px;
+      border-radius: 3px;
+      border: 1px solid #d1d5db;
+      background: #ffffff;
+      padding: 8px 10px;
+      font-size: 0.8rem;
+      color: #6b7280;
+      text-align: center;
+    }
+
+    .cv-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-top: 6px;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 6px 12px;
+      border-radius: 999px;
+      font-size: 0.8rem;
+      border: 1px solid #111827;
+      background: transparent;
+      color: #111827;
+      cursor: pointer;
+      text-decoration: none;
+    }
+
+    .btn-primary {
+      background: #111827;
+      color: #f9fafb;
+    }
+
+    .btn:hover {
+      opacity: 0.9;
+    }
+
+    /* Colonne droite */
+
+    .col-right {
+      padding: 20px 26px;
+      display: flex;
+      flex-direction: column;
+      gap: 18px;
+    }
+
+    .section-header {
+      border-bottom: 1px solid #d1d5db;
+      padding-bottom: 10px;
+    }
+
+    .section-kicker {
+      font-size: 0.78rem;
+      text-transform: uppercase;
+      letter-spacing: 0.18em;
+      color: #9ca3af;
+      margin-bottom: 4px;
+    }
+
+    .section-title {
+      font-size: 1.1rem;
+      font-weight: 600;
+      margin: 0;
+    }
+
+    .section-subtitle {
+      font-size: 0.9rem;
+      color: #4b5563;
+      margin-top: 6px;
+      line-height: 1.6;
+    }
+
+    .chip-row {
+      margin-top: 8px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+    }
+
+    .chip {
+      font-size: 0.78rem;
+      padding: 3px 9px;
+      border-radius: 999px;
+      border: 1px solid #d1d5db;
+      color: #4b5563;
+      background: #f9fafb;
+    }
+
+    /* Carte chat */
+
+    .chat-card {
+      border: 1px solid #d1d5db;
+      border-radius: 4px;
+      padding: 14px 16px 14px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .chat-header {
+      border-bottom: 1px solid #e5e7eb;
+      padding-bottom: 8px;
+      margin-bottom: 4px;
+    }
+
+    .chat-title {
+      font-size: 0.98rem;
+      font-weight: 600;
+      margin-bottom: 4px;
+    }
+
+    .chat-subtitle {
+      font-size: 0.86rem;
+      color: #4b5563;
+      line-height: 1.5;
+    }
+
+    .chat-examples {
+      font-size: 0.8rem;
+      color: #6b7280;
+      margin-top: 4px;
+    }
+
+    .chat-examples span {
+      font-style: italic;
+    }
+
+    .chat-form {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .chat-row {
+      display: flex;
+      gap: 8px;
+      align-items: flex-start;
+    }
+
+    .chat-textarea {
+      flex: 1;
+      min-height: 72px;
+      resize: vertical;
+      padding: 8px 10px;
+      border-radius: 3px;
+      border: 1px solid #d1d5db;
+      font-family: inherit;
+      font-size: 0.9rem;
+    }
+
+    .chat-button {
+      padding: 7px 14px;
+      border-radius: 999px;
+      border: 1px solid #111827;
+      background: #111827;
+      color: #f9fafb;
+      font-size: 0.85rem;
+      cursor: pointer;
+      white-space: nowrap;
+    }
+
+    .chat-button:hover {
+      opacity: 0.9;
+    }
+
+    .chat-answer {
+      margin-top: 2px;
+      padding: 9px 10px;
+      border-radius: 3px;
+      background: #f9fafb;
+      border: 1px solid #e5e7eb;
+      font-size: 0.88rem;
+      line-height: 1.5;
+      min-height: 28px;
+      white-space: pre-wrap;
+    }
+
+    /* Disclaimer pied de page */
+
+    .sheet-footer {
+      border-top: 1px solid #d1d5db;
+      padding: 10px 26px 12px;
+      font-size: 0.78rem;
+      color: #6b7280;
+      line-height: 1.5;
+    }
+
+    .sheet-footer strong {
+      color: #374151;
+    }
+
+    /* Responsive */
+
+    @media (max-width: 900px) {
+      .sheet-body {
+        grid-template-columns: 1fr;
+      }
+
+      .col-left {
+        border-right: none;
+        border-bottom: 1px solid #d1d5db;
+        flex-direction: row;
+        flex-wrap: wrap;
+        gap: 16px;
+      }
+
+      .portrait-block {
+        flex: 1 0 220px;
+      }
+    }
+
+    @media (max-width: 640px) {
+      .sheet-header {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      .header-contact {
+        text-align: left;
+      }
+
+      .col-left {
+        flex-direction: column;
+      }
+
+      .chat-row {
+        flex-direction: column;
+      }
+
+      .chat-button {
+        width: 100%;
+        text-align: center;
+        justify-content: center;
+      }
+    }
+  </style>
 </head>
 <body>
-  <h1>Samuel Ciscato</h1>
-  <p>Posez vos questions à mon dossier professionnel.</p>
+  <div class="page">
+    <div class="sheet">
+      <!-- En-tête -->
+      <header class="sheet-header">
+        <div class="header-main">
+          <div class="header-name">Samuel Ciscato</div>
+          <div class="header-title">
+            Direction marketing et e commerce · Transformation digitale
+          </div>
+        </div>
+        <div class="header-contact">
+          <p>samuel.ciscato@gmail.com</p>
+          <p>+33 6 67 98 00 44</p>
+          <p>Lyon, France</p>
+          <p>
+            <a href="https://www.linkedin.com/in/samuelciscato" target="_blank" rel="noopener">
+              linkedin.com/in/samuelciscato
+            </a>
+          </p>
+        </div>
+      </header>
 
-  <textarea id="question" rows="4" cols="60" placeholder="Saisissez votre question ici..."></textarea>
-  <br>
-  <button id="askBtn">Poser la question</button>
+      <!-- Corps structuré en colonnes -->
+      <div class="sheet-body">
+        <!-- Colonne gauche -->
+        <aside class="col-left">
+          <div class="left-section">
+            <div class="portrait-block">
+              <div class="portrait-photo">
+                <!-- Remplace par ton vrai portrait: profile.jpg à la racine -->
+                <img src="profile.jpg" alt="Photo de Samuel Ciscato">
+              </div>
+              <p class="portrait-tagline">
+                Marketing leader à la croisée du business, de la psychologie cognitive et de la tech.
+                Je conçois des systèmes de croissance lisibles, utiles et humains.
+              </p>
+            </div>
+          </div>
 
-  <h2>Réponse</h2>
-  <div id="answer"></div>
+          <div class="left-section">
+            <div class="left-title">CV et dossier</div>
+            <div class="left-text">
+              <p>Vous pouvez consulter la version détaillée de mon CV ou la télécharger en PDF.</p>
+              <div class="cv-preview">
+                Aperçu CV<br>
+                (remplace cette zone par une vraie miniature type cv-preview.jpg)
+              </div>
+              <div class="cv-actions">
+                <a class="btn btn-primary" href="Samuel_Ciscato-CV_EN-HBD.pdf" target="_blank">
+                  Télécharger le CV
+                </a>
+                <a class="btn" href="Samuel_Ciscato-CV_EN-HBD.pdf" target="_blank">
+                  Ouvrir en grand format
+                </a>
+              </div>
+            </div>
+          </div>
+
+          <div class="left-section">
+            <div class="left-title">Axes clés</div>
+            <div class="left-list">
+              <p>• Stratégie et exécution omnicanale</p>
+              <p>• Pilotage e commerce et marketplaces</p>
+              <p>• Transformation digitale et change</p>
+              <p>• Culture data et IA appliquée</p>
+            </div>
+          </div>
+        </aside>
+
+        <!-- Colonne droite -->
+        <main class="col-right">
+          <section class="section-header">
+            <div class="section-kicker">Dossier interactif</div>
+            <h1 class="section-title">
+              Interrogez mon parcours avant de prendre rendez vous
+            </h1>
+            <p class="section-subtitle">
+              Cette page vous permet de poser des questions à un agent IA entraîné sur mon CV,
+              mes réalisations et une série de questions réponses inspirées d’entretiens réels.
+              Il ne parle pas en mon nom. Il lit et synthétise les informations de mon dossier.
+            </p>
+            <div class="chip-row">
+              <span class="chip">Marketing et e commerce</span>
+              <span class="chip">Environnements complexes</span>
+              <span class="chip">IA et automatisation</span>
+            </div>
+          </section>
+
+          <section class="chat-card">
+            <div class="chat-header">
+              <div class="chat-title">Poser une question à mon dossier</div>
+              <p class="chat-subtitle">
+                L’agent s’appuiera uniquement sur les informations que je lui ai fournies.
+                Si un sujet n’est pas documenté, il indiquera simplement qu’il ne sait pas.
+              </p>
+              <p class="chat-examples">
+                Exemples&nbsp;:
+                <span>
+                  « Donne des exemples de projets e commerce multiboutiques »,
+                  « Comment Samuel a travaillé avec des équipes internationales »,
+                  « Quels résultats concrets a t il obtenus chez ANWR ou Lyca ? »
+                </span>
+              </p>
+            </div>
+
+            <div class="chat-form">
+              <div class="chat-row">
+                <textarea
+                  id="question"
+                  class="chat-textarea"
+                  placeholder="Saisissez votre question ici..."
+                ></textarea>
+                <button id="askBtn" class="chat-button">
+                  Poser la question
+                </button>
+              </div>
+              <div id="answer" class="chat-answer"></div>
+            </div>
+          </section>
+        </main>
+      </div>
+
+      <!-- Pied de page -->
+      <footer class="sheet-footer">
+        <p>
+          <strong>Confidentialité.</strong>
+          Les questions posées peuvent être enregistrées pour améliorer mon dossier et ajuster les réponses de l’agent.
+          Elles ne sont ni revendues ni utilisées pour du ciblage commercial.
+        </p>
+        <p>
+          <strong>Limites.</strong>
+          L’agent ne crée pas de nouvelles informations sur ma vie privée et ne connaît pas vos critères internes.
+          Pour valider un fit culturel, un échange direct restera nécessaire.
+        </p>
+      </footer>
+    </div>
+  </div>
 
   <script>
     document.getElementById("askBtn").addEventListener("click", async () => {
-      const question = document.getElementById("question").value.trim();
-      if (!question) return;
+      const questionEl = document.getElementById("question");
+      const answerEl = document.getElementById("answer");
+      const question = questionEl.value.trim();
 
-      const res = await fetch("/.netlify/functions/chat", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ question })
-      });
+      if (!question) {
+        return;
+      }
 
-      const data = await res.json();
-      document.getElementById("answer").textContent = data.answer || "(Pas de réponse)";
+      answerEl.textContent = "Réflexion de l’agent en cours...";
+
+      try {
+        const res = await fetch("/.netlify/functions/chat", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ question })
+        });
+
+        const data = await res.json();
+        answerEl.textContent = data.answer || "Pas de réponse disponible.";
+      } catch (err) {
+        answerEl.textContent =
+          "Une erreur est survenue. Merci de réessayer dans un instant.";
+      }
     });
   </script>
 </body>
