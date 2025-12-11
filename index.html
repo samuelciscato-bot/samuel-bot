@@ -53,13 +53,19 @@
     }
 
     /* Reorder for mobile */
-    @media (max-width: 840px) {
+    @media (max-width: 480px) {
       .page {
         grid-template-columns: minmax(0, 1fr);
       }
       .hero-card {
         order: 0;
       }
+  .hero-title {
+    font-size: 17px;
+  }
+  .hero-sub {
+    font-size: 12px;
+  }
       .main {
         order: 1;
       }
@@ -147,19 +153,21 @@
     }
 
     .hero-name {
-      margin: 0;
-      font-size: 22px;
-      letter-spacing: 0.06em;
-      text-transform: uppercase;
-      font-weight: 600;
-    }
+  margin: 0;
+  font-size: 18px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  font-weight: 500;
+  opacity: 0.9;
+}
 
-    .role {
-      font-size: 11px;
-      letter-spacing: 0.16em;
-      text-transform: uppercase;
-      color: #c7d2fe;
-    }
+.role {
+  font-size: 22px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: #e5e7ff;
+  font-weight: 600;
+}
 
     .badge-twin {
       display: inline-flex;
@@ -230,10 +238,11 @@
     }
 
     .hero-title {
-      margin: 0 0 6px;
-      font-size: 19px;
-      font-weight: 600;
-    }
+  margin: 0 0 6px;
+  font-size: 19px;
+  font-weight: 600;
+  color: #93c5fd; /* même couleur que .hero-eyebrow */
+}
 
     .hero-sub {
       margin: 0;
@@ -376,6 +385,33 @@
       text-decoration: underline;
     }
 
+.contact-buttons {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.contact-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 8px 12px;
+  border-radius: 999px;
+  font-size: 12px;
+  font-weight: 500;
+  text-decoration: none;
+  border: 1px solid #4b5563;
+  background: #020617;
+  color: #f9fafb;
+  transition: background 0.15s ease, border-color 0.15s ease, transform 0.08s ease;
+}
+
+.contact-btn:hover {
+  background: #111827;
+  border-color: var(--accent);
+  transform: translateY(-1px);
+}
+
     /* CV preview plus petit */
 
     .cv-preview-box {
@@ -457,12 +493,12 @@
     }
 
     .qa-header-row {
-      display: flex;
-      justify-content: space-between;
-      align-items: baseline;
-      gap: 16px;
-      margin-bottom: 14px;
-    }
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 4px;
+  margin-bottom: 14px;
+}
 
     .qa-title {
       margin: 0;
@@ -471,10 +507,10 @@
     }
 
     .qa-caption {
-      margin: 0;
-      font-size: 12px;
-      color: var(--text-muted);
-    }
+  margin: 0;
+  font-size: 11px;
+  color: var(--text-muted);
+}
 
     .qa-form {
       display: flex;
@@ -631,7 +667,7 @@
             </div>
             <div class="badge-twin">
               <span class="badge-dot"></span>
-              <span id="badge-text">Samuel CV Twin</span>
+              <span id="badge-text">Samuel CV-bot</span>
             </div>
           </div>
 
@@ -645,7 +681,7 @@
         </div>
 
         <div class="hero-main-row">
-          <div class="hero-eyebrow" id="hero-eyebrow">DOSSIER INTERACTIF</div>
+          <div class="hero-eyebrow" id="hero-eyebrow">SAMUEL CV-BOT</div>
           <h2 class="hero-title" id="hero-title">
             Explorez le parcours de Samuel avant d’échanger en direct
           </h2>
@@ -707,15 +743,22 @@
       </section>
 
       <section>
-        <h2 class="sidebar-section-title" id="contact-title">CONTACT</h2>
-        <p class="sidebar-contact">
-  <a id="contact-email" href="mailto:samuel.ciscato@gmail.com" class="btn btn-ghost btn-contact">
-    Écrire à Samuel
-  </a><br />
-  <a id="contact-phone" href="tel:+33667980044">+33 6 67 98 00 44</a><br />
-  <span id="contact-city">Lyon, France</span><br />
-</p>
-      </section>
+  <h2 class="sidebar-section-title" id="contact-title">CONTACT</h2>
+
+  <div class="sidebar-contact contact-buttons">
+    <a href="mailto:samuel.ciscato@gmail.com" class="contact-btn">
+      Écrire à Samuel
+    </a>
+
+    <a href="tel:+33667980044" class="contact-btn">
+      Appeler Samuel au 06 67 98 00 44
+    </a>
+
+    <a href="https://wa.me/33667980044" class="contact-btn">
+      Appeler Samuel sur WhatsApp
+    </a>
+  </div>
+</section>
 
       <section>
         <h2 class="sidebar-section-title" id="cv-title">CV</h2>
@@ -732,10 +775,9 @@
     <section class="main">
       <section class="qa-card">
         <div class="qa-header-row">
-         <h3 class="qa-title" id="qa-title">Poser une question au sujet de Samuel</h3>
+         <h3 class="qa-title" id="qa-title">Posez une question au sujet de Samuel</h3>
 <p class="qa-caption" id="qa-caption">
-  Le CV-bot répond uniquement à partir des données partagées. Si une information n’y figure pas,
-  il vous répondra qu’il ne sait pas.
+  Le CV-bot répond uniquement à partir des données partagées. Si une information n’y figure pas, il vous répondra qu’il ne sait pas. Vous pourrez me contacter directement.
 </p>
         </div>
 
@@ -775,7 +817,7 @@
     const translations = {
       fr: {
         roleLine: "DIRECTION MARKETING ET E-COMMERCE · TRANSFORMATION DIGITALE",
-        badgeText: "Samuel CV Twin",
+        badgeText: "Samuel CV-bot",
         profilTitle: "PROFIL",
         profilText:
           "Samuel construit et pilote des systèmes de croissance lisibles pour les équipes marketing et commerciales.",
@@ -789,13 +831,15 @@
         langLabel: "Langue",
         heroEyebrow: "DOSSIER INTERACTIF",
         heroTitle: "Explorez le parcours de Samuel avant d’échanger en direct",
-        heroSub:
-          "Posez vos questions sur son expérience, ses résultats ou son style de management. " +
-          "Le CV-bot de Samuel s’appuie uniquement sur son dossier réel: CV, lettres de motivation, évaluations et entretiens RH. " +
-          "Il synthétise les informations, il ne remplace pas l’échange direct.",
-        qaTitle: "Poser une question au sujet de Samuel",
+heroSub:
+  "Posez vos questions sur son expérience, ses résultats ou son style de management. " +
+  "Le CV-bot de Samuel s’appuie uniquement sur son dossier réel: CV, lettres de motivation, évaluations et entretiens RH. " +
+  "Il synthétise les informations, il ne remplace pas l’échange direct.",
+        qaTitle: "Posez une question au sujet de Samuel",
 qaCaption:
-  "Le CV-bot répond uniquement à partir des données partagées. Si une information n’y figure pas, il vous répondra qu’il ne sait pas.",
+  "Le CV-bot répond uniquement à partir des données partagées. " +
+  "Si une information n’y figure pas, il vous répondra qu’il ne sait pas. " +
+  "Ensuite, vous pourrez me contacter directement.",
         placeholder:
           "Par exemple: Quels résultats a-t-il obtenus chez Lyca? Comment gère-t-il une équipe marketing sous pression?",
         btnAsk: "Poser la question",
@@ -850,9 +894,11 @@ qaCaption:
           "Ask anything about his experience, results or management style. " +
           "Samuel’s CV bot only uses his real dossier: CV, cover letters, assessments and HR interviews. " +
           "It synthesises the information, it does not replace a live conversation.",
-        qaTitle: "Ask a question to Samuel’s CV bot",
-        qaCaption:
-          "It only answers based on his real dossier. If something is missing, it will say so.",
+        qaTitle: "Ask a question about Samuel",
+qaCaption:
+  "The CV-bot only answers based on shared data. " +
+  "If something is not in the dossier, it will simply say it doesn’t know. " +
+  "You can then reach out to Samuel directly.",
         placeholder:
           "For example: What results did he deliver at Lyca? How does he handle a marketing team under pressure?",
         btnAsk: "Ask the question",
@@ -1129,7 +1175,7 @@ qaCaption:
     });
 
     initLang();
-    initCity();
+// initCity();  // plus nécessaire
   </script>
 </body>
 </html>
