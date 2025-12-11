@@ -8,20 +8,20 @@
   <!-- Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Montserrat:wght@500;600;700&display=swap" rel="stylesheet">
 
   <style>
     :root {
       color-scheme: light;
-      --bg: #050816;
-      --bg-card: #050816;
-      --border-subtle: #1f2933;
-      --text-main: #f9fafb;
-      --text-muted: #9ca3af;
-      --accent: #38bdf8;
-      --accent-soft: rgba(56, 189, 248, 0.16);
-      --shadow-soft: 0 20px 40px rgba(15, 23, 42, 0.55);
-      --radius-lg: 20px;
+      --bg: #f5f5f7;
+      --bg-card: #ffffff;
+      --border-subtle: #e1e1e5;
+      --text-main: #111111;
+      --text-muted: #666666;
+      --accent: #1b4ae8;
+      --accent-soft: #e0e7ff;
+      --shadow-soft: 0 14px 30px rgba(15, 23, 42, 0.12);
+      --radius-lg: 16px;
     }
 
     * {
@@ -31,102 +31,203 @@
     body {
       margin: 0;
       min-height: 100vh;
-      font-family: "Montserrat", system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
-      background:
-        radial-gradient(circle at top left, #0b1120 0, #020617 45%, #020617 100%);
+      font-family: "Inter", system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+      background: radial-gradient(circle at top, #091726 0, #0b1520 30%, #0c141c 55%, #05070b 100%);
       color: var(--text-main);
+    }
+
+    h1, h2, h3,
+    .hero-title,
+    .sidebar-section-title {
+      font-family: "Montserrat", "Inter", system-ui, sans-serif;
     }
 
     .page {
       max-width: 1120px;
       margin: 32px auto 40px;
-      padding: 0 20px 40px;
+      padding: 0 20px;
       display: grid;
       grid-template-columns: 280px minmax(0, 1fr);
-      column-gap: 24px;
-      row-gap: 24px;
+      grid-auto-rows: auto;
+      gap: 24px;
     }
 
-    @media (max-width: 900px) {
+    @media (max-width: 840px) {
       .page {
         grid-template-columns: minmax(0, 1fr);
       }
     }
 
-    /* Sidebar */
+    /* Hero wide */
 
-    .sidebar {
-      background: rgba(15, 23, 42, 0.9);
-      border-radius: 18px;
-      padding: 20px 18px 22px;
-      border: 1px solid var(--border-subtle);
+    .hero-card {
+      background: #050810; /* plus de dégradé ici */
+      border-radius: var(--radius-lg);
+      border: 1px solid #131d2a;
+      box-shadow: 0 18px 40px rgba(0, 0, 0, 0.55);
+      padding: 18px 22px 18px;
+      position: relative;
+      overflow: hidden;
+      grid-column: 1 / -1;
+      color: #f6f7ff;
+    }
+
+    .hero-photo-watermark {
+      position: absolute;
+      left: -40px;
+      top: 10px;
+      width: 210px;
+      height: 210px;
+      border-radius: 50%;
+      background-image: url("images/samuel-profile.jpg"); /* remplace par ta photo */
+      background-size: cover;
+      background-position: center;
+      opacity: 0.12;
+      filter: grayscale(100%);
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 1;
+    }
+
+    .hero-top-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 16px;
+      margin-bottom: 8px;
+    }
+
+    .hero-identity {
       display: flex;
       flex-direction: column;
-      gap: 18px;
-      box-shadow: 0 14px 30px rgba(0, 0, 0, 0.45);
+      gap: 4px;
     }
 
-    .name-block {
-      border-bottom: 1px solid var(--border-subtle);
-      padding-bottom: 14px;
-      display: flex;
-      gap: 12px;
-    }
-
-    .name-texts {
-      flex: 1;
-    }
-
-    .name-block h1 {
-      margin: 0 0 4px;
-      font-size: 20px;
-      letter-spacing: 0.1em;
+    .hero-name {
+      margin: 0;
+      font-size: 22px;
+      letter-spacing: 0.06em;
       text-transform: uppercase;
       font-weight: 600;
     }
 
-    .name-block .role {
-      font-size: 10px;
-      letter-spacing: 0.18em;
+    .role {
+      font-size: 11px;
+      letter-spacing: 0.16em;
       text-transform: uppercase;
-      color: var(--text-muted);
+      color: #d0d5ff;
     }
 
     .badge-twin {
       display: inline-flex;
       align-items: center;
       gap: 6px;
-      padding: 3px 9px;
+      padding: 4px 10px;
       border-radius: 999px;
-      background: var(--accent-soft);
-      color: #e0f2fe;
-      font-size: 10px;
+      background: rgba(224, 231, 255, 0.1);
+      border: 1px solid rgba(180, 195, 255, 0.4);
+      color: #f3f4ff;
+      font-size: 11px;
       font-weight: 500;
-      margin-top: 8px;
-      border: 1px solid rgba(56, 189, 248, 0.35);
+      margin-top: 6px;
+      align-self: flex-start;
     }
 
     .badge-dot {
       width: 7px;
       height: 7px;
       border-radius: 50%;
-      background: var(--accent);
-      box-shadow: 0 0 6px rgba(56, 189, 248, 0.9);
+      background: #4ade80;
+      box-shadow: 0 0 0 4px rgba(34, 197, 94, 0.22);
     }
 
-    .avatar {
-      width: 56px;
-      height: 56px;
-      border-radius: 50%;
-      background:
-        radial-gradient(circle at 30% 25%, #f9fafb 0, #e5e7eb 40%, #111827 100%);
+    .hero-lang {
       display: flex;
       align-items: center;
-      justify-content: center;
-      font-size: 24px;
+      gap: 8px;
+      font-size: 11px;
+      color: #d0d4ff;
+    }
+
+    .hero-main-row {
+      margin-top: 6px;
+    }
+
+    .hero-eyebrow {
+      font-size: 11px;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: #9ba4ff;
+      margin-bottom: 6px;
+    }
+
+    .hero-title {
+      margin: 0 0 6px;
+      font-size: 19px;
       font-weight: 600;
-      color: #020617;
-      box-shadow: 0 0 0 3px #020617, 0 0 0 5px rgba(56, 189, 248, 0.7);
+    }
+
+    .hero-sub {
+      margin: 0;
+      font-size: 13px;
+      color: #c6c9e9;
+      line-height: 1.6;
+      max-width: 650px;
+    }
+
+    .hero-quick-questions {
+      margin-top: 12px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .hero-quick-btn {
+      border-radius: 999px;
+      border: 1px solid rgba(190, 198, 255, 0.7);
+      background: rgba(15, 23, 42, 0.7);
+      font-size: 11px;
+      padding: 5px 11px;
+      cursor: pointer;
+      color: #e2e6ff;
+      transition: background 0.15s ease, border-color 0.15s ease, transform 0.08s ease;
+      white-space: nowrap;
+      backdrop-filter: blur(2px); /* flou atténué */
+    }
+
+    .hero-quick-btn:hover {
+      background: rgba(37, 99, 235, 0.85);
+      border-color: #93c5fd;
+      transform: translateY(-0.5px);
+    }
+
+    /* visuel abstrait côté droit, façon bannière LinkedIn */
+
+    .hero-diagram {
+      position: absolute;
+      right: -80px;
+      top: -40px;
+      width: 340px;
+      height: 220px;
+      pointer-events: none;
+      opacity: 0.7;
+    }
+
+    /* Sidebar */
+
+    .sidebar {
+      background: var(--bg-card);
+      border-radius: var(--radius-lg);
+      padding: 22px 22px;
+      border: 1px solid var(--border-subtle);
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+      box-shadow: var(--shadow-soft);
     }
 
     .sidebar-section-title {
@@ -134,37 +235,35 @@
       letter-spacing: 0.18em;
       text-transform: uppercase;
       color: var(--text-muted);
-      margin: 0 0 8px;
+      margin: 0 0 10px;
     }
 
     .sidebar-text {
       font-size: 13px;
       line-height: 1.55;
-      color: #e5e7eb;
+      color: var(--text-main);
     }
 
     .sidebar-card {
-      border-radius: 14px;
-      border: 1px solid #1f2937;
-      padding: 11px 11px 13px;
-      background: radial-gradient(circle at top left, #0b1120 0, #020617 55%, #020617 100%);
+      border-radius: 12px;
+      border: 1px solid #ebebf0;
+      padding: 12px 12px 14px;
+      background: linear-gradient(135deg, #fafafa, #ffffff);
     }
-
-    /* CV preview */
 
     .cv-preview-box {
       border-radius: 10px;
-      border: 1px dashed #4b5563;
-      background:
-        linear-gradient(135deg, rgba(15, 23, 42, 0.6), rgba(15, 23, 42, 0.95));
-      padding: 14px;
-      font-size: 11px;
+      border: 1px dashed #c4c4cf;
+      background: #f9f9fb;
+      padding: 16px;
+      font-size: 12px;
       text-align: center;
       color: var(--text-muted);
-      min-height: 90px;
+      aspect-ratio: 3 / 4;
       display: flex;
       align-items: center;
       justify-content: center;
+      flex-direction: column;
     }
 
     .sidebar-buttons {
@@ -186,35 +285,29 @@
       font-weight: 500;
       cursor: pointer;
       text-decoration: none;
-      transition: background 0.15s ease,
-                  color 0.15s ease,
-                  border-color 0.15s ease,
-                  transform 0.08s ease,
-                  box-shadow 0.12s ease;
+      transition: background 0.15s ease, color 0.15s ease, border-color 0.15s ease, transform 0.08s ease;
     }
 
     .btn-primary {
-      background: linear-gradient(135deg, #38bdf8, #0ea5e9);
-      color: #0b1120;
-      box-shadow: 0 12px 24px rgba(14, 165, 233, 0.55);
+      background: var(--accent);
+      color: #ffffff;
+      box-shadow: 0 10px 22px rgba(27, 74, 232, 0.38);
     }
 
     .btn-primary:hover {
       transform: translateY(-1px);
-      box-shadow: 0 16px 32px rgba(14, 165, 233, 0.7);
+      box-shadow: 0 14px 26px rgba(27, 74, 232, 0.5);
     }
 
     .btn-ghost {
-      background: transparent;
-      color: #e5e7eb;
-      border-color: #4b5563;
+      background: #ffffff;
+      color: var(--text-main);
+      border-color: #d3d3dd;
     }
 
     .btn-ghost:hover {
-      background: rgba(15, 23, 42, 0.8);
+      background: #f3f3f8;
     }
-
-    /* Sidebar contact & LinkedIn */
 
     .sidebar-contact {
       font-size: 11px;
@@ -237,57 +330,32 @@
       align-items: center;
       gap: 10px;
       padding: 9px 10px;
-      border-radius: 14px;
-      border: 1px solid #1f2937;
-      background:
-        radial-gradient(circle at top left, rgba(15, 23, 42, 0.85), #020617 70%);
+      border-radius: 12px;
+      border: 1px solid #d3d3dd;
+      background: #ffffff;
       cursor: pointer;
       text-decoration: none;
       color: var(--text-main);
       font-size: 12px;
-      position: relative;
-      overflow: hidden;
     }
 
-    .linkedin-card::before {
-      content: "";
-      position: absolute;
-      inset: 0;
-      opacity: 0.18;
-      background:
-        radial-gradient(circle at top left, #0ea5e9 0, transparent 45%),
-        radial-gradient(circle at bottom right, #6366f1 0, transparent 55%);
-      pointer-events: none;
-    }
-
-    .linkedin-logo {
-      width: 22px;
-      height: 22px;
-      border-radius: 6px;
-      background: #0a66c2;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      color: #ffffff;
-      font-size: 13px;
-      font-weight: 700;
+    .linkedin-thumb {
+      width: 36px;
+      height: 36px;
+      border-radius: 999px;
+      background-image: url("images/linkedin-thumb.jpg"); /* miniature de ton profil */
+      background-size: cover;
+      background-position: center;
       flex-shrink: 0;
-      box-shadow: 0 6px 12px rgba(10, 102, 194, 0.6);
-      position: relative;
-      z-index: 1;
     }
 
     .linkedin-text-main {
       font-weight: 500;
-      position: relative;
-      z-index: 1;
     }
 
     .linkedin-text-sub {
       font-size: 11px;
       color: var(--text-muted);
-      position: relative;
-      z-index: 1;
     }
 
     /* Main column */
@@ -298,131 +366,35 @@
       gap: 16px;
     }
 
-    .top-bar {
-      display: flex;
-      justify-content: flex-end;
-      margin-bottom: 6px;
-      font-size: 11px;
-      color: var(--text-muted);
-      gap: 10px;
-      align-items: center;
-    }
-
     .lang-switch {
       display: inline-flex;
       border-radius: 999px;
-      border: 1px solid #4b5563;
+      border: 1px solid #3f4966;
       overflow: hidden;
-      background: rgba(15, 23, 42, 0.85);
-      box-shadow: 0 10px 18px rgba(0, 0, 0, 0.4);
+      background: rgba(15, 23, 42, 0.7);
+      backdrop-filter: blur(2px); /* flou atténué */
     }
 
     .lang-btn {
       border: none;
       background: transparent;
-      padding: 4px 10px;
+      padding: 4px 8px;
       font-size: 11px;
       cursor: pointer;
-      color: var(--text-muted);
+      color: #cbd5f5;
     }
 
     .lang-btn.active {
-      background: rgba(15, 23, 42, 1);
-      color: #e5e7eb;
+      background: #e5e7ff;
+      color: #111111;
       font-weight: 500;
     }
 
-    /* Hero */
-
-    .hero-card {
-      background:
-        radial-gradient(circle at 0% 0%, #38bdf8 0, transparent 50%),
-        radial-gradient(circle at 100% 0%, #6366f1 0, transparent 55%),
-        linear-gradient(135deg, #020617, #020617);
-      border-radius: var(--radius-lg);
-      border: 1px solid rgba(148, 163, 184, 0.45);
-      box-shadow: var(--shadow-soft);
-      padding: 20px 22px 18px;
-      position: relative;
-      overflow: hidden;
-    }
-
-    .hero-card::before {
-      content: "";
-      position: absolute;
-      inset: -40px;
-      opacity: 0.16;
-      background:
-        repeating-linear-gradient(
-          90deg,
-          rgba(148, 163, 184, 0.2) 0,
-          rgba(148, 163, 184, 0.2) 1px,
-          transparent 1px,
-          transparent 7px
-        );
-      mix-blend-mode: screen;
-      pointer-events: none;
-    }
-
-    .hero-eyebrow {
-      font-size: 10px;
-      letter-spacing: 0.22em;
-      text-transform: uppercase;
-      color: #cbd5f5;
-      margin-bottom: 8px;
-    }
-
-    .hero-title {
-      margin: 0 0 4px;
-      font-size: 20px;
-      font-weight: 600;
-      color: #f9fafb;
-    }
-
-    .hero-sub {
-      margin: 0;
-      font-size: 13px;
-      color: var(--text-muted);
-      line-height: 1.6;
-      max-width: 640px;
-    }
-
-    .hero-tags {
-      margin-top: 12px;
-      display: flex;
-      flex-wrap: wrap;
-      gap: 8px;
-    }
-
-    .hero-tag {
-      font-size: 11px;
-      padding: 4px 10px;
-      border-radius: 999px;
-      border: 1px solid rgba(148, 163, 184, 0.6);
-      background: rgba(15, 23, 42, 0.6);
-      color: #e5e7eb;
-      cursor: pointer;
-      backdrop-filter: blur(6px);
-      transition: background 0.15s ease,
-                  border-color 0.15s ease,
-                  transform 0.08s ease,
-                  box-shadow 0.12s ease;
-    }
-
-    .hero-tag:hover {
-      background: rgba(15, 23, 42, 0.9);
-      border-color: var(--accent);
-      transform: translateY(-0.5px);
-      box-shadow: 0 10px 18px rgba(15, 23, 42, 0.7);
-    }
-
-    /* Q&A card */
-
     .qa-card {
-      background: rgba(15, 23, 42, 0.98);
+      background: var(--bg-card);
       border-radius: var(--radius-lg);
       border: 1px solid var(--border-subtle);
-      box-shadow: 0 18px 36px rgba(0, 0, 0, 0.55);
+      box-shadow: var(--shadow-soft);
       padding: 20px 22px 22px;
     }
 
@@ -471,24 +443,17 @@
       resize: vertical;
       padding: 10px 11px;
       border-radius: 10px;
-      border: 1px solid #374151;
+      border: 1px solid #d4d4e2;
       font-family: inherit;
       font-size: 13px;
       line-height: 1.5;
       outline: none;
-      background: #020617;
-      color: #e5e7eb;
-      transition: border-color 0.15s ease, box-shadow 0.15s ease, background 0.15s ease;
-    }
-
-    textarea::placeholder {
-      color: #6b7280;
+      transition: border-color 0.15s ease, box-shadow 0.15s ease;
     }
 
     textarea:focus {
       border-color: var(--accent);
-      box-shadow: 0 0 0 1px rgba(56, 189, 248, 0.35);
-      background: #020617;
+      box-shadow: 0 0 0 1px rgba(27, 74, 232, 0.18);
     }
 
     .qa-submit-btn {
@@ -507,18 +472,17 @@
       margin-top: 8px;
       padding: 12px 12px 10px;
       border-radius: 10px;
-      border: 1px solid #374151;
-      background: #020617;
+      border: 1px solid #e2e2ee;
+      background: #fafafe;
       font-size: 13px;
       line-height: 1.55;
       white-space: pre-wrap;
-      color: #e5e7eb;
     }
 
     .answer-empty {
       border-style: dashed;
-      background: rgba(2, 6, 23, 0.7);
-      color: #6b7280;
+      background: #fcfcff;
+      color: #9b9bb3;
     }
 
     .followup-container {
@@ -532,15 +496,14 @@
     .followup-label {
       font-size: 11px;
       color: var(--text-muted);
-      margin-right: 2px;
     }
 
     .followup-btn {
       font-size: 11px;
       padding: 6px 12px;
       border-radius: 999px;
-      border: 1px solid #4b5563;
-      background: #020617;
+      border: 1px solid #d2d2e2;
+      background: #ffffff;
       cursor: pointer;
       max-width: 100%;
       white-space: normal;
@@ -549,19 +512,37 @@
       transition: background 0.15s ease,
                   border-color 0.15s ease,
                   transform 0.08s ease;
-      color: #e5e7eb;
     }
 
     .followup-btn:hover {
-      background: #020617;
+      background: #f3f3fb;
       border-color: var(--accent);
       transform: translateY(-0.5px);
     }
 
+    /* Info card */
+
+    .info-card {
+      background: var(--bg-card);
+      border-radius: var(--radius-lg);
+      border: 1px solid var(--border-subtle);
+      box-shadow: var(--shadow-soft);
+      padding: 18px 22px 18px;
+      grid-column: 1 / -1;
+      font-size: 12px;
+      line-height: 1.6;
+    }
+
+    .info-title {
+      margin: 0 0 8px;
+      font-size: 14px;
+      font-weight: 600;
+    }
+
     .footer-note {
-      font-size: 11px;
+      font-size: 12px;
       color: var(--text-muted);
-      line-height: 1.5;
+      line-height: 1.6;
     }
 
     .footer-note strong {
@@ -571,28 +552,89 @@
 </head>
 <body>
   <main class="page">
-    <!-- Sidebar -->
-    <aside class="sidebar">
-      <div class="name-block">
-        <div class="avatar">S</div>
-        <div class="name-texts">
-          <h1>SAMUEL CISCATO</h1>
-          <div class="role" id="role-line">
-            DIRECTION MARKETING ET E-COMMERCE · TRANSFORMATION DIGITALE
+
+    <!-- Hero wide -->
+    <section class="hero-card">
+      <div class="hero-photo-watermark"></div>
+
+      <div class="hero-content">
+        <div class="hero-top-row">
+          <div class="hero-identity">
+            <h1 class="hero-name">SAMUEL CISCATO</h1>
+            <div class="role" id="role-line">
+              DIRECTION MARKETING ET E-COMMERCE · TRANSFORMATION DIGITALE
+            </div>
+            <div class="badge-twin">
+              <span class="badge-dot"></span>
+              <span id="badge-text">Samuel CV Twin</span>
+            </div>
           </div>
-          <div class="badge-twin">
-            <span class="badge-dot"></span>
-            <span id="badge-text">Samuel CV Twin</span>
+
+          <div class="hero-lang">
+            <span id="lang-label">Langue</span>
+            <div class="lang-switch">
+              <button class="lang-btn active" data-lang="fr" id="btn-lang-fr">FR</button>
+              <button class="lang-btn" data-lang="en" id="btn-lang-en">EN</button>
+            </div>
           </div>
+        </div>
+
+        <div class="hero-main-row">
+          <div class="hero-eyebrow" id="hero-eyebrow">DOSSIER INTERACTIF</div>
+          <h2 class="hero-title" id="hero-title">
+            Explorer mon parcours avant d’échanger en direct
+          </h2>
+          <p class="hero-sub" id="hero-sub">
+            Cet outil vous permet de poser des questions à un agent IA entraîné sur mon dossier
+            (CV, lettres, profil AssessFirst, questions réponses). Il ne parle pas en mon nom :
+            il lit, recoupe et synthétise les informations disponibles, puis vous propose des pistes pour creuser.
+          </p>
+
+          <div class="hero-quick-questions" id="hero-quick-questions"></div>
         </div>
       </div>
 
+      <!-- visuel abstrait côté droit -->
+      <svg class="hero-diagram" viewBox="0 0 400 260" aria-hidden="true">
+        <defs>
+          <linearGradient id="streak" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0" stop-color="#ffe6b3" />
+            <stop offset="0.35" stop-color="#7dd3fc" />
+            <stop offset="1" stop-color="#0f172a" />
+          </linearGradient>
+        </defs>
+        <rect x="260" y="-40" width="3" height="260" fill="url(#streak)" opacity="0.8" />
+        <rect x="285" y="-60" width="2" height="280" fill="url(#streak)" opacity="0.6" />
+        <rect x="310" y="-80" width="3" height="300" fill="url(#streak)" opacity="0.9" />
+        <rect x="340" y="-30" width="2" height="260" fill="url(#streak)" opacity="0.7" />
+        <circle cx="300" cy="60" r="30" fill="#0b1220" opacity="0.7" />
+        <circle cx="305" cy="55" r="18" fill="#38bdf8" opacity="0.35" />
+        <circle cx="305" cy="55" r="6" fill="#e5e7eb" opacity="0.9" />
+      </svg>
+    </section>
+
+    <!-- Sidebar -->
+    <aside class="sidebar">
       <section>
         <h2 class="sidebar-section-title" id="profil-title">PROFIL</h2>
         <p class="sidebar-text" id="profil-text">
           Samuel clarifie des situations complexes pour les traduire en plans de croissance lisibles et utiles pour les équipes.
           Il croise marketing, digital et psychologie cognitive pour aligner clients, opérations et direction sur les mêmes priorités.
         </p>
+      </section>
+
+      <section>
+        <h2 class="sidebar-section-title" id="cv-title">CV ET DOSSIER</h2>
+        <div class="sidebar-card">
+          <div class="cv-preview-box" id="cv-preview">
+            Aperçu CV<br />
+            <span style="font-size: 11px;">(remplacez cette zone par une miniature de CV plus tard)</span>
+          </div>
+          <div class="sidebar-buttons">
+            <a href="#" class="btn btn-primary" id="btn-download-cv">Télécharger le CV</a>
+            <a href="#" class="btn btn-ghost" id="btn-open-cv">Ouvrir en grand format</a>
+          </div>
+        </div>
       </section>
 
       <section>
@@ -604,35 +646,21 @@
           class="linkedin-card"
           id="linkedin-card"
         >
-          <div class="linkedin-logo">in</div>
+          <div class="linkedin-thumb"></div>
           <div>
             <div class="linkedin-text-main" id="linkedin-main-text">Voir le profil LinkedIn</div>
             <div class="linkedin-text-sub" id="linkedin-sub-text">
-              Recommandations et détail complet des expériences sur LinkedIn.
+              Recommandations et détail des expériences sur LinkedIn.
             </div>
           </div>
         </a>
       </section>
 
       <section>
-        <h2 class="sidebar-section-title" id="cv-title">CV</h2>
-        <div class="sidebar-card">
-          <div class="cv-preview-box" id="cv-preview">
-            Aperçu CV<br />
-            <span style="font-size: 11px;">(remplacez cette zone par une miniature du CV)</span>
-          </div>
-          <div class="sidebar-buttons">
-            <a href="#" class="btn btn-primary" id="btn-download-cv">Télécharger le CV</a>
-            <a href="#" class="btn btn-ghost" id="btn-open-cv">Ouvrir en grand format</a>
-          </div>
-        </div>
-      </section>
-
-      <section>
         <h2 class="sidebar-section-title" id="contact-title">CONTACT</h2>
         <p class="sidebar-contact">
           <span id="contact-email">samuel.ciscato@gmail.com</span><br />
-          <span id="contact-phone">+33&nbsp;6&nbsp;67&nbsp;98&nbsp;00&nbsp;44</span><br />
+          <span id="contact-phone">+33 6 67 98 00 44</span><br />
           <span id="contact-city">Lyon, France</span><br />
         </p>
       </section>
@@ -640,31 +668,6 @@
 
     <!-- Main column -->
     <section class="main">
-      <div class="top-bar">
-        <span id="lang-label">Langue</span>
-        <div class="lang-switch">
-          <button class="lang-btn active" data-lang="fr" id="btn-lang-fr">FR</button>
-          <button class="lang-btn" data-lang="en" id="btn-lang-en">EN</button>
-        </div>
-      </div>
-
-      <section class="hero-card">
-        <div class="hero-eyebrow" id="hero-eyebrow">DOSSIER INTERACTIF</div>
-        <h2 class="hero-title" id="hero-title">
-          Explorer mon parcours avant d’échanger en direct
-        </h2>
-        <p class="hero-sub" id="hero-sub">
-          Cet outil vous permet de poser des questions à un agent IA entraîné sur mon dossier
-          (CV, lettres, profil AssessFirst, questions-réponses). Il ne parle pas en mon nom&nbsp;:
-          il lit, recoupe et synthétise les informations disponibles, puis vous propose des pistes pour creuser.
-        </p>
-        <div class="hero-tags">
-          <button class="hero-tag" id="tag-1"></button>
-          <button class="hero-tag" id="tag-2"></button>
-          <button class="hero-tag" id="tag-3"></button>
-        </div>
-      </section>
-
       <section class="qa-card">
         <div class="qa-header-row">
           <h3 class="qa-title" id="qa-title">Poser une question à mon dossier</h3>
@@ -679,7 +682,7 @@
             <textarea
               id="question-input"
               name="question"
-              placeholder="Par exemple : Quels résultats concrets a-t-il obtenus chez Lyca&nbsp;?"
+              placeholder="Par exemple : Quels résultats concrets a-t-il obtenus chez Lyca ?"
             ></textarea>
             <button id="submit-btn" class="btn btn-primary qa-submit-btn" type="submit">
               Poser la question
@@ -693,21 +696,15 @@
         </div>
 
         <div id="followup-container" class="followup-container" style="display:none;">
-          <span class="followup-label" id="followup-label">Questions possibles pour creuser&nbsp;:</span>
-          <!-- boutons dynamiques ici -->
+          <span class="followup-label" id="followup-label">Questions possibles pour creuser :</span>
         </div>
       </section>
+    </section>
 
-      <section>
-        <p class="footer-note" id="footer-note">
-          <strong>Données et confidentialité.</strong> Les questions posées peuvent être enregistrées
-          afin d’améliorer la qualité des réponses du jumeau IA. Elles ne sont ni revendues,
-          ni utilisées pour de la publicité ciblée.<br />
-          <strong>Ce que l’outil ne fait pas.</strong> Il ne crée pas d’informations nouvelles
-          sur la vie privée de Samuel et ne porte pas de jugement sur le fit culturel.
-          Pour cela, un échange direct reste indispensable.
-        </p>
-      </section>
+    <!-- Info card -->
+    <section class="info-card">
+      <h3 class="info-title" id="info-title">Comment fonctionne ce jumeau IA</h3>
+      <p class="footer-note" id="footer-note"></p>
     </section>
   </main>
 
@@ -721,64 +718,74 @@
         profilText:
           "Samuel clarifie des situations complexes pour les traduire en plans de croissance lisibles et utiles pour les équipes. " +
           "Il croise marketing, digital et psychologie cognitive pour aligner clients, opérations et direction sur les mêmes priorités.",
-        linkedinTitle: "LINKEDIN",
-        cvTitle: "CV",
-        cvPreview:
-          "Aperçu CV<br /><span style=\"font-size: 11px;\">(remplacez cette zone par une miniature du CV)</span>",
+        cvTitle: "CV ET DOSSIER",
+        cvPreview: "Aperçu CV<br /><span style=\"font-size: 11px;\">(remplacez cette zone par une miniature de CV plus tard)</span>",
         btnDownload: "Télécharger le CV",
         btnOpen: "Ouvrir en grand format",
         contactTitle: "CONTACT",
+        linkedinTitle: "LINKEDIN",
         linkedinMain: "Voir le profil LinkedIn",
-        linkedinSub: "Recommandations et détail complet des expériences sur LinkedIn.",
+        linkedinSub: "Recommandations et détail des expériences sur LinkedIn.",
         langLabel: "Langue",
         heroEyebrow: "DOSSIER INTERACTIF",
         heroTitle: "Explorer mon parcours avant d’échanger en direct",
         heroSub:
           "Cet outil vous permet de poser des questions à un agent IA entraîné sur mon dossier " +
-          "(CV, lettres, profil AssessFirst, questions-réponses). Il ne parle pas en mon nom\u00a0: " +
+          "(CV, lettres, profil AssessFirst, questions réponses). Il ne parle pas en mon nom : " +
           "il lit, recoupe et synthétise les informations disponibles, puis vous propose des pistes pour creuser.",
-        // Tags = questions rapides
-        pre1Label: "Résultats marketing & e-commerce",
-        pre1Question: "Quels résultats concrets Samuel a-t-il obtenus sur la partie marketing et e-commerce ?",
-        pre2Label: "Management & leadership",
-        pre2Question: "Comment Samuel gère-t-il une équipe marketing sous pression ou en transformation ?",
-        pre3Label: "IA & automatisation",
-        pre3Question: "Quels types de projets d’IA et d’automatisation Samuel a-t-il déjà pilotés ?",
         qaTitle: "Poser une question à mon dossier",
         qaCaption:
           "L’agent s’appuie uniquement sur les informations présentes dans le dossier. " +
           "Si une information n’y apparaît pas, il indique simplement qu’il ne sait pas.",
         placeholder:
-          "Par exemple : Quels résultats concrets a-t-il obtenus chez Lyca\u00a0? " +
-          "Ou comment gère-t-il une équipe marketing sous pression\u00a0?",
+          "Par exemple : Quels résultats concrets a-t-il obtenus chez Lyca ? " +
+          "Ou comment gère-t-il une équipe marketing sous pression ?",
         btnAsk: "Poser la question",
         answerEmpty: "Aucune question posée pour le moment. La première réponse apparaîtra ici.",
         followupLabel: "Questions possibles pour creuser :",
+        infoTitle: "Comment fonctionne ce jumeau IA",
         footer:
-          "<strong>Données et confidentialité.</strong> Les questions posées peuvent être enregistrées " +
-          "afin d’améliorer la qualité des réponses du jumeau IA. Elles ne sont ni revendues, " +
-          "ni utilisées pour de la publicité ciblée.<br />" +
-          "<strong>Ce que l’outil ne fait pas.</strong> Il ne crée pas d’informations nouvelles " +
-          "sur la vie privée de Samuel et ne porte pas de jugement sur le fit culturel. " +
+          "<strong>Base de travail.</strong> Le jumeau IA s’appuie sur un pack de données fixe : plusieurs versions de mon CV, " +
+          "des lettres de motivation, des réponses RH structurées et des éléments de profil de personnalité. " +
+          "Le modèle lit ces documents, recoupe les informations et produit une synthèse adaptée à la question posée.<br /><br />" +
+          "<strong>Technologie.</strong> L’agent tourne sur le modèle GPT 5.1 d’OpenAI, déployé via Netlify et piloté par des scénarios Make. " +
+          "Il n’invente pas de dates ni de chiffres en dehors de ce qui figure dans le dossier et indique explicitement quand une information manque.<br /><br />" +
+          "<strong>Données et confidentialité.</strong> Les questions que vous posez peuvent être enregistrées pour analyser les thèmes les plus fréquents " +
+          "et améliorer le dispositif. Elles ne sont ni revendues, ni utilisées pour de la publicité ciblée. " +
+          "Le jumeau IA ne crée pas d’informations nouvelles sur ma vie privée et ne porte pas de jugement sur le fit culturel. " +
           "Pour cela, un échange direct reste indispensable.",
         loading: "En réflexion...",
         emptyQuestion: "Merci de saisir une question avant d’envoyer.",
-        genericError: "Une erreur est survenue. Vous pouvez réessayer dans un instant."
+        genericError: "Une erreur est survenue. Vous pouvez réessayer dans un instant.",
+        quickExamples: [
+          {
+            label: "Son expérience marketing",
+            question: "Pouvez-vous résumer son expérience en marketing et e-commerce ?"
+          },
+          {
+            label: "Management d’équipe",
+            question: "Comment dirige-t-il une équipe marketing et digitale dans un contexte de pression ?"
+          },
+          {
+            label: "IA et automatisation",
+            question: "Comment utilise-t-il concrètement l’IA et l’automatisation dans ses missions ?"
+          }
+        ]
       },
       en: {
-        roleLine: "MARKETING & E-COMMERCE LEADERSHIP · DIGITAL TRANSFORMATION",
+        roleLine: "MARKETING AND E-COMMERCE LEADERSHIP · DIGITAL TRANSFORMATION",
         badgeText: "Samuel CV Twin",
         profilTitle: "PROFILE",
         profilText:
-          "Samuel designs growth systems that are readable, useful and sustainable for teams. " +
+          "Samuel turns complex situations into clear growth plans that are useful and sustainable for teams. " +
           "He combines marketing, digital and cognitive psychology to align customers, operations and leadership on the same priorities.",
-        linkedinTitle: "LINKEDIN",
-        cvTitle: "CV",
+        cvTitle: "CV AND DOSSIER",
         cvPreview:
-          "CV preview<br /><span style=\"font-size: 11px;\">(replace this area with a CV thumbnail)</span>",
+          "CV preview<br /><span style=\"font-size: 11px;\">(replace this area with a real CV thumbnail later)</span>",
         btnDownload: "Download CV",
         btnOpen: "Open full version",
         contactTitle: "CONTACT",
+        linkedinTitle: "LINKEDIN",
         linkedinMain: "View LinkedIn profile",
         linkedinSub: "Recommendations and full experience details on LinkedIn.",
         langLabel: "Language",
@@ -786,14 +793,8 @@
         heroTitle: "Explore my track record before a live conversation",
         heroSub:
           "This tool lets you ask questions to an AI agent trained on my dossier " +
-          "(CV, letters, AssessFirst profile, Q&A blocks). It does not speak in my name\u00a0: " +
-          "it reads, cross-checks and synthesises the information, then suggests angles to dig deeper.",
-        pre1Label: "Marketing & e-commerce impact",
-        pre1Question: "What concrete marketing and e-commerce results has Samuel delivered recently?",
-        pre2Label: "Team leadership",
-        pre2Question: "How does Samuel lead and support a marketing team in demanding contexts?",
-        pre3Label: "AI & automation projects",
-        pre3Question: "What kind of AI and marketing automation projects has Samuel already run?",
+          "(CV, letters, AssessFirst profile, Q and A blocks). It does not speak in my name: " +
+          "it reads, cross checks and synthesises the available information, then suggests angles you can dig into.",
         qaTitle: "Ask a question to my dossier",
         qaCaption:
           "The agent only relies on what is present in the dossier. " +
@@ -804,14 +805,33 @@
         btnAsk: "Ask the question",
         answerEmpty: "No question asked yet. The first answer will appear here.",
         followupLabel: "Follow-up questions you could ask:",
+        infoTitle: "How this AI twin works",
         footer:
-          "<strong>Data and privacy.</strong> Questions may be logged in order to improve the quality " +
-          "of the AI twin answers. They are not sold or used for targeted advertising.<br />" +
-          "<strong>What this tool does not do.</strong> It does not create new information about Samuel’s private life " +
-          "and it does not judge cultural fit. A direct conversation is still required for that.",
+          "<strong>Data set.</strong> The AI twin is based on a fixed pack of documents: several versions of my CV, " +
+          "cover letters, structured HR Q and A and personality insights. The model reads these documents, " +
+          "cross checks the information and produces a synthesis tailored to the question.<br /><br />" +
+          "<strong>Technology.</strong> The agent runs on OpenAI’s GPT 5.1 model, deployed on Netlify and orchestrated with Make scenarios. " +
+          "It does not invent dates or figures beyond what is present in the dossier and clearly says when a piece of information is missing.<br /><br />" +
+          "<strong>Data and privacy.</strong> Questions may be logged to analyse recurring themes and improve the system. " +
+          "They are not sold or used for targeted advertising. The AI twin does not create new information about my private life " +
+          "and does not judge cultural fit. For that, a direct conversation is still required.",
         loading: "Thinking...",
         emptyQuestion: "Please type a question before sending.",
-        genericError: "Something went wrong. You can try again in a moment."
+        genericError: "Something went wrong. You can try again in a moment.",
+        quickExamples: [
+          {
+            label: "Marketing track record",
+            question: "Could you summarise his experience in marketing and e-commerce?"
+          },
+          {
+            label: "Team leadership",
+            question: "How does he lead a marketing and digital team in a high-pressure context?"
+          },
+          {
+            label: "AI and automation",
+            question: "How does he use AI and automation in his recent projects?"
+          }
+        ]
       }
     };
 
@@ -820,32 +840,31 @@
       badgeText: document.getElementById("badge-text"),
       profilTitle: document.getElementById("profil-title"),
       profilText: document.getElementById("profil-text"),
-      linkedinTitle: document.getElementById("linkedin-title"),
       cvTitle: document.getElementById("cv-title"),
       cvPreview: document.getElementById("cv-preview"),
       btnDownload: document.getElementById("btn-download-cv"),
       btnOpen: document.getElementById("btn-open-cv"),
       contactTitle: document.getElementById("contact-title"),
+      linkedinTitle: document.getElementById("linkedin-title"),
       linkedinMain: document.getElementById("linkedin-main-text"),
       linkedinSub: document.getElementById("linkedin-sub-text"),
       langLabel: document.getElementById("lang-label"),
       heroEyebrow: document.getElementById("hero-eyebrow"),
       heroTitle: document.getElementById("hero-title"),
       heroSub: document.getElementById("hero-sub"),
-      tag1: document.getElementById("tag-1"),
-      tag2: document.getElementById("tag-2"),
-      tag3: document.getElementById("tag-3"),
       qaTitle: document.getElementById("qa-title"),
       qaCaption: document.getElementById("qa-caption"),
       questionInput: document.getElementById("question-input"),
       submitBtn: document.getElementById("submit-btn"),
       answerBox: document.getElementById("answer-box"),
       followupLabel: document.getElementById("followup-label"),
+      infoTitle: document.getElementById("info-title"),
       footerNote: document.getElementById("footer-note")
     };
 
     const statusText = document.getElementById("status-text");
     const followupContainer = document.getElementById("followup-container");
+    const quickContainer = document.getElementById("hero-quick-questions");
 
     const langButtons = {
       fr: document.getElementById("btn-lang-fr"),
@@ -853,6 +872,25 @@
     };
 
     let currentLang = "fr";
+
+    function renderQuickExamples(lang) {
+      const t = translations[lang];
+      if (!t || !Array.isArray(t.quickExamples)) return;
+
+      quickContainer.innerHTML = "";
+      t.quickExamples.forEach((item) => {
+        if (!item || typeof item.label !== "string" || typeof item.question !== "string") return;
+        const btn = document.createElement("button");
+        btn.type = "button";
+        btn.className = "hero-quick-btn";
+        btn.textContent = item.label;
+        btn.addEventListener("click", () => {
+          elements.questionInput.value = item.question;
+          document.getElementById("qa-form").dispatchEvent(new Event("submit", { cancelable: true }));
+        });
+        quickContainer.appendChild(btn);
+      });
+    }
 
     function applyLang(lang) {
       const t = translations[lang];
@@ -865,26 +903,18 @@
       elements.badgeText.textContent = t.badgeText;
       elements.profilTitle.textContent = t.profilTitle;
       elements.profilText.textContent = t.profilText;
-      elements.linkedinTitle.textContent = t.linkedinTitle;
       elements.cvTitle.textContent = t.cvTitle;
       elements.cvPreview.innerHTML = t.cvPreview;
       elements.btnDownload.textContent = t.btnDownload;
       elements.btnOpen.textContent = t.btnOpen;
       elements.contactTitle.textContent = t.contactTitle;
+      elements.linkedinTitle.textContent = t.linkedinTitle;
       elements.linkedinMain.textContent = t.linkedinMain;
       elements.linkedinSub.textContent = t.linkedinSub;
       elements.langLabel.textContent = t.langLabel;
       elements.heroEyebrow.textContent = t.heroEyebrow;
       elements.heroTitle.textContent = t.heroTitle;
       elements.heroSub.textContent = t.heroSub;
-
-      elements.tag1.textContent = t.pre1Label;
-      elements.tag1.dataset.question = t.pre1Question;
-      elements.tag2.textContent = t.pre2Label;
-      elements.tag2.dataset.question = t.pre2Question;
-      elements.tag3.textContent = t.pre3Label;
-      elements.tag3.dataset.question = t.pre3Question;
-
       elements.qaTitle.textContent = t.qaTitle;
       elements.qaCaption.textContent = t.qaCaption;
       elements.questionInput.placeholder = t.placeholder;
@@ -892,6 +922,7 @@
       elements.answerBox.textContent = t.answerEmpty;
       elements.answerBox.classList.add("answer-empty");
       elements.followupLabel.textContent = t.followupLabel;
+      elements.infoTitle.textContent = t.infoTitle;
       elements.footerNote.innerHTML = t.footer;
 
       Object.keys(langButtons).forEach(code => {
@@ -900,6 +931,7 @@
 
       statusText.textContent = "";
       clearFollowups();
+      renderQuickExamples(lang);
     }
 
     function initLang() {
@@ -933,7 +965,7 @@
           contactCity.textContent = "Paris, France";
         }
       } catch (e) {
-        // fallback: keep default value
+        // fallback
       }
     }
 
@@ -963,7 +995,6 @@
       followupContainer.querySelectorAll(".followup-btn").forEach((btn) => btn.remove());
     }
 
-    // Parse la ligne QUESTIONS_SUIVANTES: ["...", "...", "..."]
     function parseSuggestions(rawText) {
       const match = rawText.match(/QUESTIONS_SUIVANTES:\s*(\[.*\])\s*$/m);
       if (!match) return { mainAnswer: rawText.trim(), suggestions: [] };
@@ -1002,23 +1033,22 @@
 
         btn.addEventListener("click", () => {
           elements.questionInput.value = q;
-          sendQuestion(q);
+          form.dispatchEvent(new Event("submit", { cancelable: true }));
         });
 
         followupContainer.appendChild(btn);
       });
     }
 
-    async function sendQuestion(question) {
+    form.addEventListener("submit", async (event) => {
+      event.preventDefault();
       const t = translations[currentLang];
-
-      const trimmed = (question || "").trim();
-      if (!trimmed) {
+      const question = elements.questionInput.value.trim();
+      if (!question) {
         statusText.textContent = t.emptyQuestion;
         return;
       }
 
-      elements.questionInput.value = trimmed;
       setLoading(true);
       clearFollowups();
 
@@ -1028,7 +1058,7 @@
           headers: {
             "Content-Type": "application/json"
           },
-          body: JSON.stringify({ question: trimmed })
+          body: JSON.stringify({ question })
         });
 
         const data = await response.json();
@@ -1045,24 +1075,8 @@
       } finally {
         setLoading(false);
       }
-    }
-
-    form.addEventListener("submit", async (event) => {
-      event.preventDefault();
-      const question = elements.questionInput.value;
-      sendQuestion(question);
     });
 
-    // Tags = questions rapides
-    [elements.tag1, elements.tag2, elements.tag3].forEach((tagBtn) => {
-      tagBtn.addEventListener("click", () => {
-        const q = tagBtn.dataset.question || "";
-        if (!q) return;
-        sendQuestion(q);
-      });
-    });
-
-    // Init
     initLang();
     initCity();
   </script>
