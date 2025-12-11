@@ -8,20 +8,20 @@
   <!-- Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Montserrat:wght@500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Sora:wght@500;600;700&display=swap" rel="stylesheet">
 
   <style>
     :root {
       color-scheme: light;
       --bg: #05070b;
-      --bg-card: #0f172a;
-      --border-subtle: #1f2937;
+      --bg-card: #0b1017;
+      --border-subtle: #202532;
       --text-main: #f9fafb;
       --text-muted: #9ca3af;
-      --accent: #3b82f6;
-      --accent-soft: rgba(59, 130, 246, 0.1);
-      --shadow-soft: 0 18px 40px rgba(0, 0, 0, 0.55);
-      --radius-lg: 16px;
+      --accent: #2563eb;
+      --accent-soft: #1d3a9e;
+      --shadow-soft: 0 18px 40px rgba(0, 0, 0, 0.6);
+      --radius-lg: 18px;
     }
 
     * {
@@ -32,15 +32,14 @@
       margin: 0;
       min-height: 100vh;
       font-family: "Inter", system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
-      background:
-        radial-gradient(circle at top, #0b1120 0, #020617 40%, #020617 100%);
+      background: radial-gradient(circle at top, #0b1220 0, #020617 40%, #000000 100%);
       color: var(--text-main);
     }
 
     h1, h2, h3,
     .hero-title,
     .sidebar-section-title {
-      font-family: "Montserrat", "Inter", system-ui, sans-serif;
+      font-family: "Sora", "Inter", system-ui, sans-serif;
     }
 
     .page {
@@ -53,39 +52,51 @@
       gap: 24px;
     }
 
+    /* Reorder for mobile */
     @media (max-width: 840px) {
       .page {
         grid-template-columns: minmax(0, 1fr);
       }
+      .hero-card {
+        order: 0;
+      }
+      .main {
+        order: 1;
+      }
+      .sidebar {
+        order: 2;
+      }
+      .info-card {
+        order: 3;
+      }
     }
 
-    /* HERO TOP (full width) */
+    /* Hero wide */
 
     .hero-card {
-      background:
-        radial-gradient(circle at top left, #1e293b 0, #020617 40%, #020617 100%);
+      background: radial-gradient(circle at top left, #10253c 0, #06121f 35%, #020617 100%);
       border-radius: var(--radius-lg);
-      border: 1px solid #111827;
-      box-shadow: var(--shadow-soft);
+      border: 1px solid #1e293b;
+      box-shadow: 0 24px 60px rgba(0, 0, 0, 0.85);
       padding: 18px 22px 18px;
       position: relative;
       overflow: hidden;
       grid-column: 1 / -1;
-      color: #e5e7eb;
+      color: #f9fafb;
     }
 
     .hero-photo-watermark {
       position: absolute;
-      left: -32px;
-      top: 18px;
-      width: 200px;
-      height: 200px;
+      left: -70px;
+      top: -10px;
+      width: 280px;
+      height: 280px;
       border-radius: 50%;
-      background-image: url("netlify/images/samuel-profile.jpg"); /* ta photo */
+      background-image: url("netlify/images/samuel-profile.jpg");
       background-size: cover;
       background-position: center;
-      opacity: 0.14;
-      filter: grayscale(15%);
+      opacity: 0.2;
+      filter: grayscale(10%);
       pointer-events: none;
       z-index: 0;
     }
@@ -93,6 +104,26 @@
     .hero-content {
       position: relative;
       z-index: 1;
+    }
+
+    /* Décalage du contenu vers la droite sur desktop pour libérer la zone portrait */
+    @media (min-width: 900px) {
+      .hero-content {
+        margin-left: 260px;
+      }
+    }
+
+    @media (max-width: 899px) {
+      .hero-photo-watermark {
+        width: 190px;
+        height: 190px;
+        left: -40px;
+        top: 6px;
+        opacity: 0.18;
+      }
+      .hero-content {
+        margin-left: 0;
+      }
     }
 
     .hero-top-row {
@@ -130,13 +161,14 @@
       gap: 6px;
       padding: 4px 10px;
       border-radius: 999px;
-      background: rgba(15, 23, 42, 0.8);
-      border: 1px solid rgba(129, 140, 248, 0.5);
-      color: #e5e7ff;
+      background: rgba(15, 23, 42, 0.85);
+      border: 1px solid rgba(191, 219, 254, 0.7);
+      color: #e5edff;
       font-size: 11px;
       font-weight: 500;
       margin-top: 6px;
       align-self: flex-start;
+      box-shadow: 0 10px 25px rgba(15, 23, 42, 0.6);
     }
 
     .badge-dot {
@@ -144,7 +176,7 @@
       height: 7px;
       border-radius: 50%;
       background: #4ade80;
-      box-shadow: 0 0 0 4px rgba(34, 197, 94, 0.22);
+      box-shadow: 0 0 0 4px rgba(34, 197, 94, 0.25);
     }
 
     .hero-lang {
@@ -152,16 +184,16 @@
       align-items: center;
       gap: 8px;
       font-size: 11px;
-      color: #c7d2fe;
+      color: #e5e7eb;
     }
 
     .lang-switch {
       display: inline-flex;
       border-radius: 999px;
-      border: 1px solid #374151;
+      border: 1px solid #4b5563;
       overflow: hidden;
-      background: rgba(15, 23, 42, 0.85);
-      backdrop-filter: blur(2px);
+      background: rgba(15, 23, 42, 0.9);
+      backdrop-filter: blur(4px);
     }
 
     .lang-btn {
@@ -187,7 +219,7 @@
       font-size: 11px;
       letter-spacing: 0.22em;
       text-transform: uppercase;
-      color: #9ca3ff;
+      color: #93c5fd;
       margin-bottom: 6px;
     }
 
@@ -214,39 +246,39 @@
 
     .hero-quick-btn {
       border-radius: 999px;
-      border: 1px solid rgba(148, 163, 235, 0.75);
-      background: rgba(15, 23, 42, 0.85);
+      border: 1px solid rgba(191, 219, 254, 0.7);
+      background: rgba(15, 23, 42, 0.7);
       font-size: 11px;
       padding: 5px 11px;
       cursor: pointer;
-      color: #e5e7ff;
+      color: #e5edff;
       transition: background 0.15s ease, border-color 0.15s ease, transform 0.08s ease;
       white-space: nowrap;
-      backdrop-filter: blur(2px); /* blur léger */
+      backdrop-filter: blur(4px);
     }
 
     .hero-quick-btn:hover {
-      background: rgba(59, 130, 246, 0.9);
+      background: rgba(37, 99, 235, 0.9);
       border-color: #bfdbfe;
       transform: translateY(-0.5px);
     }
 
-    /* visuel abstrait à droite (type bannière LinkedIn) */
+    /* Visuel abstrait à droite */
 
     .hero-diagram {
       position: absolute;
-      right: -70px;
+      right: -60px;
       top: -40px;
       width: 320px;
       height: 220px;
       pointer-events: none;
-      opacity: 0.75;
+      opacity: 0.8;
     }
 
-    /* SIDEBAR */
+    /* Sidebar */
 
     .sidebar {
-      background: #020617;
+      background: var(--bg-card);
       border-radius: var(--radius-lg);
       padding: 22px 22px;
       border: 1px solid var(--border-subtle);
@@ -260,7 +292,7 @@
       font-size: 11px;
       letter-spacing: 0.18em;
       text-transform: uppercase;
-      color: var(--text-muted);
+      color: #9ca3af;
       margin: 0 0 10px;
     }
 
@@ -272,54 +304,54 @@
 
     .sidebar-card {
       border-radius: 12px;
-      border: 1px solid #111827;
+      border: 1px solid #1f2933;
       padding: 12px 12px 14px;
-      background: radial-gradient(circle at top left, #020617 0, #020617 40%, #020617 100%);
+      background: radial-gradient(circle at top left, #111827 0, #020617 70%);
     }
 
-    /* Profil */
-
-    /* LinkedIn card */
+    /* LinkedIn block: grande miniature */
 
     .linkedin-card {
-      margin-top: 4px;
       display: flex;
-      align-items: center;
-      gap: 10px;
-      padding: 9px 10px;
+      flex-direction: column;
+      gap: 8px;
+      padding: 10px 10px 12px;
       border-radius: 12px;
-      border: 1px solid #1f2937;
-      background: #020617;
+      border: 1px solid #1f2933;
+      background: radial-gradient(circle at top, #020617 0, #020617 50%, #020617 100%);
       cursor: pointer;
       text-decoration: none;
-      color: #e5e7eb;
+      color: #f9fafb;
       font-size: 12px;
+      overflow: hidden;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6);
     }
 
     .linkedin-thumb {
-      width: 36px;
-      height: 36px;
-      border-radius: 999px;
-      background-image: url("netlify/images/linkedin-thumb.jpg"); /* miniature LinkedIn */
+      width: 100%;
+      border-radius: 10px;
+      background-image: url("netlify/images/linkedin-thumb.jpg");
       background-size: cover;
       background-position: center;
+      aspect-ratio: 16 / 9;
       flex-shrink: 0;
     }
 
     .linkedin-text-main {
       font-weight: 500;
+      font-size: 12px;
     }
 
     .linkedin-text-sub {
       font-size: 11px;
-      color: var(--text-muted);
+      color: #9ca3af;
     }
 
     /* Contact */
 
     .sidebar-contact {
       font-size: 11px;
-      color: var(--text-muted);
+      color: #d1d5db;
       line-height: 1.5;
     }
 
@@ -332,34 +364,27 @@
       text-decoration: underline;
     }
 
-    /* CV block */
-
-    #cv-title {
-      display: none; /* pas de titre visible pour CV */
-    }
+    /* CV preview plus petit */
 
     .cv-preview-box {
       border-radius: 10px;
-      border: 1px dashed #4b5563;
-      background-color: #020617;
-      background-image: url("netlify/images/cv-preview.jpg"); /* miniature du CV */
+      border: 1px solid #1f2933;
+      background-image: url("netlify/images/cv-preview.jpg");
       background-size: cover;
-      background-position: top center;
-      padding: 0;
-      font-size: 12px;
-      text-align: center;
-      color: var(--text-muted);
+      background-position: top;
+      background-repeat: no-repeat;
+      width: 100%;
+      max-height: 140px;
       aspect-ratio: 3 / 4;
-      display: flex;
-      align-items: center;
-      justify-content: center;
+      overflow: hidden;
+      margin-bottom: 10px;
     }
 
     .sidebar-buttons {
       display: flex;
       flex-direction: column;
       gap: 8px;
-      margin-top: 10px;
+      margin-top: 2px;
     }
 
     .btn {
@@ -380,25 +405,25 @@
     .btn-primary {
       background: var(--accent);
       color: #ffffff;
-      box-shadow: 0 10px 22px rgba(37, 99, 235, 0.5);
+      box-shadow: 0 10px 24px rgba(37, 99, 235, 0.6);
     }
 
     .btn-primary:hover {
       transform: translateY(-1px);
-      box-shadow: 0 14px 26px rgba(37, 99, 235, 0.7);
+      box-shadow: 0 16px 32px rgba(37, 99, 235, 0.85);
     }
 
     .btn-ghost {
-      background: #020617;
-      color: #e5e7eb;
-      border-color: #374151;
+      background: transparent;
+      color: var(--text-main);
+      border-color: #4b5563;
     }
 
     .btn-ghost:hover {
       background: #111827;
     }
 
-    /* MAIN COLUMN */
+    /* Main column */
 
     .main {
       display: flex;
@@ -407,7 +432,7 @@
     }
 
     .qa-card {
-      background: #020617;
+      background: var(--bg-card);
       border-radius: var(--radius-lg);
       border: 1px solid var(--border-subtle);
       box-shadow: var(--shadow-soft);
@@ -475,7 +500,7 @@
 
     textarea:focus {
       border-color: var(--accent);
-      box-shadow: 0 0 0 1px rgba(59, 130, 246, 0.4);
+      box-shadow: 0 0 0 1px rgba(37, 99, 235, 0.4);
       background: #020617;
     }
 
@@ -495,7 +520,7 @@
       margin-top: 8px;
       padding: 12px 12px 10px;
       border-radius: 10px;
-      border: 1px solid #374151;
+      border: 1px dashed #374151;
       background: #020617;
       font-size: 13px;
       line-height: 1.55;
@@ -504,8 +529,6 @@
     }
 
     .answer-empty {
-      border-style: dashed;
-      background: #020617;
       color: #6b7280;
     }
 
@@ -533,8 +556,10 @@
       white-space: normal;
       line-height: 1.4;
       text-align: left;
+      transition: background 0.15s ease,
+                  border-color 0.15s ease,
+                  transform 0.08s ease;
       color: #e5e7eb;
-      transition: background 0.15s ease, border-color 0.15s ease, transform 0.08s ease;
     }
 
     .followup-btn:hover {
@@ -543,10 +568,10 @@
       transform: translateY(-0.5px);
     }
 
-    /* INFO CARD (bottom) */
+    /* Info card */
 
     .info-card {
-      background: #020617;
+      background: var(--bg-card);
       border-radius: var(--radius-lg);
       border: 1px solid var(--border-subtle);
       box-shadow: var(--shadow-soft);
@@ -576,7 +601,7 @@
 <body>
   <main class="page">
 
-    <!-- HERO TOP -->
+    <!-- Hero wide -->
     <section class="hero-card">
       <div class="hero-photo-watermark"></div>
 
@@ -605,12 +630,12 @@
         <div class="hero-main-row">
           <div class="hero-eyebrow" id="hero-eyebrow">DOSSIER INTERACTIF</div>
           <h2 class="hero-title" id="hero-title">
-            Explorer mon parcours avant d’échanger en direct
+            Explorer mon parcours avant d echanger en direct
           </h2>
           <p class="hero-sub" id="hero-sub">
-            Cet outil vous permet de poser des questions à un agent IA entraîné sur mon dossier
-            (CV, lettres, profil AssessFirst, questions/réponses). Il ne parle pas en mon nom :
-            il lit, recoupe et synthétise les informations disponibles, puis vous propose des pistes pour creuser.
+            Cet outil vous permet de poser des questions a un agent IA entraine sur mon dossier
+            (CV, lettres, profil AssessFirst, questions reponses). Il ne parle pas en mon nom:
+            il lit, recoupe et synthetise les informations disponibles, puis vous propose des pistes pour creuser.
           </p>
 
           <div class="hero-quick-questions" id="hero-quick-questions"></div>
@@ -621,7 +646,7 @@
       <svg class="hero-diagram" viewBox="0 0 400 260" aria-hidden="true">
         <defs>
           <linearGradient id="streak" x1="0" y1="0" x2="0" y2="1">
-            <stop offset="0" stop-color="#fbbf24" />
+            <stop offset="0" stop-color="#ffe6b3" />
             <stop offset="0.35" stop-color="#7dd3fc" />
             <stop offset="1" stop-color="#0f172a" />
           </linearGradient>
@@ -636,18 +661,16 @@
       </svg>
     </section>
 
-    <!-- SIDEBAR -->
+    <!-- Sidebar -->
     <aside class="sidebar">
-      <!-- Profil -->
       <section>
         <h2 class="sidebar-section-title" id="profil-title">PROFIL</h2>
         <p class="sidebar-text" id="profil-text">
-          Samuel clarifie des situations complexes pour les traduire en plans de croissance lisibles et utiles pour les équipes.
-          Il croise marketing, digital et psychologie cognitive pour aligner clients, opérations et direction sur les mêmes priorités.
+          Samuel clarifie des situations complexes pour les traduire en plans de croissance lisibles et utiles pour les equipes.
+          Il croise marketing, digital et psychologie cognitive pour aligner clients, operations et direction sur les memes priorites.
         </p>
       </section>
 
-      <!-- LinkedIn -->
       <section>
         <h2 class="sidebar-section-title" id="linkedin-title">LINKEDIN</h2>
         <a
@@ -661,13 +684,12 @@
           <div>
             <div class="linkedin-text-main" id="linkedin-main-text">Voir le profil LinkedIn</div>
             <div class="linkedin-text-sub" id="linkedin-sub-text">
-              Recommandations et détail complet des expériences sur LinkedIn.
+              Recommandations et detail complet des experiences sur LinkedIn.
             </div>
           </div>
         </a>
       </section>
 
-      <!-- Contact -->
       <section>
         <h2 class="sidebar-section-title" id="contact-title">CONTACT</h2>
         <p class="sidebar-contact">
@@ -677,29 +699,25 @@
         </p>
       </section>
 
-      <!-- CV -->
       <section>
         <h2 class="sidebar-section-title" id="cv-title">CV</h2>
         <div class="sidebar-card">
-          <div class="cv-preview-box" id="cv-preview">
-            <!-- miniature CV en background -->
-          </div>
+          <div class="cv-preview-box" id="cv-preview"></div>
           <div class="sidebar-buttons">
-            <a href="#" class="btn btn-primary" id="btn-download-cv">Télécharger le CV</a>
-            <a href="#" class="btn btn-ghost" id="btn-open-cv">Ouvrir en grand format</a>
+            <a href="#" class="btn btn-primary" id="btn-download-cv">Telecharger le CV</a>
           </div>
         </div>
       </section>
     </aside>
 
-    <!-- MAIN COLUMN -->
+    <!-- Main column -->
     <section class="main">
       <section class="qa-card">
         <div class="qa-header-row">
-          <h3 class="qa-title" id="qa-title">Poser une question à mon dossier</h3>
+          <h3 class="qa-title" id="qa-title">Poser une question a mon dossier</h3>
           <p class="qa-caption" id="qa-caption">
-            L’agent s’appuie uniquement sur les informations présentes dans le dossier.
-            Si une information n’y apparaît pas, il indique simplement qu’il ne sait pas.
+            L agent s appuie uniquement sur les informations presentes dans le dossier.
+            Si une information n y apparait pas, il indique simplement qu il ne sait pas.
           </p>
         </div>
 
@@ -708,7 +726,7 @@
             <textarea
               id="question-input"
               name="question"
-              placeholder="Par exemple : Quels résultats concrets a-t-il obtenus chez Lyca ?"
+              placeholder="Par exemple: Quels resultats concrets a t il obtenus chez Lyca ?"
             ></textarea>
             <button id="submit-btn" class="btn btn-primary qa-submit-btn" type="submit">
               Poser la question
@@ -718,7 +736,7 @@
         </form>
 
         <div id="answer-box" class="answer-box answer-empty">
-          Aucune question posée pour le moment. La première réponse apparaîtra ici.
+          Aucune question posee pour le moment. La premiere reponse apparaitra ici.
         </div>
 
         <div id="followup-container" class="followup-container" style="display:none;">
@@ -727,7 +745,7 @@
       </section>
     </section>
 
-    <!-- INFO CARD BOTTOM -->
+    <!-- Info card -->
     <section class="info-card">
       <h3 class="info-title" id="info-title">Comment fonctionne ce jumeau IA</h3>
       <p class="footer-note" id="footer-note"></p>
@@ -742,59 +760,58 @@
         badgeText: "Samuel CV Twin",
         profilTitle: "PROFIL",
         profilText:
-          "Samuel clarifie des situations complexes pour les traduire en plans de croissance lisibles et utiles pour les équipes. " +
-          "Il croise marketing, digital et psychologie cognitive pour aligner clients, opérations et direction sur les mêmes priorités.",
+          "Samuel clarifie des situations complexes pour les traduire en plans de croissance lisibles et utiles pour les equipes. " +
+          "Il croise marketing, digital et psychologie cognitive pour aligner clients, operations et direction sur les memes priorites.",
         cvTitle: "CV",
         cvPreview: "",
-        btnDownload: "Télécharger le CV",
-        btnOpen: "Ouvrir en grand format",
+        btnDownload: "Telecharger le CV",
         contactTitle: "CONTACT",
         linkedinTitle: "LINKEDIN",
         linkedinMain: "Voir le profil LinkedIn",
-        linkedinSub: "Recommandations et détail complet des expériences sur LinkedIn.",
+        linkedinSub: "Recommandations et detail complet des experiences sur LinkedIn.",
         langLabel: "Langue",
         heroEyebrow: "DOSSIER INTERACTIF",
-        heroTitle: "Explorer mon parcours avant d’échanger en direct",
+        heroTitle: "Explorer mon parcours avant d echanger en direct",
         heroSub:
-          "Cet outil vous permet de poser des questions à un agent IA entraîné sur mon dossier " +
-          "(CV, lettres, profil AssessFirst, questions/réponses). Il ne parle pas en mon nom : " +
-          "il lit, recoupe et synthétise les informations disponibles, puis vous propose des pistes pour creuser.",
-        qaTitle: "Poser une question à mon dossier",
+          "Cet outil vous permet de poser des questions a un agent IA entraine sur mon dossier " +
+          "(CV, lettres, profil AssessFirst, questions reponses). Il ne parle pas en mon nom: " +
+          "il lit, recoupe et synthetise les informations disponibles, puis vous propose des pistes pour creuser.",
+        qaTitle: "Poser une question a mon dossier",
         qaCaption:
-          "L’agent s’appuie uniquement sur les informations présentes dans le dossier. " +
-          "Si une information n’y apparaît pas, il indique simplement qu’il ne sait pas.",
+          "L agent s appuie uniquement sur les informations presentes dans le dossier. " +
+          "Si une information n y apparait pas, il indique simplement qu il ne sait pas.",
         placeholder:
-          "Par exemple : Quels résultats concrets a-t-il obtenus chez Lyca ? " +
-          "Ou comment gère-t-il une équipe marketing sous pression ?",
+          "Par exemple: Quels resultats concrets a t il obtenus chez Lyca ? " +
+          "ou Comment gere t il une equipe marketing sous pression ?",
         btnAsk: "Poser la question",
-        answerEmpty: "Aucune question posée pour le moment. La première réponse apparaîtra ici.",
+        answerEmpty: "Aucune question posee pour le moment. La premiere reponse apparaitra ici.",
         followupLabel: "Questions possibles pour creuser :",
         infoTitle: "Comment fonctionne ce jumeau IA",
         footer:
-          "<strong>Base de travail.</strong> Le jumeau IA s’appuie sur un pack de données fixe : plusieurs versions de mon CV, " +
-          "des lettres de motivation, des réponses RH structurées et des éléments de profil de personnalité. " +
-          "Le modèle lit ces documents, recoupe les informations et produit une synthèse adaptée à la question posée.<br /><br />" +
-          "<strong>Technologie.</strong> L’agent tourne sur le modèle GPT-5.1 d’OpenAI, déployé via Netlify et piloté par des scénarios Make. " +
-          "Il n’invente pas de dates ni de chiffres en dehors de ce qui figure dans le dossier et indique explicitement quand une information manque.<br /><br />" +
-          "<strong>Données et confidentialité.</strong> Les questions que vous posez peuvent être enregistrées pour analyser les thèmes les plus fréquents " +
-          "et améliorer le dispositif. Elles ne sont ni revendues, ni utilisées pour de la publicité ciblée. " +
-          "Le jumeau IA ne crée pas d’informations nouvelles sur ma vie privée et ne porte pas de jugement sur le fit culturel. " +
-          "Pour cela, un échange direct reste indispensable.",
-        loading: "En réflexion...",
-        emptyQuestion: "Merci de saisir une question avant d’envoyer.",
-        genericError: "Une erreur est survenue. Vous pouvez réessayer dans un instant.",
+          "<strong>Base de travail.</strong> Le jumeau IA s appuie sur un pack de donnees fixe: plusieurs versions de mon CV, " +
+          "des lettres de motivation, des reponses RH structurees et des elements de profil de personnalite. " +
+          "Le modele lit ces documents, recoupe les informations et produit une synthese adaptee a la question posee.<br /><br />" +
+          "<strong>Technologie.</strong> L agent tourne sur le modele GPT 5.1 d OpenAI, deploye via Netlify et pilote par des scenarios Make. " +
+          "Il ne invente pas de dates ni de chiffres en dehors de ce qui figure dans le dossier et indique explicitement quand une information manque.<br /><br />" +
+          "<strong>Donnees et confidentialite.</strong> Les questions que vous posez peuvent etre enregistreés pour analyser les themes les plus frequents " +
+          "et ameliorer le dispositif. Elles ne sont ni revendues, ni utilisees pour de la publicite ciblee. " +
+          "Le jumeau IA ne cree pas d informations nouvelles sur ma vie privee et ne porte pas de jugement sur le fit culturel. " +
+          "Pour cela, un echange direct reste indispensable.",
+        loading: "En reflexion...",
+        emptyQuestion: "Merci de saisir une question avant d envoyer.",
+        genericError: "Une erreur est survenue. Vous pouvez reessayer dans un instant.",
         quickExamples: [
           {
-            label: "Expérience marketing",
-            question: "Pouvez-vous résumer son expérience en marketing et e-commerce ?"
+            label: "Experience marketing",
+            question: "Pouvez vous resumer son experience en marketing et e commerce ?"
           },
           {
-            label: "Management d’équipe",
-            question: "Comment dirige-t-il une équipe marketing et digitale dans un contexte de pression ?"
+            label: "Management d equipe",
+            question: "Comment dirige t il une equipe marketing et digitale dans un contexte de pression ?"
           },
           {
             label: "IA et automatisation",
-            question: "Comment utilise-t-il concrètement l’IA et l’automatisation dans ses missions ?"
+            question: "Comment utilise t il concretement l IA et l automatisation dans ses missions ?"
           }
         ]
       },
@@ -808,34 +825,33 @@
         cvTitle: "CV",
         cvPreview: "",
         btnDownload: "Download CV",
-        btnOpen: "Open full version",
         contactTitle: "CONTACT",
         linkedinTitle: "LINKEDIN",
         linkedinMain: "View LinkedIn profile",
         linkedinSub: "Recommendations and full experience details on LinkedIn.",
         langLabel: "Language",
         heroEyebrow: "INTERACTIVE DOSSIER",
-        heroTitle: "Explore my track record before a live conversation",
+        heroTitle: "Explore his track record before a live conversation",
         heroSub:
-          "This tool lets you ask questions to an AI agent trained on my dossier " +
-          "(CV, letters, AssessFirst profile, Q&A blocks). It does not speak in my name: " +
-          "it reads, cross-checks and synthesises the available information, then suggests angles you can dig into.",
-        qaTitle: "Ask a question to my dossier",
+          "This tool lets you ask questions to an AI agent trained on his dossier " +
+          "(CV, letters, AssessFirst profile, Q and A blocks). It does not speak in his name: " +
+          "it reads, cross checks and synthesises the available information, then suggests angles you can dig into.",
+        qaTitle: "Ask a question to his dossier",
         qaCaption:
           "The agent only relies on what is present in the dossier. " +
           "If a piece of information is not there, it simply says it does not know.",
         placeholder:
           "For example: What concrete results did he deliver at Lyca? " +
-          "Or how does he handle a marketing team under pressure?",
+          "or How does he handle a marketing team under pressure?",
         btnAsk: "Ask the question",
         answerEmpty: "No question asked yet. The first answer will appear here.",
-        followupLabel: "Follow-up questions you could ask:",
+        followupLabel: "Follow up questions you could ask:",
         infoTitle: "How this AI twin works",
         footer:
           "<strong>Data set.</strong> The AI twin is based on a fixed pack of documents: several versions of my CV, " +
-          "cover letters, structured HR Q&A and personality insights. The model reads these documents, " +
-          "cross-checks the information and produces a synthesis tailored to the question.<br /><br />" +
-          "<strong>Technology.</strong> The agent runs on OpenAI’s GPT-5.1 model, deployed on Netlify and orchestrated with Make scenarios. " +
+          "cover letters, structured HR Q and A and personality insights. The model reads these documents, " +
+          "cross checks the information and produces a synthesis tailored to the question.<br /><br />" +
+          "<strong>Technology.</strong> The agent runs on OpenAI s GPT 5.1 model, deployed on Netlify and orchestrated with Make scenarios. " +
           "It does not invent dates or figures beyond what is present in the dossier and clearly says when a piece of information is missing.<br /><br />" +
           "<strong>Data and privacy.</strong> Questions may be logged to analyse recurring themes and improve the system. " +
           "They are not sold or used for targeted advertising. The AI twin does not create new information about my private life " +
@@ -846,11 +862,11 @@
         quickExamples: [
           {
             label: "Marketing track record",
-            question: "Could you summarise his experience in marketing and e-commerce?"
+            question: "Could you summarise his experience in marketing and e commerce?"
           },
           {
             label: "Team leadership",
-            question: "How does he lead a marketing and digital team in a high-pressure context?"
+            question: "How does he lead a marketing and digital team in a high pressure context?"
           },
           {
             label: "AI and automation",
@@ -868,7 +884,6 @@
       cvTitle: document.getElementById("cv-title"),
       cvPreview: document.getElementById("cv-preview"),
       btnDownload: document.getElementById("btn-download-cv"),
-      btnOpen: document.getElementById("btn-open-cv"),
       contactTitle: document.getElementById("contact-title"),
       linkedinTitle: document.getElementById("linkedin-title"),
       linkedinMain: document.getElementById("linkedin-main-text"),
@@ -931,7 +946,6 @@
       elements.cvTitle.textContent = t.cvTitle;
       elements.cvPreview.innerHTML = t.cvPreview;
       elements.btnDownload.textContent = t.btnDownload;
-      elements.btnOpen.textContent = t.btnOpen;
       elements.contactTitle.textContent = t.contactTitle;
       elements.linkedinTitle.textContent = t.linkedinTitle;
       elements.linkedinMain.textContent = t.linkedinMain;
