@@ -209,17 +209,20 @@ exports.handler = async (event) => {
       }
     }
 
-   const answer = completion.choices[0].message.content.trim();
-const lower = answer.toLowerCase();
+    // Détection "unknown" basée sur le texte renvoyé
+    const lower = answer.toLowerCase();
 
-const isUnknown =
-  /^je ne sais pas/.test(lower) ||
-  /^i don.?t know/.test(lower) ||
-  lower.includes("cette information ne figure pas dans le dossier") ||
-  lower.includes("ne figure pas dans le dossier disponible sur samuel") ||
-  lower.includes("il est impossible de répondre de manière factuelle à cette question") ||
-  lower.includes("this information is not present in the dossier");
-    // Log vers Make (comme avant)
+    const isUnknown =
+      lower.startsWith("je ne sais pas.") ||
+      lower.startsWith("je ne sais pas ") ||
+      lower.startsWith("i don’t know.") ||
+      lower.startsWith("i don't know.") ||
+      lower.includes("cette information ne figure pas dans le dossier") ||
+      lower.includes("ne figure pas dans le dossier disponible sur samuel") ||
+      lower.includes("il est impossible de répondre de manière factuelle à cette question") ||
+      lower.includes("this information is not present in the dossier");
+
+    // Log vers Make
     try {
       await fetch(
         "https://hook.eu2.make.com/quvd1xm7kdw1fs9l4ba4j52qhjqabps9",
@@ -229,24 +232,25 @@ const isUnknown =
           body: JSON.stringify({
             question,
             answer,
-            unknown,
+            unknown: isUnknown,
             sessionId:
               event.headers["x-nf-client-connection-ip"] ||
               event.headers["client-ip"] ||
               "unknown",
             source: "site-netlify",
-            lang: "fr"
+            lang: "fr" // on pourra le rendre dynamique plus tard
           })
         }
       );
     } catch (logError) {
       console.error("Erreur d'envoi vers Make:", logError);
+      // on ne bloque pas la réponse au front
     }
 
     return {
       statusCode: 200,
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ answer, unknown })
+      body: JSON.stringify({ answer, unknown: isUnknown })
     };
   } catch (err) {
     console.error("Erreur serveur:", err);
