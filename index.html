@@ -87,15 +87,15 @@
 
     .hero-photo-watermark {
       position: absolute;
-      left: -70px;
-      top: -10px;
-      width: 280px;
-      height: 280px;
+      left: -80px;
+      top: -40px;
+      width: 320px;
+      height: 320px;
       border-radius: 50%;
       background-image: url("netlify/images/samuel-profile.jpg");
       background-size: cover;
       background-position: center;
-      opacity: 0.2;
+      opacity: 0.22;
       filter: grayscale(10%);
       pointer-events: none;
       z-index: 0;
@@ -115,14 +115,20 @@
 
     @media (max-width: 899px) {
       .hero-photo-watermark {
-        width: 190px;
-        height: 190px;
-        left: -40px;
-        top: 6px;
-        opacity: 0.18;
+        width: 200px;
+        height: 200px;
+        left: -45px;
+        top: 0;
+        opacity: 0.2;
       }
       .hero-content {
         margin-left: 0;
+      }
+      .hero-name {
+        font-size: 18px;
+      }
+      .hero-title {
+        font-size: 17px;
       }
     }
 
@@ -168,7 +174,7 @@
       font-weight: 500;
       margin-top: 6px;
       align-self: flex-start;
-      box-shadow: 0 10px 25px rgba(15, 23, 42, 0.6);
+      box-shadow: 0 8px 20px rgba(15, 23, 42, 0.55);
     }
 
     .badge-dot {
@@ -309,6 +315,11 @@
       background: radial-gradient(circle at top left, #111827 0, #020617 70%);
     }
 
+    /* On masque pour l’instant le bloc PROFIL */
+    .sidebar-profile {
+      display: none;
+    }
+
     /* LinkedIn block: grande miniature */
 
     .linkedin-card {
@@ -358,6 +369,7 @@
     .sidebar-contact a {
       color: inherit;
       text-decoration: none;
+      font-weight: 500;
     }
 
     .sidebar-contact a:hover {
@@ -399,18 +411,18 @@
       font-weight: 500;
       cursor: pointer;
       text-decoration: none;
-      transition: background 0.15s ease, color 0.15s ease, border-color 0.15s ease, transform 0.08s ease;
+      transition: background 0.15s ease, color 0.15s ease, border-color 0.15s ease, transform 0.08s ease, box-shadow 0.15s ease;
     }
 
     .btn-primary {
       background: var(--accent);
       color: #ffffff;
-      box-shadow: 0 10px 24px rgba(37, 99, 235, 0.6);
+      box-shadow: 0 8px 18px rgba(37, 99, 235, 0.45);
     }
 
     .btn-primary:hover {
       transform: translateY(-1px);
-      box-shadow: 0 16px 32px rgba(37, 99, 235, 0.85);
+      box-shadow: 0 12px 24px rgba(37, 99, 235, 0.7);
     }
 
     .btn-ghost {
@@ -610,7 +622,7 @@
           <div class="hero-identity">
             <h1 class="hero-name">SAMUEL CISCATO</h1>
             <div class="role" id="role-line">
-              DIRECTION MARKETING ET E COMMERCE · TRANSFORMATION DIGITALE
+              DIRECTION MARKETING ET E-COMMERCE · TRANSFORMATION DIGITALE
             </div>
             <div class="badge-twin">
               <span class="badge-dot"></span>
@@ -630,12 +642,12 @@
         <div class="hero-main-row">
           <div class="hero-eyebrow" id="hero-eyebrow">DOSSIER INTERACTIF</div>
           <h2 class="hero-title" id="hero-title">
-            Explorer mon parcours avant d echanger en direct
+            Explorez le parcours de Samuel avant d’échanger en direct
           </h2>
           <p class="hero-sub" id="hero-sub">
-            Cet outil vous permet de poser des questions a un agent IA entraine sur mon dossier
-            (CV, lettres, profil AssessFirst, questions reponses). Il ne parle pas en mon nom:
-            il lit, recoupe et synthetise les informations disponibles, puis vous propose des pistes pour creuser.
+            Posez vos questions sur son expérience, ses résultats ou son style de management.
+            Le CV-bot de Samuel s’appuie uniquement sur son dossier réel: CV, lettres de motivation,
+            évaluations et entretiens RH. Il synthétise les informations, il ne remplace pas l’échange direct.
           </p>
 
           <div class="hero-quick-questions" id="hero-quick-questions"></div>
@@ -663,11 +675,10 @@
 
     <!-- Sidebar -->
     <aside class="sidebar">
-      <section>
+      <section class="sidebar-profile">
         <h2 class="sidebar-section-title" id="profil-title">PROFIL</h2>
         <p class="sidebar-text" id="profil-text">
-          Samuel clarifie des situations complexes pour les traduire en plans de croissance lisibles et utiles pour les equipes.
-          Il croise marketing, digital et psychologie cognitive pour aligner clients, operations et direction sur les memes priorites.
+          Samuel construit et pilote des systèmes de croissance lisibles pour les équipes marketing et commerciales.
         </p>
       </section>
 
@@ -684,7 +695,7 @@
           <div>
             <div class="linkedin-text-main" id="linkedin-main-text">Voir le profil LinkedIn</div>
             <div class="linkedin-text-sub" id="linkedin-sub-text">
-              Recommandations et detail complet des experiences sur LinkedIn.
+              Recommandations et détail complet des expériences sur LinkedIn.
             </div>
           </div>
         </a>
@@ -693,8 +704,8 @@
       <section>
         <h2 class="sidebar-section-title" id="contact-title">CONTACT</h2>
         <p class="sidebar-contact">
-          <span id="contact-email">samuel.ciscato@gmail.com</span><br />
-          <span id="contact-phone">+33 6 67 98 00 44</span><br />
+          <a id="contact-email" href="mailto:samuel.ciscato@gmail.com">Écrire à Samuel</a><br />
+          <a id="contact-phone" href="tel:+33667980044">+33 6 67 98 00 44</a><br />
           <span id="contact-city">Lyon, France</span><br />
         </p>
       </section>
@@ -704,7 +715,7 @@
         <div class="sidebar-card">
           <div class="cv-preview-box" id="cv-preview"></div>
           <div class="sidebar-buttons">
-            <a href="#" class="btn btn-primary" id="btn-download-cv">Telecharger le CV</a>
+            <a href="#" class="btn btn-primary" id="btn-download-cv">Télécharger le CV</a>
           </div>
         </div>
       </section>
@@ -714,10 +725,9 @@
     <section class="main">
       <section class="qa-card">
         <div class="qa-header-row">
-          <h3 class="qa-title" id="qa-title">Poser une question a mon dossier</h3>
+          <h3 class="qa-title" id="qa-title">Poser une question au CV-bot de Samuel</h3>
           <p class="qa-caption" id="qa-caption">
-            L agent s appuie uniquement sur les informations presentes dans le dossier.
-            Si une information n y apparait pas, il indique simplement qu il ne sait pas.
+            Il répond uniquement à partir de son dossier réel. Si une information n’y figure pas, il vous le dit.
           </p>
         </div>
 
@@ -726,7 +736,7 @@
             <textarea
               id="question-input"
               name="question"
-              placeholder="Par exemple: Quels resultats concrets a t il obtenus chez Lyca ?"
+              placeholder="Par exemple: Quels résultats a-t-il obtenus chez Lyca? Comment gère-t-il une équipe marketing sous pression?"
             ></textarea>
             <button id="submit-btn" class="btn btn-primary qa-submit-btn" type="submit">
               Poser la question
@@ -736,7 +746,7 @@
         </form>
 
         <div id="answer-box" class="answer-box answer-empty">
-          Aucune question posee pour le moment. La premiere reponse apparaitra ici.
+          Aucune question posée pour le moment. La première réponse apparaîtra ici.
         </div>
 
         <div id="followup-container" class="followup-container" style="display:none;">
@@ -747,7 +757,7 @@
 
     <!-- Info card -->
     <section class="info-card">
-      <h3 class="info-title" id="info-title">Comment fonctionne ce jumeau IA</h3>
+      <h3 class="info-title" id="info-title">Comment fonctionne ce CV-bot de Samuel</h3>
       <p class="footer-note" id="footer-note"></p>
     </section>
   </main>
@@ -756,72 +766,68 @@
     // Traductions FR / EN
     const translations = {
       fr: {
-        roleLine: "DIRECTION MARKETING ET E COMMERCE · TRANSFORMATION DIGITALE",
+        roleLine: "DIRECTION MARKETING ET E-COMMERCE · TRANSFORMATION DIGITALE",
         badgeText: "Samuel CV Twin",
         profilTitle: "PROFIL",
         profilText:
-          "Samuel clarifie des situations complexes pour les traduire en plans de croissance lisibles et utiles pour les equipes. " +
-          "Il croise marketing, digital et psychologie cognitive pour aligner clients, operations et direction sur les memes priorites.",
+          "Samuel construit et pilote des systèmes de croissance lisibles pour les équipes marketing et commerciales.",
         cvTitle: "CV",
         cvPreview: "",
-        btnDownload: "Telecharger le CV",
+        btnDownload: "Télécharger le CV",
         contactTitle: "CONTACT",
         linkedinTitle: "LINKEDIN",
         linkedinMain: "Voir le profil LinkedIn",
-        linkedinSub: "Recommandations et detail complet des experiences sur LinkedIn.",
+        linkedinSub: "Recommandations et détail complet des expériences sur LinkedIn.",
         langLabel: "Langue",
         heroEyebrow: "DOSSIER INTERACTIF",
-        heroTitle: "Explorer mon parcours avant d echanger en direct",
+        heroTitle: "Explorez le parcours de Samuel avant d’échanger en direct",
         heroSub:
-          "Cet outil vous permet de poser des questions a un agent IA entraine sur mon dossier " +
-          "(CV, lettres, profil AssessFirst, questions reponses). Il ne parle pas en mon nom: " +
-          "il lit, recoupe et synthetise les informations disponibles, puis vous propose des pistes pour creuser.",
-        qaTitle: "Poser une question a mon dossier",
+          "Posez vos questions sur son expérience, ses résultats ou son style de management. " +
+          "Le CV-bot de Samuel s’appuie uniquement sur son dossier réel: CV, lettres de motivation, évaluations et entretiens RH. " +
+          "Il synthétise les informations, il ne remplace pas l’échange direct.",
+        qaTitle: "Poser une question au CV-bot de Samuel",
         qaCaption:
-          "L agent s appuie uniquement sur les informations presentes dans le dossier. " +
-          "Si une information n y apparait pas, il indique simplement qu il ne sait pas.",
+          "Il répond uniquement à partir de son dossier réel. Si une information n’y figure pas, il vous le dit.",
         placeholder:
-          "Par exemple: Quels resultats concrets a t il obtenus chez Lyca ? " +
-          "ou Comment gere t il une equipe marketing sous pression ?",
+          "Par exemple: Quels résultats a-t-il obtenus chez Lyca? Comment gère-t-il une équipe marketing sous pression?",
         btnAsk: "Poser la question",
-        answerEmpty: "Aucune question posee pour le moment. La premiere reponse apparaitra ici.",
+        answerEmpty: "Aucune question posée pour le moment. La première réponse apparaîtra ici.",
         followupLabel: "Questions possibles pour creuser :",
-        infoTitle: "Comment fonctionne ce jumeau IA",
+        infoTitle: "Comment fonctionne ce CV-bot de Samuel",
         footer:
-          "<strong>Base de travail.</strong> Le jumeau IA s appuie sur un pack de donnees fixe: plusieurs versions de mon CV, " +
-          "des lettres de motivation, des reponses RH structurees et des elements de profil de personnalite. " +
-          "Le modele lit ces documents, recoupe les informations et produit une synthese adaptee a la question posee.<br /><br />" +
-          "<strong>Technologie.</strong> L agent tourne sur le modele GPT 5.1 d OpenAI, deploye via Netlify et pilote par des scenarios Make. " +
-          "Il ne invente pas de dates ni de chiffres en dehors de ce qui figure dans le dossier et indique explicitement quand une information manque.<br /><br />" +
-          "<strong>Donnees et confidentialite.</strong> Les questions que vous posez peuvent etre enregistreés pour analyser les themes les plus frequents " +
-          "et ameliorer le dispositif. Elles ne sont ni revendues, ni utilisees pour de la publicite ciblee. " +
-          "Le jumeau IA ne cree pas d informations nouvelles sur ma vie privee et ne porte pas de jugement sur le fit culturel. " +
-          "Pour cela, un echange direct reste indispensable.",
-        loading: "En reflexion...",
-        emptyQuestion: "Merci de saisir une question avant d envoyer.",
-        genericError: "Une erreur est survenue. Vous pouvez reessayer dans un instant.",
+          "<strong>Base de travail.</strong> Le CV-bot s’appuie sur un pack de données fixe: plusieurs versions de mon CV, " +
+          "des lettres de motivation, des réponses RH structurées et des éléments de profil de personnalité. " +
+          "Le modèle lit ces documents, recoupe les informations et produit une synthèse adaptée à la question posée.<br /><br />" +
+          "<strong>Technologie.</strong> L’agent tourne sur le modèle GPT 5.1 d’OpenAI, déployé via Netlify et piloté par des scénarios Make. " +
+          "Il n’invente pas de dates ni de chiffres en dehors de ce qui figure dans le dossier et indique explicitement quand une information manque.<br /><br />" +
+          "<strong>Données et confidentialité.</strong> Les questions que vous posez peuvent être enregistrées pour analyser les thèmes les plus fréquents " +
+          "et améliorer le dispositif. Elles ne sont ni revendues, ni utilisées pour de la publicité ciblée. " +
+          "Le CV-bot ne crée pas d’informations nouvelles sur ma vie privée et ne porte pas de jugement sur le fit culturel. " +
+          "Pour cela, un échange direct reste indispensable.",
+        loading: "En réflexion...",
+        emptyQuestion: "Merci de saisir une question avant d’envoyer.",
+        genericError: "Une erreur est survenue. Vous pouvez réessayer dans un instant.",
         quickExamples: [
           {
-            label: "Experience marketing",
-            question: "Pouvez vous resumer son experience en marketing et e commerce ?"
+            label: "Expérience marketing",
+            question: "Pouvez-vous résumer son expérience en marketing et e-commerce?"
           },
           {
-            label: "Management d equipe",
-            question: "Comment dirige t il une equipe marketing et digitale dans un contexte de pression ?"
+            label: "Management d’équipe",
+            question: "Comment dirige-t-il une équipe marketing et digitale dans un contexte de pression?"
           },
           {
             label: "IA et automatisation",
-            question: "Comment utilise t il concretement l IA et l automatisation dans ses missions ?"
+            question: "Comment utilise-t-il concrètement l’IA et l’automatisation dans ses missions?"
           }
         ]
       },
       en: {
-        roleLine: "MARKETING AND E COMMERCE LEADERSHIP · DIGITAL TRANSFORMATION",
+        roleLine: "MARKETING AND E-COMMERCE LEADERSHIP · DIGITAL TRANSFORMATION",
         badgeText: "Samuel CV Twin",
         profilTitle: "PROFILE",
         profilText:
-          "Samuel turns complex situations into clear growth plans that are useful and sustainable for teams. " +
-          "He combines marketing, digital and cognitive psychology to align customers, operations and leadership on the same priorities.",
+          "Samuel turns complex situations into clear growth systems for marketing and sales teams.",
         cvTitle: "CV",
         cvPreview: "",
         btnDownload: "Download CV",
@@ -831,30 +837,28 @@
         linkedinSub: "Recommendations and full experience details on LinkedIn.",
         langLabel: "Language",
         heroEyebrow: "INTERACTIVE DOSSIER",
-        heroTitle: "Explore his track record before a live conversation",
+        heroTitle: "Explore Samuel’s track record before a live conversation",
         heroSub:
-          "This tool lets you ask questions to an AI agent trained on his dossier " +
-          "(CV, letters, AssessFirst profile, Q and A blocks). It does not speak in his name: " +
-          "it reads, cross checks and synthesises the available information, then suggests angles you can dig into.",
-        qaTitle: "Ask a question to his dossier",
+          "Ask anything about his experience, results or management style. " +
+          "Samuel’s CV bot only uses his real dossier: CV, cover letters, assessments and HR interviews. " +
+          "It synthesises the information, it does not replace a live conversation.",
+        qaTitle: "Ask a question to Samuel’s CV bot",
         qaCaption:
-          "The agent only relies on what is present in the dossier. " +
-          "If a piece of information is not there, it simply says it does not know.",
+          "It only answers based on his real dossier. If something is missing, it will say so.",
         placeholder:
-          "For example: What concrete results did he deliver at Lyca? " +
-          "or How does he handle a marketing team under pressure?",
+          "For example: What results did he deliver at Lyca? How does he handle a marketing team under pressure?",
         btnAsk: "Ask the question",
         answerEmpty: "No question asked yet. The first answer will appear here.",
         followupLabel: "Follow up questions you could ask:",
-        infoTitle: "How this AI twin works",
+        infoTitle: "How Samuel’s CV bot works",
         footer:
-          "<strong>Data set.</strong> The AI twin is based on a fixed pack of documents: several versions of my CV, " +
+          "<strong>Data set.</strong> The CV bot is based on a fixed pack of documents: several versions of my CV, " +
           "cover letters, structured HR Q and A and personality insights. The model reads these documents, " +
           "cross checks the information and produces a synthesis tailored to the question.<br /><br />" +
-          "<strong>Technology.</strong> The agent runs on OpenAI s GPT 5.1 model, deployed on Netlify and orchestrated with Make scenarios. " +
+          "<strong>Technology.</strong> The agent runs on OpenAI’s GPT 5.1 model, deployed on Netlify and orchestrated with Make scenarios. " +
           "It does not invent dates or figures beyond what is present in the dossier and clearly says when a piece of information is missing.<br /><br />" +
           "<strong>Data and privacy.</strong> Questions may be logged to analyse recurring themes and improve the system. " +
-          "They are not sold or used for targeted advertising. The AI twin does not create new information about my private life " +
+          "They are not sold or used for targeted advertising. The CV bot does not create new information about my private life " +
           "and does not judge cultural fit. For that, a direct conversation is still required.",
         loading: "Thinking...",
         emptyQuestion: "Please type a question before sending.",
@@ -862,7 +866,7 @@
         quickExamples: [
           {
             label: "Marketing track record",
-            question: "Could you summarise his experience in marketing and e commerce?"
+            question: "Could you summarise his experience in marketing and e-commerce?"
           },
           {
             label: "Team leadership",
