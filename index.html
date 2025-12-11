@@ -101,9 +101,9 @@
   background-image: url("netlify/images/samuel-profile.jpg");
   background-size: cover;
   background-position: center top;
-  opacity: 0.32;              /* plus visible */
-  filter: none;               /* plus de filtre gris */
-  box-shadow: 0 0 60px rgba(0, 0, 0, 0.75); /* halo discret */
+   opacity: 0.45;          /* plus visible */
+  filter: grayscale(0%);  /* ou 20% si tu veux garder un léger effet */
+  box-shadow: 0 0 80px rgba(0, 0, 0, 0.75); /* halo doux sous la photo */
   pointer-events: none;
   z-index: 0;
 }
@@ -126,7 +126,7 @@
         height: 200px;
         left: -45px;
         top: 0;
-        opacity: 0.2;
+        opacity: 0.35;
       }
       .hero-content {
         margin-left: 0;
@@ -801,8 +801,8 @@
               placeholder="Par exemple: Quels résultats a-t-il obtenus chez Lyca? Comment gère-t-il une équipe marketing sous pression?"
             ></textarea>
             <button id="submit-btn" class="btn btn-primary qa-submit-btn" type="submit">
-              Poser la question
-            </button>
+  Envoyer
+</button>
           </div>
           <div class="status-text" id="status-text"></div>
         </form>
@@ -827,132 +827,129 @@
   <script>
     // Traductions FR / EN
     const translations = {
-      fr: {
-        roleLine: "MARKETING AND E-COMMERCE LEADERSHIP · DIGITAL TRANSFORMATION",
-badgeText: "Samuel CV-bot",
-heroTitle: "Explore Samuel’s track record before a live conversation",
-heroSub:
-  "Ask questions about his experience, results or management style. " +
-  "Samuel’s CV-bot only uses his real dossier: CV, cover letters, assessments and HR interviews. " +
-  "It synthesises the information, it does not replace a direct conversation.",
-        cvTitle: "CV",
-        cvPreview: "",
-contactEmailLabel: "Écrire à Samuel",
-contactWhatsLabel: "Appeler Samuel sur WhatsApp",        
-btnDownload: "Télécharger le CV",
-        contactTitle: "CONTACT",
-        linkedinTitle: "LINKEDIN",
-        linkedinMain: "Voir le profil LinkedIn",
-        linkedinSub: "Recommandations et détail complet des expériences sur LinkedIn.",
-        langLabel: "Langue",
-        heroEyebrow: "DOSSIER INTERACTIF",
-        heroTitle: "Explorez le parcours de Samuel avant d’échanger en direct",
-heroSub:
-  "Posez vos questions sur son expérience, ses résultats ou son style de management. " +
-  "Le CV-bot de Samuel s’appuie uniquement sur son dossier réel: CV, lettres de motivation, évaluations et entretiens RH. " +
-  "Il synthétise les informations, il ne remplace pas l’échange direct.",
-        qaTitle: "Posez une question au sujet de Samuel",
-qaCaption:
-  "Le CV-bot répond uniquement à partir des données partagées. " +
-  "Si une information n’y figure pas, il vous répondra qu’il ne sait pas. " +
-  "Vous pourrez ensuite me contacter directement.",
-btnAsk: "Envoyer",
-        placeholder:
-          "Par exemple: Quels résultats a-t-il obtenus chez Lyca? Comment gère-t-il une équipe marketing sous pression?",
-        btnAsk: "Poser la question",
-        answerEmpty: "Aucune question posée pour le moment. La première réponse apparaîtra ici.",
-        followupLabel: "Questions possibles pour creuser :",
-        infoTitle: "Comment fonctionne ce CV-bot de Samuel",
-        footer:
-          "<strong>Base de travail.</strong> Le CV-bot s’appuie sur un pack de données fixe: plusieurs versions de mon CV, " +
-          "des lettres de motivation, des réponses RH structurées et des éléments de profil de personnalité. " +
-          "Le modèle lit ces documents, recoupe les informations et produit une synthèse adaptée à la question posée.<br /><br />" +
-          "<strong>Technologie.</strong> L’agent tourne sur le modèle GPT 5.1 d’OpenAI, déployé via Netlify et piloté par des scénarios Make. " +
-          "Il n’invente pas de dates ni de chiffres en dehors de ce qui figure dans le dossier et indique explicitement quand une information manque.<br /><br />" +
-          "<strong>Données et confidentialité.</strong> Les questions que vous posez peuvent être enregistrées pour analyser les thèmes les plus fréquents " +
-          "et améliorer le dispositif. Elles ne sont ni revendues, ni utilisées pour de la publicité ciblée. " +
-          "Le CV-bot ne crée pas d’informations nouvelles sur ma vie privée et ne porte pas de jugement sur le fit culturel. " +
-          "Pour cela, un échange direct reste indispensable.",
-        loading: "En réflexion...",
-        emptyQuestion: "Merci de saisir une question avant d’envoyer.",
-        genericError: "Une erreur est survenue. Vous pouvez réessayer dans un instant.",
-        quickExamples: [
-          {
-            label: "Expérience marketing",
-            question: "Pouvez-vous résumer son expérience en marketing et e-commerce?"
-          },
-          {
-            label: "Management d’équipe",
-            question: "Comment dirige-t-il une équipe marketing et digitale dans un contexte de pression?"
-          },
-          {
-            label: "IA et automatisation",
-            question: "Comment utilise-t-il concrètement l’IA et l’automatisation dans ses missions?"
-          }
-        ]
+  fr: {
+    roleLine: "DIRECTION MARKETING ET E-COMMERCE · TRANSFORMATION DIGITALE",
+    badgeText: "Samuel CV-bot",
+    profilTitle: "PROFIL",
+    profilText:
+      "Samuel construit et pilote des systèmes de croissance lisibles pour les équipes marketing et commerciales.",
+    cvTitle: "CV",
+    cvPreview: "",
+    contactEmailLabel: "Écrire à Samuel",
+    contactWhatsLabel: "Appeler Samuel sur WhatsApp",
+    btnDownload: "Télécharger le CV",
+    contactTitle: "CONTACT",
+    linkedinTitle: "LINKEDIN",
+    linkedinMain: "Voir le profil LinkedIn",
+    linkedinSub: "Recommandations et détail complet des expériences sur LinkedIn.",
+    langLabel: "Langue",
+    heroEyebrow: "SAMUEL CV-BOT",
+    heroTitle: "Explorez le parcours de Samuel avant d’échanger en direct",
+    heroSub:
+      "Posez vos questions sur son expérience, ses résultats ou son style de management. " +
+      "Le CV-bot de Samuel s’appuie uniquement sur son dossier réel : CV, lettres de motivation, évaluations et entretiens RH. " +
+      "Il synthétise les informations, il ne remplace pas l’échange direct.",
+    qaTitle: "Posez une question au sujet de Samuel",
+    qaCaption:
+      "Le CV-bot répond uniquement à partir des données partagées. " +
+      "Si une information n’y figure pas, il vous répondra qu’il ne sait pas. " +
+      "Vous pourrez ensuite me contacter directement.",
+    btnAsk: "Envoyer",
+    placeholder:
+      "Par exemple : Quels résultats a-t-il obtenus chez Lyca ? Comment gère-t-il une équipe marketing sous pression ?",
+    answerEmpty: "Aucune question posée pour le moment. La première réponse apparaîtra ici.",
+    followupLabel: "Questions possibles pour creuser :",
+    infoTitle: "Comment fonctionne ce CV-bot de Samuel",
+    footer:
+      "<strong>Base de travail.</strong> Le CV-bot s’appuie sur un pack de données fixe : plusieurs versions de mon CV, " +
+      "des lettres de motivation, des réponses RH structurées et des éléments de profil de personnalité. " +
+      "Le modèle lit ces documents, recoupe les informations et produit une synthèse adaptée à la question posée.<br /><br />" +
+      "<strong>Technologie.</strong> L’agent tourne sur le modèle GPT 5.1 d’OpenAI, déployé via Netlify et piloté par des scénarios Make. " +
+      "Il n’invente pas de dates ni de chiffres en dehors de ce qui figure dans le dossier et indique explicitement quand une information manque.<br /><br />" +
+      "<strong>Données et confidentialité.</strong> Les questions que vous posez peuvent être enregistrées pour analyser les thèmes les plus fréquents " +
+      "et améliorer le dispositif. Elles ne sont ni revendues, ni utilisées pour de la publicité ciblée. " +
+      "Le CV-bot ne crée pas d’informations nouvelles sur ma vie privée et ne porte pas de jugement sur le fit culturel. " +
+      "Pour cela, un échange direct reste indispensable.",
+    loading: "En réflexion...",
+    emptyQuestion: "Merci de saisir une question avant d’envoyer.",
+    genericError: "Une erreur est survenue. Vous pouvez réessayer dans un instant.",
+    quickExamples: [
+      {
+        label: "Expérience marketing",
+        question: "Pouvez-vous résumer son expérience en marketing et e-commerce ?"
       },
-      en: {
-        roleLine: "MARKETING AND E-COMMERCE LEADERSHIP · DIGITAL TRANSFORMATION",
-        badgeText: "Samuel CV Twin",
-        profilTitle: "PROFILE",
-        profilText:
-          "Samuel turns complex situations into clear growth systems for marketing and sales teams.",
-        cvTitle: "CV",
-        cvPreview: "",
-contactEmailLabel: "Email Samuel",
-contactWhatsLabel: "Call Samuel on WhatsApp",       
- btnDownload: "Download CV",
-        contactTitle: "CONTACT",
-        linkedinTitle: "LINKEDIN",
-        linkedinMain: "View LinkedIn profile",
-        linkedinSub: "Recommendations and full experience details on LinkedIn.",
-        langLabel: "Language",
-        heroEyebrow: "INTERACTIVE DOSSIER",
-        heroTitle: "Explore Samuel’s track record before a live conversation",
-        heroSub:
-          "Ask anything about his experience, results or management style. " +
-          "Samuel’s CV bot only uses his real dossier: CV, cover letters, assessments and HR interviews. " +
-          "It synthesises the information, it does not replace a live conversation.",
-        qaTitle: "Ask a question about Samuel",
-qaCaption:
-  "The CV-bot only answers based on the shared data. " +
-  "If something is not in the dossier, it will simply say it does not know. " +
-  "You can then contact Samuel directly.",
-btnAsk: "Send",
-        placeholder:
-          "For example: What results did he deliver at Lyca? How does he handle a marketing team under pressure?",
-        btnAsk: "Ask the question",
-        answerEmpty: "No question asked yet. The first answer will appear here.",
-        followupLabel: "Follow up questions you could ask:",
-        infoTitle: "How Samuel’s CV bot works",
-        footer:
-          "<strong>Data set.</strong> The CV bot is based on a fixed pack of documents: several versions of my CV, " +
-          "cover letters, structured HR Q and A and personality insights. The model reads these documents, " +
-          "cross checks the information and produces a synthesis tailored to the question.<br /><br />" +
-          "<strong>Technology.</strong> The agent runs on OpenAI’s GPT 5.1 model, deployed on Netlify and orchestrated with Make scenarios. " +
-          "It does not invent dates or figures beyond what is present in the dossier and clearly says when a piece of information is missing.<br /><br />" +
-          "<strong>Data and privacy.</strong> Questions may be logged to analyse recurring themes and improve the system. " +
-          "They are not sold or used for targeted advertising. The CV bot does not create new information about my private life " +
-          "and does not judge cultural fit. For that, a direct conversation is still required.",
-        loading: "Thinking...",
-        emptyQuestion: "Please type a question before sending.",
-        genericError: "Something went wrong. You can try again in a moment.",
-        quickExamples: [
-          {
-            label: "Marketing track record",
-            question: "Could you summarise his experience in marketing and e-commerce?"
-          },
-          {
-            label: "Team leadership",
-            question: "How does he lead a marketing and digital team in a high pressure context?"
-          },
-          {
-            label: "AI and automation",
-            question: "How does he use AI and automation in his recent projects?"
-          }
-        ]
+      {
+        label: "Management d’équipe",
+        question: "Comment dirige-t-il une équipe marketing et digitale dans un contexte de pression ?"
+      },
+      {
+        label: "IA et automatisation",
+        question: "Comment utilise-t-il concrètement l’IA et l’automatisation dans ses missions ?"
       }
-    };
+    ]
+  },
+
+  en: {
+    roleLine: "MARKETING AND E-COMMERCE LEADERSHIP · DIGITAL TRANSFORMATION",
+    badgeText: "Samuel CV-bot",
+    profilTitle: "PROFILE",
+    profilText:
+      "Samuel turns complex situations into clear growth systems for marketing and sales teams.",
+    cvTitle: "CV",
+    cvPreview: "",
+    contactEmailLabel: "Email Samuel",
+    contactWhatsLabel: "Call Samuel on WhatsApp",
+    btnDownload: "Download CV",
+    contactTitle: "CONTACT",
+    linkedinTitle: "LINKEDIN",
+    linkedinMain: "View LinkedIn profile",
+    linkedinSub: "Recommendations and full experience details on LinkedIn.",
+    langLabel: "Language",
+    heroEyebrow: "SAMUEL CV-BOT",
+    heroTitle: "Explore Samuel’s track record before a live conversation",
+    heroSub:
+      "Ask anything about his experience, results or management style. " +
+      "Samuel’s CV-bot only uses his real dossier : CV, cover letters, assessments and HR interviews. " +
+      "It synthesises the information, it does not replace a live conversation.",
+    qaTitle: "Ask a question about Samuel",
+    qaCaption:
+      "The CV-bot only answers based on the shared data. " +
+      "If something is not in the dossier, it will simply say it does not know. " +
+      "You can then contact Samuel directly.",
+    btnAsk: "Send",
+    placeholder:
+      "For example : What results did he deliver at Lyca ? How does he handle a marketing team under pressure ?",
+    answerEmpty: "No question asked yet. The first answer will appear here.",
+    followupLabel: "Follow up questions you could ask :",
+    infoTitle: "How Samuel’s CV-bot works",
+    footer:
+      "<strong>Data set.</strong> The CV-bot is based on a fixed pack of documents : several versions of my CV, " +
+      "cover letters, structured HR Q and A and personality insights. The model reads these documents, " +
+      "cross checks the information and produces a synthesis tailored to the question.<br /><br />" +
+      "<strong>Technology.</strong> The agent runs on OpenAI’s GPT 5.1 model, deployed on Netlify and orchestrated with Make scenarios. " +
+      "It does not invent dates or figures beyond what is present in the dossier and clearly says when a piece of information is missing.<br /><br />" +
+      "<strong>Data and privacy.</strong> Questions may be logged to analyse recurring themes and improve the system. " +
+      "They are not sold or used for targeted advertising. The CV-bot does not create new information about my private life " +
+      "and does not judge cultural fit. For that, a direct conversation is still required.",
+    loading: "Thinking...",
+    emptyQuestion: "Please type a question before sending.",
+    genericError: "Something went wrong. You can try again in a moment.",
+    quickExamples: [
+      {
+        label: "Marketing track record",
+        question: "Could you summarise his experience in marketing and e-commerce?"
+      },
+      {
+        label: "Team leadership",
+        question: "How does he lead a marketing and digital team in a high pressure context?"
+      },
+      {
+        label: "AI and automation",
+        question: "How does he use AI and automation in his recent projects?"
+      }
+    ]
+  }
+};
 
     const elements = {
       roleLine: document.getElementById("role-line"),
@@ -1044,21 +1041,28 @@ btnDownload: document.getElementById("btn-download-cv"),
   elements.infoTitle.textContent = t.infoTitle;
   elements.footerNote.innerHTML = t.footer;
 
-  // >>> ICI ton bloc pour le lien CV selon la langue <<<
-  const cvLink = document.getElementById("cv-link");
-if (cvLink) {
-  if (lang === "fr") {
-    const hrefFr = "/netlify/files/Samuel Ciscato - CV-FR_CMO.pdf";
-    cvLink.href = hrefFr;
-    elements.btnDownload.href = hrefFr;
-  } else {
-    const hrefEn = "/netlify/files/Samuel Ciscato - CV-EN_CMO.pdf";
-    cvLink.href = hrefEn;
-    elements.btnDownload.href = hrefEn;
+  // Labels des boutons contact
+  if (elements.btnContactEmail) {
+    elements.btnContactEmail.textContent = t.contactEmailLabel;
   }
-}
+  if (elements.btnContactWhats) {
+    elements.btnContactWhats.textContent = t.contactWhatsLabel;
+  }
 
-  // Boutons FR / EN actifs
+  // Lien CV selon la langue
+  const cvLink = document.getElementById("cv-link");
+  if (cvLink) {
+    if (lang === "fr") {
+      const hrefFr = "/netlify/files/Samuel Ciscato - CV-FR_CMO.pdf";
+      cvLink.href = hrefFr;
+      elements.btnDownload.href = hrefFr;
+    } else {
+      const hrefEn = "/netlify/files/Samuel Ciscato - CV-EN_CMO.pdf";
+      cvLink.href = hrefEn;
+      elements.btnDownload.href = hrefEn;
+    }
+  }
+
   Object.keys(langButtons).forEach(code => {
     langButtons[code].classList.toggle("active", code === lang);
   });
