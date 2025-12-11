@@ -32,7 +32,7 @@
       margin: 0;
       min-height: 100vh;
       font-family: "Inter", system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
-      background: radial-gradient(circle at top, #f3f4ff 0, #f5f5f7 40%, #f5f5f7 100%);
+      background: radial-gradient(circle at top, #091726 0, #0b1520 30%, #0c141c 55%, #05070b 100%);
       color: var(--text-main);
     }
 
@@ -61,50 +61,47 @@
     /* Hero wide */
 
     .hero-card {
-      background: var(--bg-card);
+      background: radial-gradient(circle at top left, #10253c 0, #06121f 38%, #050810 100%);
       border-radius: var(--radius-lg);
-      border: 1px solid var(--border-subtle);
-      box-shadow: var(--shadow-soft);
+      border: 1px solid #131d2a;
+      box-shadow: 0 18px 40px rgba(0, 0, 0, 0.55);
       padding: 18px 22px 18px;
       position: relative;
       overflow: hidden;
       grid-column: 1 / -1;
+      color: #f6f7ff;
     }
 
-    .hero-layout {
-      display: grid;
-      grid-template-columns: auto minmax(0, 1fr);
-      gap: 20px;
+    .hero-photo-watermark {
+      position: absolute;
+      left: -40px;
+      top: 10px;
+      width: 210px;
+      height: 210px;
+      border-radius: 50%;
+      background-image: url("images/samuel-profile.jpg"); /* remplace par ta photo */
+      background-size: cover;
+      background-position: center;
+      opacity: 0.12;
+      filter: grayscale(10%);
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 1;
+    }
+
+    .hero-top-row {
+      display: flex;
+      justify-content: space-between;
       align-items: flex-start;
-    }
-
-    @media (max-width: 720px) {
-      .hero-layout {
-        grid-template-columns: minmax(0, 1fr);
-      }
+      gap: 16px;
+      margin-bottom: 8px;
     }
 
     .hero-identity {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-    }
-
-    .avatar {
-      width: 64px;
-      height: 64px;
-      border-radius: 50%;
-      background: linear-gradient(135deg, #d6defa, #f2f3ff);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 26px;
-      font-weight: 600;
-      color: #1c2a5a;
-      flex-shrink: 0;
-    }
-
-    .name-texts {
       display: flex;
       flex-direction: column;
       gap: 4px;
@@ -122,7 +119,7 @@
       font-size: 11px;
       letter-spacing: 0.16em;
       text-transform: uppercase;
-      color: var(--text-muted);
+      color: #d0d5ff;
     }
 
     .badge-twin {
@@ -131,8 +128,9 @@
       gap: 6px;
       padding: 4px 10px;
       border-radius: 999px;
-      background: var(--accent-soft);
-      color: #1c2a5a;
+      background: rgba(224, 231, 255, 0.1);
+      border: 1px solid rgba(180, 195, 255, 0.4);
+      color: #f3f4ff;
       font-size: 11px;
       font-weight: 500;
       margin-top: 6px;
@@ -143,14 +141,27 @@
       width: 7px;
       height: 7px;
       border-radius: 50%;
-      background: var(--accent);
+      background: #4ade80;
+      box-shadow: 0 0 0 4px rgba(34, 197, 94, 0.22);
+    }
+
+    .hero-lang {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 11px;
+      color: #d0d4ff;
+    }
+
+    .hero-main-row {
+      margin-top: 6px;
     }
 
     .hero-eyebrow {
       font-size: 11px;
       letter-spacing: 0.22em;
       text-transform: uppercase;
-      color: var(--text-muted);
+      color: #9ba4ff;
       margin-bottom: 6px;
     }
 
@@ -163,9 +174,9 @@
     .hero-sub {
       margin: 0;
       font-size: 13px;
-      color: var(--text-muted);
+      color: #c6c9e9;
       line-height: 1.6;
-      max-width: 640px;
+      max-width: 650px;
     }
 
     .hero-quick-questions {
@@ -177,29 +188,33 @@
 
     .hero-quick-btn {
       border-radius: 999px;
-      border: 1px solid #ddddea;
-      background: #f7f7fb;
+      border: 1px solid rgba(190, 198, 255, 0.7);
+      background: rgba(15, 23, 42, 0.7);
       font-size: 11px;
-      padding: 5px 10px;
+      padding: 5px 11px;
       cursor: pointer;
+      color: #e2e6ff;
       transition: background 0.15s ease, border-color 0.15s ease, transform 0.08s ease;
       white-space: nowrap;
+      backdrop-filter: blur(6px);
     }
 
     .hero-quick-btn:hover {
-      background: #e8ebff;
-      border-color: var(--accent);
+      background: rgba(37, 99, 235, 0.85);
+      border-color: #93c5fd;
       transform: translateY(-0.5px);
     }
 
+    /* light streaks on right, façon bannière LinkedIn */
+
     .hero-diagram {
       position: absolute;
-      right: -30px;
-      top: -10px;
-      width: 180px;
-      height: 120px;
+      right: -80px;
+      top: -40px;
+      width: 340px;
+      height: 220px;
       pointer-events: none;
-      opacity: 0.5;
+      opacity: 0.7;
     }
 
     /* Sidebar */
@@ -244,6 +259,11 @@
       font-size: 12px;
       text-align: center;
       color: var(--text-muted);
+      aspect-ratio: 3 / 4;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
     }
 
     .sidebar-buttons {
@@ -305,12 +325,12 @@
     }
 
     .linkedin-card {
-      margin-top: 8px;
+      margin-top: 4px;
       display: flex;
       align-items: center;
       gap: 10px;
       padding: 9px 10px;
-      border-radius: 999px;
+      border-radius: 12px;
       border: 1px solid #d3d3dd;
       background: #ffffff;
       cursor: pointer;
@@ -319,17 +339,14 @@
       font-size: 12px;
     }
 
-    .linkedin-logo {
-      width: 20px;
-      height: 20px;
-      border-radius: 4px;
-      background: #0a66c2;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      color: #ffffff;
-      font-size: 13px;
-      font-weight: 700;
+    .linkedin-thumb {
+      width: 36px;
+      height: 36px;
+      border-radius: 999px;
+      background-image: url("images/linkedin-thumb.jpg"); /* miniature de ton profil */
+      background-size: cover;
+      background-position: center;
+      flex-shrink: 0;
     }
 
     .linkedin-text-main {
@@ -341,6 +358,11 @@
       color: var(--text-muted);
     }
 
+    /* Cache le titre "CV ET DOSSIER" */
+    #cv-title {
+      display: none;
+    }
+
     /* Main column */
 
     .main {
@@ -349,21 +371,13 @@
       gap: 16px;
     }
 
-    .top-bar {
-      display: flex;
-      justify-content: flex-end;
-      margin-bottom: 6px;
-      font-size: 11px;
-      color: var(--text-muted);
-      gap: 10px;
-      align-items: center;
-    }
-
     .lang-switch {
       display: inline-flex;
       border-radius: 999px;
-      border: 1px solid #d3d3dd;
+      border: 1px solid #3f4966;
       overflow: hidden;
+      background: rgba(15, 23, 42, 0.7);
+      backdrop-filter: blur(4px);
     }
 
     .lang-btn {
@@ -372,6 +386,7 @@
       padding: 4px 8px;
       font-size: 11px;
       cursor: pointer;
+      color: #cbd5f5;
     }
 
     .lang-btn.active {
@@ -545,10 +560,11 @@
 
     <!-- Hero wide -->
     <section class="hero-card">
-      <div class="hero-layout">
-        <div class="hero-identity">
-          <div class="avatar">S</div>
-          <div class="name-texts">
+      <div class="hero-photo-watermark"></div>
+
+      <div class="hero-content">
+        <div class="hero-top-row">
+          <div class="hero-identity">
             <h1 class="hero-name">SAMUEL CISCATO</h1>
             <div class="role" id="role-line">
               DIRECTION MARKETING ET E COMMERCE · TRANSFORMATION DIGITALE
@@ -558,9 +574,17 @@
               <span id="badge-text">Samuel CV Twin</span>
             </div>
           </div>
+
+          <div class="hero-lang">
+            <span id="lang-label">Langue</span>
+            <div class="lang-switch">
+              <button class="lang-btn active" data-lang="fr" id="btn-lang-fr">FR</button>
+              <button class="lang-btn" data-lang="en" id="btn-lang-en">EN</button>
+            </div>
+          </div>
         </div>
 
-        <div>
+        <div class="hero-main-row">
           <div class="hero-eyebrow" id="hero-eyebrow">DOSSIER INTERACTIF</div>
           <h2 class="hero-title" id="hero-title">
             Explorer mon parcours avant d echanger en direct
@@ -575,22 +599,22 @@
         </div>
       </div>
 
-      <!-- petit diagramme tech discret -->
-      <svg class="hero-diagram" viewBox="0 0 200 120" aria-hidden="true">
+      <!-- visuel abstrait coté droit -->
+      <svg class="hero-diagram" viewBox="0 0 400 260" aria-hidden="true">
         <defs>
-          <linearGradient id="grad" x1="0" y1="0" x2="1" y2="1">
-            <stop offset="0" stop-color="#d7ddff" />
-            <stop offset="1" stop-color="#b3c3ff" />
+          <linearGradient id="streak" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0" stop-color="#ffe6b3" />
+            <stop offset="0.35" stop-color="#7dd3fc" />
+            <stop offset="1" stop-color="#0f172a" />
           </linearGradient>
         </defs>
-        <circle cx="40" cy="60" r="10" fill="url(#grad)" />
-        <circle cx="110" cy="30" r="8" fill="url(#grad)" />
-        <circle cx="150" cy="80" r="9" fill="url(#grad)" />
-        <circle cx="85" cy="95" r="6" fill="#ffffff" stroke="#c4cdf7" stroke-width="1" />
-        <line x1="40" y1="60" x2="110" y2="30" stroke="#c4cdf7" stroke-width="1" />
-        <line x1="40" y1="60" x2="150" y2="80" stroke="#c4cdf7" stroke-width="1" />
-        <line x1="110" y1="30" x2="150" y2="80" stroke="#c4cdf7" stroke-width="1" />
-        <line x1="40" y1="60" x2="85" y2="95" stroke="#c4cdf7" stroke-width="1" />
+        <rect x="260" y="-40" width="3" height="260" fill="url(#streak)" opacity="0.8" />
+        <rect x="285" y="-60" width="2" height="280" fill="url(#streak)" opacity="0.6" />
+        <rect x="310" y="-80" width="3" height="300" fill="url(#streak)" opacity="0.9" />
+        <rect x="340" y="-30" width="2" height="260" fill="url(#streak)" opacity="0.7" />
+        <circle cx="300" cy="60" r="30" fill="#0b1220" opacity="0.7" />
+        <circle cx="305" cy="55" r="18" fill="#38bdf8" opacity="0.35" />
+        <circle cx="305" cy="55" r="6" fill="#e5e7eb" opacity="0.9" />
       </svg>
     </section>
 
@@ -619,13 +643,7 @@
       </section>
 
       <section>
-        <h2 class="sidebar-section-title" id="contact-title">CONTACT</h2>
-        <p class="sidebar-contact">
-          <span id="contact-email">samuel.ciscato@gmail.com</span><br />
-          <span id="contact-phone">+33 6 67 98 00 44</span><br />
-          <span id="contact-city">Lyon, France</span><br />
-        </p>
-
+        <h2 class="sidebar-section-title" id="linkedin-title">LINKEDIN</h2>
         <a
           href="https://linkedin.com/in/samuelciscato"
           target="_blank"
@@ -633,7 +651,7 @@
           class="linkedin-card"
           id="linkedin-card"
         >
-          <div class="linkedin-logo">in</div>
+          <div class="linkedin-thumb"></div>
           <div>
             <div class="linkedin-text-main" id="linkedin-main-text">Voir le profil LinkedIn</div>
             <div class="linkedin-text-sub" id="linkedin-sub-text">
@@ -642,18 +660,19 @@
           </div>
         </a>
       </section>
+
+      <section>
+        <h2 class="sidebar-section-title" id="contact-title">CONTACT</h2>
+        <p class="sidebar-contact">
+          <span id="contact-email">samuel.ciscato@gmail.com</span><br />
+          <span id="contact-phone">+33 6 67 98 00 44</span><br />
+          <span id="contact-city">Lyon, France</span><br />
+        </p>
+      </section>
     </aside>
 
     <!-- Main column -->
     <section class="main">
-      <div class="top-bar">
-        <span id="lang-label">Langue</span>
-        <div class="lang-switch">
-          <button class="lang-btn active" data-lang="fr" id="btn-lang-fr">FR</button>
-          <button class="lang-btn" data-lang="en" id="btn-lang-en">EN</button>
-        </div>
-      </div>
-
       <section class="qa-card">
         <div class="qa-header-row">
           <h3 class="qa-title" id="qa-title">Poser une question a mon dossier</h3>
@@ -690,9 +709,7 @@
     <!-- Info card -->
     <section class="info-card">
       <h3 class="info-title" id="info-title">Comment fonctionne ce jumeau IA</h3>
-      <p class="footer-note" id="footer-note">
-        <!-- Rempli par le script selon la langue -->
-      </p>
+      <p class="footer-note" id="footer-note"></p>
     </section>
   </main>
 
@@ -711,6 +728,7 @@
         btnDownload: "Telecharger le CV",
         btnOpen: "Ouvrir en grand format",
         contactTitle: "CONTACT",
+        linkedinTitle: "LINKEDIN",
         linkedinMain: "Voir le profil LinkedIn",
         linkedinSub: "Recommandations et detail des experiences sur LinkedIn.",
         langLabel: "Langue",
@@ -737,7 +755,7 @@
           "Le modele lit ces documents, recoupe les informations et produit une synthese adaptee a la question posee.<br /><br />" +
           "<strong>Technologie.</strong> L agent tourne sur le modele GPT 5.1 d OpenAI, deploye via Netlify et pilote par des scenarios Make. " +
           "Il ne invente pas de dates ni de chiffres en dehors de ce qui figure dans le dossier et indique explicitement quand une information manque.<br /><br />" +
-          "<strong>Donnees et confidentialite.</strong> Les questions que vous posez peuvent etre enregistreés pour analyser les themes les plus fréquents " +
+          "<strong>Donnees et confidentialite.</strong> Les questions que vous posez peuvent etre enregistreés pour analyser les themes les plus frequents " +
           "et ameliorer le dispositif. Elles ne sont ni revendues, ni utilisees pour de la publicite ciblee. " +
           "Le jumeau IA ne cree pas d informations nouvelles sur ma vie privee et ne porte pas de jugement sur le fit culturel. " +
           "Pour cela, un echange direct reste indispensable.",
@@ -772,6 +790,7 @@
         btnDownload: "Download CV",
         btnOpen: "Open full version",
         contactTitle: "CONTACT",
+        linkedinTitle: "LINKEDIN",
         linkedinMain: "View LinkedIn profile",
         linkedinSub: "Recommendations and full experience details on LinkedIn.",
         langLabel: "Language",
@@ -831,6 +850,7 @@
       btnDownload: document.getElementById("btn-download-cv"),
       btnOpen: document.getElementById("btn-open-cv"),
       contactTitle: document.getElementById("contact-title"),
+      linkedinTitle: document.getElementById("linkedin-title"),
       linkedinMain: document.getElementById("linkedin-main-text"),
       linkedinSub: document.getElementById("linkedin-sub-text"),
       langLabel: document.getElementById("lang-label"),
@@ -893,6 +913,7 @@
       elements.btnDownload.textContent = t.btnDownload;
       elements.btnOpen.textContent = t.btnOpen;
       elements.contactTitle.textContent = t.contactTitle;
+      elements.linkedinTitle.textContent = t.linkedinTitle;
       elements.linkedinMain.textContent = t.linkedinMain;
       elements.linkedinSub.textContent = t.linkedinSub;
       elements.langLabel.textContent = t.langLabel;
@@ -909,12 +930,10 @@
       elements.infoTitle.textContent = t.infoTitle;
       elements.footerNote.innerHTML = t.footer;
 
-      // switch UI
       Object.keys(langButtons).forEach(code => {
         langButtons[code].classList.toggle("active", code === lang);
       });
 
-      // reset status text et followups
       statusText.textContent = "";
       clearFollowups();
       renderQuickExamples(lang);
@@ -951,7 +970,7 @@
           contactCity.textContent = "Paris, France";
         }
       } catch (e) {
-        // fallback: keep default value
+        // fallback
       }
     }
 
@@ -981,7 +1000,6 @@
       followupContainer.querySelectorAll(".followup-btn").forEach((btn) => btn.remove());
     }
 
-    // Parse la ligne QUESTIONS_SUIVANTES: ["...", "...", "..."]
     function parseSuggestions(rawText) {
       const match = rawText.match(/QUESTIONS_SUIVANTES:\s*(\[.*\])\s*$/m);
       if (!match) return { mainAnswer: rawText.trim(), suggestions: [] };
@@ -1064,7 +1082,6 @@
       }
     });
 
-    // Init
     initLang();
     initCity();
   </script>
