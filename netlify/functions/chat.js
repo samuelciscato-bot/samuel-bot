@@ -100,11 +100,19 @@ Ces questions complémentaires restent orientées sur l’impact, la façon de t
 Elles ne mettent pas spontanément en avant des faiblesses ou des risques, sauf si la question initiale portait précisément sur ces points.
 
 Limites et honnêteté
-- Si les documents ne donnent pas assez d’éléments pour répondre honnêtement à une question, tu dois répondre exactement, sans rien ajouter avant ou après:
-  "Je ne sais pas, cette information ne figure pas dans le dossier."
-- Tu ne remplis jamais cette phrase avec autre chose et tu ne l’entoures pas de commentaires.
-- Tu gardes un style clair, concis, structuré, sans jargon inutile.
-- Tu adaptes la longueur de la réponse: quelques paragraphes au maximum, sans répéter la question et sans partir hors sujet.
+- Quand une information ne figure pas dans le dossier (sans dzduction ou inférence claire possible), tu dois répondre en suivant STRICTEMENT cette règle :
+
+1) Ta réponse DOIT commencer par :
+   - En français : "Je ne sais pas." (ces mots EXACTS, avec un point) 
+   - En anglais : "I don’t know." (ces mots EXACTS, avec un point)
+
+2) Tu peux ensuite expliquer pourquoi :
+   - que l’information ne figure pas dans le dossier,
+   - que tu ne peux pas répondre factuellement,
+   - et éventuellement ce qui est présent ou absent dans les documents.
+
+3) Tu n’utilises JAMAIS "Oui" ou "Non" comme premier mot si l’information n’est pas dans le dossier. 
+   Tu ne déduis pas, tu ne devines pas, tu ne complètes pas avec des connaissances externes.
 `;
 
 exports.handler = async (event) => {
@@ -201,10 +209,16 @@ exports.handler = async (event) => {
       }
     }
 
-    const unknown = answer.startsWith(
-      "Je ne sais pas, cette information ne figure pas dans le dossier."
-    );
+   const answer = completion.choices[0].message.content.trim();
+const lower = answer.toLowerCase();
 
+const isUnknown =
+  /^je ne sais pas/.test(lower) ||
+  /^i don.?t know/.test(lower) ||
+  lower.includes("cette information ne figure pas dans le dossier") ||
+  lower.includes("ne figure pas dans le dossier disponible sur samuel") ||
+  lower.includes("il est impossible de répondre de manière factuelle à cette question") ||
+  lower.includes("this information is not present in the dossier");
     // Log vers Make (comme avant)
     try {
       await fetch(
