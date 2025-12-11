@@ -481,6 +481,9 @@
   display: block;
   text-decoration: none;
 }
+    .cv-link-wrapper {
+  display: block;
+}
 
     /* Main column */
 
@@ -770,13 +773,11 @@
      <section>
   <h2 class="sidebar-section-title" id="cv-title">CV</h2>
   <div class="sidebar-card">
-    <a href="#" class="cv-preview-link" id="cv-link">
+    <a id="cv-link" href="#" download class="cv-link-wrapper">
       <div class="cv-preview-box" id="cv-preview"></div>
     </a>
     <div class="sidebar-buttons">
-      <a href="#" class="btn btn-ghost" id="btn-download-cv">
-        Télécharger le CV
-      </a>
+      <a href="#" class="btn btn-primary" id="btn-download-cv">Télécharger le CV</a>
     </div>
   </div>
 </section>
@@ -1045,17 +1046,17 @@ btnDownload: document.getElementById("btn-download-cv"),
 
   // >>> ICI ton bloc pour le lien CV selon la langue <<<
   const cvLink = document.getElementById("cv-link");
-  if (cvLink) {
-    if (lang === "fr") {
-      const hrefFr = "/netlify/files/Samuel_Ciscato_CV_FR.pdf";
-      cvLink.href = hrefFr;
-      elements.btnDownload.href = hrefFr;
-    } else {
-      const hrefEn = "/netlify/files/Samuel_Ciscato_CV_EN.pdf";
-      cvLink.href = hrefEn;
-      elements.btnDownload.href = hrefEn;
-    }
+if (cvLink) {
+  if (lang === "fr") {
+    const hrefFr = "/netlify/files/Samuel Ciscato - CV-FR_CMO.pdf";
+    cvLink.href = hrefFr;
+    elements.btnDownload.href = hrefFr;
+  } else {
+    const hrefEn = "/netlify/files/Samuel Ciscato - CV-EN_CMO.pdf";
+    cvLink.href = hrefEn;
+    elements.btnDownload.href = hrefEn;
   }
+}
 
   // Boutons FR / EN actifs
   Object.keys(langButtons).forEach(code => {
