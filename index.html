@@ -86,20 +86,20 @@
     }
 
     .hero-photo-watermark {
-      position: absolute;
-      left: -80px;
-      top: -40px;
-      width: 320px;
-      height: 320px;
-      border-radius: 50%;
-      background-image: url("netlify/images/samuel-profile.jpg");
-      background-size: cover;
-      background-position: center;
-      opacity: 0.22;
-      filter: grayscale(10%);
-      pointer-events: none;
-      z-index: 0;
-    }
+  position: absolute;
+  left: -80px;
+  top: -10px;              /* décalée vers le bas */
+  width: 320px;
+  height: 320px;
+  border-radius: 50%;
+  background-image: url("netlify/images/samuel-profile.jpg");
+  background-size: cover;
+  background-position: center 20%;  /* cadre un peu plus le haut du visage */
+  opacity: 0.22;
+  filter: grayscale(10%);
+  pointer-events: none;
+  z-index: 0;
+}
 
     .hero-content {
       position: relative;
@@ -108,10 +108,10 @@
 
     /* Décalage du contenu vers la droite sur desktop pour libérer la zone portrait */
     @media (min-width: 900px) {
-      .hero-content {
-        margin-left: 260px;
-      }
-    }
+  .hero-content {
+    margin-left: 304px;  /* 280 de sidebar + 24 de gap, tu peux ajuster à 300 si tu préfères */
+  }
+}
 
     @media (max-width: 899px) {
       .hero-photo-watermark {
@@ -434,6 +434,11 @@
     .btn-ghost:hover {
       background: #111827;
     }
+.btn-contact {
+  padding: 7px 14px;
+  font-size: 11px;
+  margin-bottom: 8px;
+}
 
     /* Main column */
 
@@ -704,10 +709,12 @@
       <section>
         <h2 class="sidebar-section-title" id="contact-title">CONTACT</h2>
         <p class="sidebar-contact">
-          <a id="contact-email" href="mailto:samuel.ciscato@gmail.com">Écrire à Samuel</a><br />
-          <a id="contact-phone" href="tel:+33667980044">+33 6 67 98 00 44</a><br />
-          <span id="contact-city">Lyon, France</span><br />
-        </p>
+  <a id="contact-email" href="mailto:samuel.ciscato@gmail.com" class="btn btn-ghost btn-contact">
+    Écrire à Samuel
+  </a><br />
+  <a id="contact-phone" href="tel:+33667980044">+33 6 67 98 00 44</a><br />
+  <span id="contact-city">Lyon, France</span><br />
+</p>
       </section>
 
       <section>
@@ -725,10 +732,11 @@
     <section class="main">
       <section class="qa-card">
         <div class="qa-header-row">
-          <h3 class="qa-title" id="qa-title">Poser une question au CV-bot de Samuel</h3>
-          <p class="qa-caption" id="qa-caption">
-            Il répond uniquement à partir de son dossier réel. Si une information n’y figure pas, il vous le dit.
-          </p>
+         <h3 class="qa-title" id="qa-title">Poser une question au sujet de Samuel</h3>
+<p class="qa-caption" id="qa-caption">
+  Le CV-bot répond uniquement à partir des données partagées. Si une information n’y figure pas,
+  il vous répondra qu’il ne sait pas.
+</p>
         </div>
 
         <form id="qa-form" class="qa-form">
@@ -785,9 +793,9 @@
           "Posez vos questions sur son expérience, ses résultats ou son style de management. " +
           "Le CV-bot de Samuel s’appuie uniquement sur son dossier réel: CV, lettres de motivation, évaluations et entretiens RH. " +
           "Il synthétise les informations, il ne remplace pas l’échange direct.",
-        qaTitle: "Poser une question au CV-bot de Samuel",
-        qaCaption:
-          "Il répond uniquement à partir de son dossier réel. Si une information n’y figure pas, il vous le dit.",
+        qaTitle: "Poser une question au sujet de Samuel",
+qaCaption:
+  "Le CV-bot répond uniquement à partir des données partagées. Si une information n’y figure pas, il vous répondra qu’il ne sait pas.",
         placeholder:
           "Par exemple: Quels résultats a-t-il obtenus chez Lyca? Comment gère-t-il une équipe marketing sous pression?",
         btnAsk: "Poser la question",
