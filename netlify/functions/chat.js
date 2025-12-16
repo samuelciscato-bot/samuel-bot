@@ -156,7 +156,7 @@ exports.handler = async (event) => {
               {
                 type: "input_file",
                 // garde le file_id qui marche chez toi tant que tu n'as pas remplacé le PDF
-                file_id: "file-SpQs3kvBa2R6DVm97eeDqk"
+                file_id: "file-Bpj4pFEj18oCHy4KVtBNai"
               }
             ]
           }
