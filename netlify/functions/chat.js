@@ -1,4 +1,17 @@
+const fs = require("fs");
+const path = require("path");
+
 const apiUrl = "https://api.openai.com/v1/responses";
+
+function loadExtraKnowledge() {
+  try {
+    const filePath = path.join(__dirname, "..", "knowledge", "extra.txt");
+    return fs.readFileSync(filePath, "utf8").trim();
+  } catch (error) {
+    console.error("Impossible de lire extra.txt:", error);
+    return "";
+  }
+}
 
 // Prompt système centralisé
 const SYSTEM_PROMPT = `
@@ -35,6 +48,11 @@ Sources et fiabilité
   - "Une ancienne directrice générale souligne sa capacité à..." 
   - "Un manager met en avant sa manière de..."
 - Même dans ces formulations qualitatives, tu restes cohérent avec ce qui apparaît dans le dossier et tu n’inventes ni dates, ni intitulés, ni résultats chiffrés.
+
+Informations complémentaires validées par Samuel (à considérer comme faisant partie du dossier)
+- Samuel utilise VS Code, Codex, GitHub et Netlify dans ses projets.
+- Il conçoit et développe des sites web et des prototypes (front-end et intégration).
+- Il sait déployer et opérer des sites sur Netlify.
 
 Ce que tu as le droit de faire
 - Tu peux synthétiser, reformuler, structurer et faire des liens entre différentes expériences.
@@ -120,6 +138,8 @@ Limites et honnêteté
    Tu ne déduis pas, tu ne devines pas, tu ne complètes pas avec des connaissances externes.
 `;
 
+const EXTRA_KNOWLEDGE = loadExtraKnowledge();
+
 exports.handler = async (event) => {
   if (event.httpMethod !== "POST") {
     return {
@@ -138,13 +158,21 @@ exports.handler = async (event) => {
     };
   }
 
-  const { question } = body || {};
-  if (!question) {
+  const { question, lang } = body || {};
+  const questionText = typeof question === "string" ? question.trim() : "";
+  if (!questionText) {
     return {
       statusCode: 400,
       body: JSON.stringify({ error: "Question manquante" })
     };
   }
+  if (questionText.length > 1000) {
+    return {
+      statusCode: 413,
+      body: JSON.stringify({ error: "Question trop longue" })
+    };
+  }
+  const safeLang = typeof lang === "string" && lang.toLowerCase() === "en" ? "en" : "fr";
 
   try {
     const res = await fetch(apiUrl, {
@@ -155,7 +183,10 @@ exports.handler = async (event) => {
       },
       body: JSON.stringify({
         model: "gpt-5.1",
-        instructions: SYSTEM_PROMPT,
+        instructions: [
+          SYSTEM_PROMPT,
+          EXTRA_KNOWLEDGE ? "\n" + EXTRA_KNOWLEDGE : ""
+        ].join(""),
         input: [
           {
             role: "user",
@@ -164,7 +195,7 @@ exports.handler = async (event) => {
                 type: "input_text",
                 text:
                   "Question du recruteur : " +
-                  question +
+                  questionText +
                   "\n\nRéponds en respectant strictement les instructions système."
               },
               {
@@ -236,7 +267,7 @@ exports.handler = async (event) => {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({
-            question,
+            question: questionText,
             answer,
             unknown: isUnknown,
             sessionId:
@@ -244,7 +275,7 @@ exports.handler = async (event) => {
               event.headers["client-ip"] ||
               "unknown",
             source: "site-netlify",
-            lang: "fr"
+            lang: safeLang
           })
         }
       );

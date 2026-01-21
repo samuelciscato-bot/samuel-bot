@@ -1,0 +1,7 @@
+BASE DE CONNAISSANCES COMPLEMENTAIRE - SAMUEL CISCATO
+
+Ce contenu est considere comme faisant partie du dossier. Tu peux l'utiliser comme faits.
+
+- Samuel utilise VS Code, Codex, GitHub et Netlify dans ses projets.
+- Il conçoit et développe des sites web et des prototypes (front-end et intégration).
+- Il sait déployer et opérer des sites sur Netlify.

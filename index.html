@@ -3,7 +3,9 @@
 <head>
   <meta charset="UTF-8" />
   <title>Samuel Ciscato - CV Twin</title>
+  <meta name="description" content="CV-bot interactif de Samuel Ciscato : parcours, résultats, management et compétences en marketing, digital et e-commerce." />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="preload" as="image" href="netlify/images/samuel-profile.jpg" />
 
   <!-- Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -26,6 +28,18 @@
 
     * {
       box-sizing: border-box;
+    }
+
+    .sr-only {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      padding: 0;
+      margin: -1px;
+      overflow: hidden;
+      clip: rect(0, 0, 0, 0);
+      white-space: nowrap;
+      border: 0;
     }
 
     body {
@@ -800,6 +814,7 @@
 
         <form id="qa-form" class="qa-form">
           <div class="qa-row">
+            <label class="sr-only" for="question-input">Question</label>
             <textarea
               id="question-input"
               name="question"
@@ -809,10 +824,10 @@
   Envoyer
 </button>
           </div>
-          <div class="status-text" id="status-text"></div>
+          <div class="status-text" id="status-text" aria-live="polite"></div>
         </form>
 
-        <div id="answer-box" class="answer-box answer-empty">
+        <div id="answer-box" class="answer-box answer-empty" aria-live="polite">
           Aucune question posée pour le moment. La première réponse apparaîtra ici.
         </div>
 
@@ -1021,6 +1036,7 @@ btnDownload: document.getElementById("btn-download-cv"),
 
   currentLang = lang;
   localStorage.setItem("cv_twin_lang", lang);
+  document.documentElement.lang = lang;
 
   elements.roleLine.textContent = t.roleLine;
   elements.badgeText.textContent = t.badgeText;
@@ -1202,7 +1218,7 @@ btnDownload: document.getElementById("btn-download-cv"),
           headers: {
             "Content-Type": "application/json"
           },
-          body: JSON.stringify({ question })
+          body: JSON.stringify({ question, lang: currentLang })
         });
 
         const data = await response.json();
@@ -1215,6 +1231,7 @@ btnDownload: document.getElementById("btn-download-cv"),
         }
       } catch (error) {
         console.error(error);
+        statusText.textContent = t.genericError;
         renderAnswer(translations[currentLang].genericError);
       } finally {
         setLoading(false);
